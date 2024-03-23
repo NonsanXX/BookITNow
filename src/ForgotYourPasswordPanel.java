@@ -34,6 +34,9 @@ public class ForgotYourPasswordPanel extends javax.swing.JPanel {
         studentIDFYPTF = new javax.swing.JTextField();
         emailFYPTF = new javax.swing.JTextField();
         resetPasswordB = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        contactL = new javax.swing.JLabel();
 
         jPanel2.setBackground(new java.awt.Color(9, 26, 88));
         jPanel2.setPreferredSize(new java.awt.Dimension(1335, 810));
@@ -94,6 +97,43 @@ public class ForgotYourPasswordPanel extends javax.swing.JPanel {
             }
         });
 
+        jPanel4.setBackground(new java.awt.Color(9, 26, 88));
+        jPanel4.setPreferredSize(new java.awt.Dimension(1335, 20));
+
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Problem?");
+
+        contactL.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        contactL.setForeground(new java.awt.Color(255, 255, 255));
+        contactL.setText("Contact the developer");
+        contactL.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(255, 255, 255)));
+        contactL.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        contactL.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                contactLMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(contactL)
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(contactL)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 3, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -111,6 +151,7 @@ public class ForgotYourPasswordPanel extends javax.swing.JPanel {
                             .addComponent(studentIDFYPTF, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(emailFYPTF, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(414, 414, 414))))
+            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,7 +166,8 @@ public class ForgotYourPasswordPanel extends javax.swing.JPanel {
                 .addComponent(studentIDFYPTF, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(resetPasswordB, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(258, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -187,12 +229,19 @@ public class ForgotYourPasswordPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_resetPasswordBActionPerformed
 
+    private void contactLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contactLMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_contactLMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel contactL;
     private javax.swing.JTextField emailFYPTF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JButton resetPasswordB;
     private javax.swing.JTextField studentIDFYPTF;
     // End of variables declaration//GEN-END:variables
