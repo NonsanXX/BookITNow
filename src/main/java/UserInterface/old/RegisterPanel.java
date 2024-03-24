@@ -1,4 +1,4 @@
-package UserInterface;
+package UserInterface.old;
 
 
 import java.awt.Color;
@@ -163,7 +163,6 @@ public class RegisterPanel extends javax.swing.JPanel {
             }
         });
 
-        sigupB.setBackground(new java.awt.Color(255, 255, 255));
         sigupB.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         sigupB.setForeground(new java.awt.Color(9, 26, 88));
         sigupB.setText("SIGNUP");
