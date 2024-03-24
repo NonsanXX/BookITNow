@@ -28,6 +28,8 @@ public class LoginGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        MainPanel = new javax.swing.JPanel();
+        LoginPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -40,6 +42,29 @@ public class LoginGUI extends javax.swing.JFrame {
         signup_btn = new javax.swing.JLabel();
         contacttext = new javax.swing.JLabel();
         contact_btn = new javax.swing.JLabel();
+        RegisterPanel = new javax.swing.JPanel();
+        backbtn = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        name_th = new javax.swing.JTextField();
+        surname_th = new javax.swing.JTextField();
+        name_en = new javax.swing.JTextField();
+        surname_en = new javax.swing.JTextField();
+        email_tf = new javax.swing.JTextField();
+        password = new javax.swing.JPasswordField();
+        c_password = new javax.swing.JPasswordField();
+        student_id = new javax.swing.JTextField();
+        register_btn = new javax.swing.JButton();
+        ForgetPasswordPanel = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        forget_studid = new javax.swing.JTextField();
+        forget_email = new javax.swing.JTextField();
+        signin_btn1 = new javax.swing.JButton();
+        backbtn1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -50,6 +75,10 @@ public class LoginGUI extends javax.swing.JFrame {
             public void windowLostFocus(java.awt.event.WindowEvent evt) {
             }
         });
+
+        MainPanel.setLayout(new java.awt.CardLayout());
+
+        LoginPanel.setBackground(new java.awt.Color(21, 31, 44));
 
         jPanel1.setBackground(new java.awt.Color(21, 31, 44));
 
@@ -104,6 +133,9 @@ public class LoginGUI extends javax.swing.JFrame {
         fgt_pass.setText("ลืมรหัสผ่าน?");
         fgt_pass.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         fgt_pass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                fgt_passMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 fgt_passMouseEntered(evt);
             }
@@ -122,6 +154,9 @@ public class LoginGUI extends javax.swing.JFrame {
         signup_btn.setText("ลงทะเบียนเลย!");
         signup_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         signup_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                signup_btnMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 signup_btnMouseEntered(evt);
             }
@@ -153,32 +188,32 @@ public class LoginGUI extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(170, 170, 170)
+                .addGap(158, 158, 158)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.CENTER)
                     .addGroup(javax.swing.GroupLayout.Alignment.CENTER, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                        .addComponent(jLabel3)
-                        .addComponent(stud_id_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(fgt_pass)
+                        .addComponent(signin_btn))
                     .addGroup(javax.swing.GroupLayout.Alignment.CENTER, jPanel1Layout.createSequentialGroup()
                         .addComponent(fgt_pass1)
                         .addGap(8, 8, 8)
                         .addComponent(signup_btn))
-                    .addComponent(fgt_pass, javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(signin_btn, javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(stud_id_tf, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pass_tf, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(197, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(contacttext)
                 .addGap(8, 8, 8)
                 .addComponent(contact_btn)
-                .addGap(18, 18, 18))
+                .addGap(17, 17, 17))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -186,32 +221,416 @@ public class LoginGUI extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(stud_id_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(pass_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(pass_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addComponent(signin_btn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(fgt_pass)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fgt_pass1)
                     .addComponent(signup_btn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(contacttext)
                     .addComponent(contact_btn))
-                .addGap(14, 14, 14))
+                .addGap(57, 57, 57))
         );
+
+        javax.swing.GroupLayout LoginPanelLayout = new javax.swing.GroupLayout(LoginPanel);
+        LoginPanel.setLayout(LoginPanelLayout);
+        LoginPanelLayout.setHorizontalGroup(
+            LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        LoginPanelLayout.setVerticalGroup(
+            LoginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        MainPanel.add(LoginPanel, "LoginPanel");
+
+        RegisterPanel.setBackground(new java.awt.Color(21, 31, 44));
+
+        backbtn.setFont(new java.awt.Font("Unispace", 0, 48)); // NOI18N
+        backbtn.setForeground(new java.awt.Color(117, 105, 109));
+        backbtn.setText("<");
+        backbtn.setBorder(null);
+        backbtn.setBorderPainted(false);
+        backbtn.setContentAreaFilled(false);
+        backbtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        backbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backbtnActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/test_logo_noraptor.png"))); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Register");
+
+        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel5.setFont(new java.awt.Font("Noto Sans Thai", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("กรุณากรอกข้อมูลให้ถูกต้องและครบถ้วน");
+
+        jPanel2.setBackground(new java.awt.Color(21, 31, 44));
+        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 34, 34), 5, true));
+
+        name_th.setBackground(new java.awt.Color(34, 34, 34));
+        name_th.setFont(new java.awt.Font("Noto Sans Thai", 0, 24)); // NOI18N
+        name_th.setForeground(new java.awt.Color(117, 105, 109));
+        name_th.setText("ชื่อจริง (ภาษาไทย)");
+        name_th.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));
+        name_th.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                name_thFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                name_thFocusLost(evt);
+            }
+        });
+        name_th.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                name_thActionPerformed(evt);
+            }
+        });
+
+        surname_th.setBackground(new java.awt.Color(34, 34, 34));
+        surname_th.setFont(new java.awt.Font("Noto Sans Thai", 0, 24)); // NOI18N
+        surname_th.setForeground(new java.awt.Color(117, 105, 109));
+        surname_th.setText("นามสกุล (ภาษาไทย)");
+        surname_th.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));
+        surname_th.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                surname_thFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                surname_thFocusLost(evt);
+            }
+        });
+
+        name_en.setBackground(new java.awt.Color(34, 34, 34));
+        name_en.setFont(new java.awt.Font("Noto Sans Thai", 0, 24)); // NOI18N
+        name_en.setForeground(new java.awt.Color(117, 105, 109));
+        name_en.setText("ชื่อจริง (ภาษาอังกฤษ)");
+        name_en.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));
+        name_en.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                name_enFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                name_enFocusLost(evt);
+            }
+        });
+
+        surname_en.setBackground(new java.awt.Color(34, 34, 34));
+        surname_en.setFont(new java.awt.Font("Noto Sans Thai", 0, 24)); // NOI18N
+        surname_en.setForeground(new java.awt.Color(117, 105, 109));
+        surname_en.setText("นามสกุล (ภาษาอังกฤษ)");
+        surname_en.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));
+        surname_en.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                surname_enFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                surname_enFocusLost(evt);
+            }
+        });
+
+        email_tf.setBackground(new java.awt.Color(34, 34, 34));
+        email_tf.setFont(new java.awt.Font("Noto Sans Thai", 0, 24)); // NOI18N
+        email_tf.setForeground(new java.awt.Color(117, 105, 109));
+        email_tf.setText("E-mail");
+        email_tf.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));
+        email_tf.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                email_tfFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                email_tfFocusLost(evt);
+            }
+        });
+
+        password.setBackground(new java.awt.Color(34, 34, 34));
+        password.setFont(new java.awt.Font("Noto Sans Thai", 0, 24)); // NOI18N
+        password.setForeground(new java.awt.Color(117, 105, 109));
+        password.setText("รหัสผ่าน");
+        password.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));
+        password.setEchoChar((char) 0);
+        password.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                passwordFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                passwordFocusLost(evt);
+            }
+        });
+
+        c_password.setBackground(new java.awt.Color(34, 34, 34));
+        c_password.setFont(new java.awt.Font("Noto Sans Thai", 0, 24)); // NOI18N
+        c_password.setForeground(new java.awt.Color(117, 105, 109));
+        c_password.setText("ยืนยันรหัสผ่าน");
+        c_password.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));
+        c_password.setEchoChar((char) 0);
+        c_password.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                c_passwordFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                c_passwordFocusLost(evt);
+            }
+        });
+
+        student_id.setBackground(new java.awt.Color(34, 34, 34));
+        student_id.setFont(new java.awt.Font("Noto Sans Thai", 0, 24)); // NOI18N
+        student_id.setForeground(new java.awt.Color(117, 105, 109));
+        student_id.setText("รหัสนักศึกษา");
+        student_id.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));
+        student_id.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                student_idFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                student_idFocusLost(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                        .addComponent(student_id, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(email_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 851, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)
+                        .addComponent(c_password, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(name_en, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51)
+                        .addComponent(surname_en, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(name_th, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51)
+                        .addComponent(surname_th, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(67, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(name_th, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(surname_th, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(name_en, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(surname_en, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addComponent(email_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(student_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(c_password, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
+        register_btn.setBackground(new java.awt.Color(0, 0, 0));
+        register_btn.setFont(new java.awt.Font("Noto Sans Thai", 0, 24)); // NOI18N
+        register_btn.setForeground(new java.awt.Color(255, 255, 255));
+        register_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/register.png"))); // NOI18N
+        register_btn.setBorderPainted(false);
+        register_btn.setContentAreaFilled(false);
+        register_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        register_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                register_btnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout RegisterPanelLayout = new javax.swing.GroupLayout(RegisterPanel);
+        RegisterPanel.setLayout(RegisterPanelLayout);
+        RegisterPanelLayout.setHorizontalGroup(
+            RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(RegisterPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(backbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(100, 100, 100)
+                .addGroup(RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(136, 136, 136))
+            .addGroup(RegisterPanelLayout.createSequentialGroup()
+                .addGroup(RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(RegisterPanelLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(RegisterPanelLayout.createSequentialGroup()
+                        .addGap(339, 339, 339)
+                        .addComponent(register_btn)))
+                .addGap(0, 27, Short.MAX_VALUE))
+        );
+        RegisterPanelLayout.setVerticalGroup(
+            RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(RegisterPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(RegisterPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5))
+                    .addComponent(backbtn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(register_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(200, 200, 200))
+        );
+
+        MainPanel.add(RegisterPanel, "RegisterPanel");
+
+        ForgetPasswordPanel.setBackground(new java.awt.Color(21, 31, 44));
+
+        jPanel3.setBackground(new java.awt.Color(21, 31, 44));
+
+        jLabel8.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel8.setFont(new java.awt.Font("Noto Sans Thai", 0, 24)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("กดเพื่อรีเซตรหัสผ่าน");
+
+        jLabel9.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel9.setFont(new java.awt.Font("Noto Sans Thai", 1, 48)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("รหัสผ่านจะส่งไปยังอีเมลของท่าน");
+
+        forget_studid.setBackground(new java.awt.Color(34, 34, 34));
+        forget_studid.setFont(new java.awt.Font("Noto Sans Thai", 0, 18)); // NOI18N
+        forget_studid.setForeground(new java.awt.Color(117, 105, 109));
+        forget_studid.setText("รหัสนักศึกษา / Student ID");
+        forget_studid.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 0, 0));
+        forget_studid.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                forget_studidFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                forget_studidFocusLost(evt);
+            }
+        });
+
+        forget_email.setBackground(new java.awt.Color(34, 34, 34));
+        forget_email.setFont(new java.awt.Font("Noto Sans Thai", 0, 18)); // NOI18N
+        forget_email.setForeground(new java.awt.Color(117, 105, 109));
+        forget_email.setText("อีเมล / Email");
+        forget_email.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 0, 0));
+        forget_email.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                forget_emailFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                forget_emailFocusLost(evt);
+            }
+        });
+
+        signin_btn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reset_pass.png"))); // NOI18N
+        signin_btn1.setBorderPainted(false);
+        signin_btn1.setContentAreaFilled(false);
+        signin_btn1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        backbtn1.setFont(new java.awt.Font("Unispace", 0, 48)); // NOI18N
+        backbtn1.setForeground(new java.awt.Color(117, 105, 109));
+        backbtn1.setText("<");
+        backbtn1.setBorder(null);
+        backbtn1.setBorderPainted(false);
+        backbtn1.setContentAreaFilled(false);
+        backbtn1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        backbtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backbtn1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(backbtn1))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(155, 155, 155)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(forget_studid, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(forget_email, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(signin_btn1, javax.swing.GroupLayout.Alignment.CENTER))))
+                .addContainerGap(202, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(backbtn1)
+                        .addGap(37, 37, 37))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addComponent(jLabel9)
+                .addGap(18, 18, 18)
+                .addComponent(forget_studid, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(forget_email, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(signin_btn1)
+                .addContainerGap(399, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout ForgetPasswordPanelLayout = new javax.swing.GroupLayout(ForgetPasswordPanel);
+        ForgetPasswordPanel.setLayout(ForgetPasswordPanelLayout);
+        ForgetPasswordPanelLayout.setHorizontalGroup(
+            ForgetPasswordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        ForgetPasswordPanelLayout.setVerticalGroup(
+            ForgetPasswordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        MainPanel.add(ForgetPasswordPanel, "ForgetPasswordPanel");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(MainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(MainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 827, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         setSize(new java.awt.Dimension(1014, 834));
@@ -221,12 +640,14 @@ public class LoginGUI extends javax.swing.JFrame {
     private void stud_id_tfFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_stud_id_tfFocusGained
         if (stud_id_tf.getText().equals("รหัสนักศึกษา / Student ID")){
             stud_id_tf.setText("");
+            stud_id_tf.setForeground(new Color(255,255,255));
         }
     }//GEN-LAST:event_stud_id_tfFocusGained
 
     private void stud_id_tfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_stud_id_tfFocusLost
         if (stud_id_tf.getText().isEmpty()){
             stud_id_tf.setText("รหัสนักศึกษา / Student ID");
+            stud_id_tf.setForeground(new Color(117,105,109));
        }
     }//GEN-LAST:event_stud_id_tfFocusLost
 
@@ -238,6 +659,7 @@ public class LoginGUI extends javax.swing.JFrame {
         if (pass_tf.getText().equals("รหัสผ่าน / Password")){
             pass_tf.setText("");
             pass_tf.setEchoChar('*');
+            pass_tf.setForeground(new Color(255,255,255));
         }
     }//GEN-LAST:event_pass_tfFocusGained
 
@@ -245,12 +667,12 @@ public class LoginGUI extends javax.swing.JFrame {
         if (pass_tf.getText().equals("")){
             pass_tf.setText("รหัสผ่าน / Password");
             pass_tf.setEchoChar((char) 0);
+            pass_tf.setForeground(new Color(117,105,109));
         }
     }//GEN-LAST:event_pass_tfFocusLost
 
     private void fgt_passMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fgt_passMouseEntered
         fgt_pass.setForeground(new Color(72, 145, 255));
-        
     }//GEN-LAST:event_fgt_passMouseEntered
 
     private void fgt_passMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fgt_passMouseExited
@@ -272,6 +694,178 @@ public class LoginGUI extends javax.swing.JFrame {
     private void contact_btnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contact_btnMouseExited
         contact_btn.setForeground(new Color(117,105,109));
     }//GEN-LAST:event_contact_btnMouseExited
+
+    private void signup_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signup_btnMouseClicked
+            java.awt.CardLayout cardLayout = ( java.awt.CardLayout) MainPanel.getLayout();
+            cardLayout.show(MainPanel, "RegisterPanel");
+    }//GEN-LAST:event_signup_btnMouseClicked
+
+    private void backbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbtnActionPerformed
+        java.awt.CardLayout cardLayout = ( java.awt.CardLayout) MainPanel.getLayout();
+            cardLayout.show(MainPanel, "LoginPanel");
+    }//GEN-LAST:event_backbtnActionPerformed
+
+    private void register_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_register_btnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_register_btnActionPerformed
+
+    private void name_thActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_name_thActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_name_thActionPerformed
+
+    private void name_thFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_name_thFocusGained
+        if (name_th.getText().equals("ชื่อจริง (ภาษาไทย)")) {
+            name_th.setText("");
+            name_th.setForeground(new Color(255,255,255));
+        }
+    }//GEN-LAST:event_name_thFocusGained
+
+    private void name_thFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_name_thFocusLost
+         if (name_th.getText().equals("")) {
+            name_th.setText("ชื่อจริง (ภาษาไทย)");
+            name_th.setForeground(new Color(117,105,109));
+        }
+    }//GEN-LAST:event_name_thFocusLost
+
+    private void surname_thFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_surname_thFocusGained
+        if (surname_th.getText().equals("นามสกุล (ภาษาไทย)")) {
+            surname_th.setText("");
+            surname_th.setForeground(new Color(255,255,255));
+        }
+    }//GEN-LAST:event_surname_thFocusGained
+
+    private void surname_thFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_surname_thFocusLost
+        if (surname_th.getText().equals("")) {
+            surname_th.setText("นามสกุล (ภาษาไทย)");
+            surname_th.setForeground(new Color(117,105,109));
+        }
+    }//GEN-LAST:event_surname_thFocusLost
+
+    private void name_enFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_name_enFocusGained
+        if (name_en.getText().equals("ชื่อจริง (ภาษาอังกฤษ)")) {
+            name_en.setText("");
+            name_en.setForeground(new Color(255,255,255));
+        }
+    }//GEN-LAST:event_name_enFocusGained
+
+    private void name_enFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_name_enFocusLost
+        if (name_en.getText().equals("")) {
+            name_en.setText("ชื่อจริง (ภาษาอังกฤษ)");
+            name_en.setForeground(new Color(117,105,109));
+        }
+    }//GEN-LAST:event_name_enFocusLost
+
+    private void surname_enFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_surname_enFocusGained
+        if (surname_en.getText().equals("นามสกุล (ภาษาอังกฤษ)")) {
+            surname_en.setText("");
+            surname_en.setForeground(new Color(255,255,255));
+        }
+    }//GEN-LAST:event_surname_enFocusGained
+
+    private void surname_enFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_surname_enFocusLost
+        if (surname_en.getText().equals("")) {
+            surname_en.setText("นามสกุล (ภาษาอังกฤษ)");
+            surname_en.setForeground(new Color(117,105,109));
+        }
+    }//GEN-LAST:event_surname_enFocusLost
+
+    private void email_tfFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_email_tfFocusGained
+        if (email_tf.getText().equals("E-mail")) {
+            email_tf.setText("");
+            email_tf.setForeground(new Color(255,255,255));
+        }
+    }//GEN-LAST:event_email_tfFocusGained
+
+    private void email_tfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_email_tfFocusLost
+        if (email_tf.getText().equals("")) {
+            email_tf.setText("E-mail");
+            email_tf.setForeground(new Color(117,105,109));
+        }
+    }//GEN-LAST:event_email_tfFocusLost
+
+    private void passwordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordFocusGained
+        if (password.getText().equals("รหัสผ่าน")){
+            password.setText("");
+            password.setEchoChar('*');
+            password.setForeground(new Color(255,255,255));
+        }
+    }//GEN-LAST:event_passwordFocusGained
+
+    private void passwordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordFocusLost
+         if (password.getText().equals("")){
+            password.setText("รหัสผ่าน");
+            password.setEchoChar((char) 0);
+            password.setForeground(new Color(117,105,109));
+        }
+    }//GEN-LAST:event_passwordFocusLost
+
+    private void c_passwordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_c_passwordFocusGained
+        if (c_password.getText().equals("ยืนยันรหัสผ่าน")){
+            c_password.setText("");
+            c_password.setEchoChar('*');
+            c_password.setForeground(new Color(255,255,255));
+        }
+    }//GEN-LAST:event_c_passwordFocusGained
+
+    private void c_passwordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_c_passwordFocusLost
+        if (c_password.getText().equals("")){
+            c_password.setText("ยืนยันรหัสผ่าน");
+            c_password.setEchoChar((char) 0);
+            c_password.setForeground(new Color(117,105,109));
+        }
+    }//GEN-LAST:event_c_passwordFocusLost
+
+    private void student_idFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_student_idFocusGained
+        if (student_id.getText().equals("รหัสนักศึกษา")) {
+            student_id.setText("");
+            student_id.setForeground(new Color(255,255,255));
+        }
+    }//GEN-LAST:event_student_idFocusGained
+
+    private void student_idFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_student_idFocusLost
+         if (student_id.getText().equals("")) {
+            student_id.setText("รหัสนักศึกษา");
+            student_id.setForeground(new Color(117,105,109));
+        }
+    }//GEN-LAST:event_student_idFocusLost
+
+    private void forget_studidFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_forget_studidFocusGained
+        if (forget_studid.getText().equals("รหัสนักศึกษา / Student ID")){
+            forget_studid.setText("");
+            forget_studid.setForeground(new Color(255,255,255));
+        }
+    }//GEN-LAST:event_forget_studidFocusGained
+
+    private void forget_studidFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_forget_studidFocusLost
+        if (forget_studid.getText().isEmpty()){
+            forget_studid.setText("รหัสนักศึกษา / Student ID");
+            forget_studid.setForeground(new Color(117,105,109));
+       }
+    }//GEN-LAST:event_forget_studidFocusLost
+
+    private void forget_emailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_forget_emailFocusGained
+        if (forget_email.getText().equals("อีเมล / Email")){
+            forget_email.setText("");
+            forget_email.setForeground(new Color(255,255,255));
+        }
+    }//GEN-LAST:event_forget_emailFocusGained
+
+    private void forget_emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_forget_emailFocusLost
+        if (forget_email.getText().isEmpty()){
+            forget_email.setText("อีเมล / Email");
+            forget_email.setForeground(new Color(117,105,109));
+       }
+    }//GEN-LAST:event_forget_emailFocusLost
+
+    private void fgt_passMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fgt_passMouseClicked
+        java.awt.CardLayout cardLayout = ( java.awt.CardLayout) MainPanel.getLayout();
+        cardLayout.show(MainPanel, "ForgetPasswordPanel");
+    }//GEN-LAST:event_fgt_passMouseClicked
+
+    private void backbtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbtn1ActionPerformed
+        java.awt.CardLayout cardLayout = ( java.awt.CardLayout) MainPanel.getLayout();
+        cardLayout.show(MainPanel, "LoginPanel");
+    }//GEN-LAST:event_backbtn1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -309,17 +903,42 @@ public class LoginGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel ForgetPasswordPanel;
+    private javax.swing.JPanel LoginPanel;
+    private javax.swing.JPanel MainPanel;
+    private javax.swing.JPanel RegisterPanel;
+    private javax.swing.JButton backbtn;
+    private javax.swing.JButton backbtn1;
+    private javax.swing.JPasswordField c_password;
     private javax.swing.JLabel contact_btn;
     private javax.swing.JLabel contacttext;
+    private javax.swing.JTextField email_tf;
     private javax.swing.JLabel fgt_pass;
     private javax.swing.JLabel fgt_pass1;
+    private javax.swing.JTextField forget_email;
+    private javax.swing.JTextField forget_studid;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JTextField name_en;
+    private javax.swing.JTextField name_th;
     private javax.swing.JPasswordField pass_tf;
+    private javax.swing.JPasswordField password;
+    private javax.swing.JButton register_btn;
     private javax.swing.JButton signin_btn;
+    private javax.swing.JButton signin_btn1;
     private javax.swing.JLabel signup_btn;
     private javax.swing.JTextField stud_id_tf;
+    private javax.swing.JTextField student_id;
+    private javax.swing.JTextField surname_en;
+    private javax.swing.JTextField surname_th;
     // End of variables declaration//GEN-END:variables
 }
