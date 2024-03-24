@@ -558,6 +558,7 @@ public class LoginGUI extends javax.swing.JFrame {
         backbtn1.setBorderPainted(false);
         backbtn1.setContentAreaFilled(false);
         backbtn1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        backbtn1.setFocusPainted(false);
         backbtn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backbtn1ActionPerformed(evt);
