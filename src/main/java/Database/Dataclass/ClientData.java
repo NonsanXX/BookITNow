@@ -4,7 +4,13 @@
  */
 package Database.Dataclass;
 
+import Database.Exception.ClientDataConstructureException;
+
 import java.util.HashMap;
+
+import java.lang.reflect.Field;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,12 +24,13 @@ public class ClientData {
     private String email;
     private String studentID;
     private String passcode;
+    private long accessLevel;
     
     public ClientData(){
-        this("", "", "", "", "", "", "");
+        this("", "", "", "", "", "", "", 0);
     }
 
-    public ClientData(String thaiName, String thaiSurname, String englishName, String englishSurname, String email, String StudentID, String passcode) {
+    public ClientData(String thaiName, String thaiSurname, String englishName, String englishSurname, String email, String StudentID, String passcode, int accessLevel) {
         this.thaiName = thaiName;
         this.thaiSurname = thaiSurname;
         this.englishName = englishName;
@@ -31,6 +38,17 @@ public class ClientData {
         this.email = email;
         this.studentID = StudentID;
         this.passcode = hashing(passcode);
+        this.accessLevel = accessLevel;
+    }
+    
+    public ClientData(HashMap<String, Object> fieldMap) throws ClientDataConstructureException{
+        try {
+            for(String s : fieldMap.keySet()){
+                getClass().getDeclaredField(s).set(this, fieldMap.get(s));
+            }
+        } catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException ex) {
+            throw new ClientDataConstructureException("Invalid fieldName or Invalid fieldType.");
+        }
     }
     
     public String getThaiName() {
@@ -80,6 +98,14 @@ public class ClientData {
     public void setStudentID(String StudentID) {
         this.studentID = StudentID;
     }
+    
+    public long getAccessLevel(){
+        return accessLevel;
+    }
+    
+    public void setAccessLevel(int accessLevel){
+        this.accessLevel = accessLevel;
+    }
 
     public String getPasscode() {
         return passcode;
@@ -96,16 +122,21 @@ public class ClientData {
     public static String hashing(String passCode){
         return org.apache.commons.codec.digest.DigestUtils.sha256Hex(passCode);
     }
-    
-    public HashMap<String, String> toHashMap(){
-        HashMap<String, String> h = new HashMap<>();
-        h.put("thaiName", thaiName);
-        h.put("thaiSurname", thaiSurname);
-        h.put("englishName", englishName);
-        h.put("englishSurname", englishSurname);
-        h.put("email", email);
-        h.put("stdID", studentID);
-        h.put("passcode", passcode);
+
+    public HashMap<String, Object> toHashMap(){
+        /**
+         * @return HashMap between Field and it's value
+         */
+        HashMap<String, Object> h = new HashMap<>();
+        Class<?> thisObject = getClass();
+        Field[] fields = thisObject.getDeclaredFields();
+        for(Field field : fields){
+            try {
+                h.put(field.getName(), field.get(this));
+            } catch (IllegalArgumentException | IllegalAccessException ex) {
+                Logger.getLogger(ClientData.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         return h;
     }
 }
