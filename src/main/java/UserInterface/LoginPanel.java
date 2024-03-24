@@ -294,7 +294,7 @@ public class LoginPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_studentIDTFFocusLost
 
     private void studentIDTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentIDTFActionPerformed
-        // TODO add your handling code here:
+            // TODO add your handling code here:
     }//GEN-LAST:event_studentIDTFActionPerformed
 
     private void loginBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBActionPerformed
