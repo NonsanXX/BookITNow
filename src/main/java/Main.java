@@ -1,5 +1,5 @@
 
-import ui.LoginFrame;
+import UserInterface.LoginFrame;
 import javax.swing.*;
 
 public class Main {

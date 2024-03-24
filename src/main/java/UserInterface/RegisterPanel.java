@@ -1,4 +1,4 @@
-package ui;
+package UserInterface;
 
 
 import java.awt.Color;
@@ -174,7 +174,6 @@ public class RegisterPanel extends javax.swing.JPanel {
             }
         });
 
-        jCheckBox1.setForeground(new java.awt.Color(0, 0, 0));
         jCheckBox1.setText("I accept ");
         jCheckBox1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jCheckBox1.setBorderPainted(true);

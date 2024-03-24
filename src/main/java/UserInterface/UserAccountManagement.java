@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package ui;
+package UserInterface;
 
 /**
  *
@@ -53,31 +53,25 @@ public class UserAccountManagement extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/demo-profile.png"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Noto Sans Thai", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("นายห้างมักเสี่ยว เจตจรูญ");
 
         jLabel3.setFont(new java.awt.Font("Noto Sans Thai", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Mr.Hangmaksaew Jetjarun");
 
         jLabel4.setFont(new java.awt.Font("Noto Sans Thai", 0, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("รหัสนักศึกษา : 6x070xxx");
 
         jLabel5.setBackground(new java.awt.Color(0, 0, 0));
         jLabel5.setFont(new java.awt.Font("Noto Sans Thai", 1, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/history.png"))); // NOI18N
         jLabel5.setText("Booking History");
         jLabel5.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
 
         jLabel6.setFont(new java.awt.Font("Noto Sans Thai", 1, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("เปลี่ยนรหัสผ่าน");
 
-        jPasswordField1.setBackground(new java.awt.Color(255, 255, 255));
         jPasswordField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,14 +79,12 @@ public class UserAccountManagement extends javax.swing.JFrame {
             }
         });
 
-        jPasswordField2.setBackground(new java.awt.Color(255, 255, 255));
         jPasswordField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordField2ActionPerformed(evt);
             }
         });
 
-        jPasswordField3.setBackground(new java.awt.Color(255, 255, 255));
         jPasswordField3.setToolTipText("");
         jPasswordField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,15 +93,12 @@ public class UserAccountManagement extends javax.swing.JFrame {
         });
 
         jLabel7.setFont(new java.awt.Font("Noto Sans Thai", 0, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("รหัสผ่านใหม่");
 
         jLabel8.setFont(new java.awt.Font("Noto Sans Thai", 0, 24)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("รหัสผ่านเก่า");
 
         jLabel9.setFont(new java.awt.Font("Noto Sans Thai", 0, 24)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("ยืนยันรหัสผ่านใหม่");
 
         jButton1.setBackground(new java.awt.Color(255, 51, 51));
