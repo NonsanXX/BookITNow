@@ -90,7 +90,7 @@ public class ClientData {
     }
     
     public boolean comparePasscode(String passcode){
-        return hashing(passcode).equals(passcode);
+        return hashing(passcode).equals(this.passcode);
     }
     
     public static String hashing(String passCode){
