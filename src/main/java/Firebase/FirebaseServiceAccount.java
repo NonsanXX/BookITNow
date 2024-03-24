@@ -2,22 +2,24 @@ package Firebase;/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 import com.google.cloud.firestore.Firestore;
-import com.google.cloud.firestore.WriteBatch;
 
 import java.io.*;
 import java.net.*;
-import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import Database.ClientDatabase;
+import Database.Dataclass.ClientData;
+
 public class FirebaseServiceAccount {
-    public static void initFirebase() throws URISyntaxException, FileNotFoundException, IOException, InterruptedException, ExecutionException{
+    public static void initFirebase() throws URISyntaxException, FileNotFoundException, IOException, InterruptedException, ExecutionException, Exception{
         FileInputStream serviceAccount = new FileInputStream(new FirebaseServiceAccount().getServiceAccount());
         GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
         FirebaseOptions options = FirebaseOptions.builder()
@@ -25,13 +27,10 @@ public class FirebaseServiceAccount {
                 .build();
         FirebaseApp.initializeApp(options);
         Firestore firestore = FirestoreClient.getFirestore();
+        ClientDatabase.setDb(firestore);
+        ClientDatabase.addClient(new ClientData("Thai_Phum", "Thai_Wong", "Phum", "Wong", "PhumphumWongWong@gmail.com", "66070162", "easyPasscode"));
         
-        // Write test
-        WriteBatch batch = firestore.batch();
-        HashMap<String, String> data = new HashMap<>();
-        data.put("key1", "value1");
-        batch.set(firestore.collection("dataTest").document("data1"), data);
-        batch.commit().get();
+        firestore.close();
     }
     
     public File getServiceAccount() throws URISyntaxException {
@@ -47,7 +46,11 @@ public class FirebaseServiceAccount {
     public static void main(String[] args) {
         try {
             initFirebase();
-        } catch (URISyntaxException | IOException | InterruptedException | ExecutionException ex) {
+        } catch (IOException ex) {
+            Logger.getLogger(FirebaseServiceAccount.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException | ExecutionException ex) {
+            Logger.getLogger(FirebaseServiceAccount.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(FirebaseServiceAccount.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
