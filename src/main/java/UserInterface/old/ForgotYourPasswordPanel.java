@@ -1,4 +1,4 @@
-package UserInterface;
+package UserInterface.old;
 
 
 import java.awt.Color;
@@ -88,7 +88,6 @@ public class ForgotYourPasswordPanel extends javax.swing.JPanel {
             }
         });
 
-        resetPasswordB.setBackground(new java.awt.Color(255, 255, 255));
         resetPasswordB.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         resetPasswordB.setForeground(new java.awt.Color(9, 26, 88));
         resetPasswordB.setText("Reset password");
