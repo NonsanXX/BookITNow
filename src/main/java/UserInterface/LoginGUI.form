@@ -87,10 +87,8 @@
                       <Group type="102" attributes="0">
                           <EmptySpace min="158" pref="158" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="2" groupAlignment="2" attributes="0">
-                                  <Component id="fgt_pass" alignment="2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="signin_btn" alignment="2" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="fgt_pass" alignment="2" min="-2" max="-2" attributes="0"/>
+                              <Component id="signin_btn" alignment="2" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="2" attributes="0">
                                   <Component id="fgt_pass1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
@@ -240,6 +238,7 @@
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Hand Cursor"/>
                     </Property>
+                    <Property name="focusPainted" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="fgt_pass">
@@ -736,6 +735,7 @@
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
                 </Property>
+                <Property name="focusPainted" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="register_btnActionPerformed"/>
@@ -911,6 +911,7 @@
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Hand Cursor"/>
                     </Property>
+                    <Property name="focusPainted" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="backbtn1">

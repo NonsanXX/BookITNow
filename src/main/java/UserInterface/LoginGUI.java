@@ -127,6 +127,7 @@ public class LoginGUI extends javax.swing.JFrame {
         signin_btn.setBorderPainted(false);
         signin_btn.setContentAreaFilled(false);
         signin_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        signin_btn.setFocusPainted(false);
 
         fgt_pass.setFont(new java.awt.Font("Noto Sans Thai", 0, 18)); // NOI18N
         fgt_pass.setForeground(new java.awt.Color(117, 105, 109));
@@ -190,9 +191,8 @@ public class LoginGUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(158, 158, 158)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.CENTER, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                        .addComponent(fgt_pass)
-                        .addComponent(signin_btn))
+                    .addComponent(fgt_pass, javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(signin_btn, javax.swing.GroupLayout.Alignment.CENTER)
                     .addGroup(javax.swing.GroupLayout.Alignment.CENTER, jPanel1Layout.createSequentialGroup()
                         .addComponent(fgt_pass1)
                         .addGap(8, 8, 8)
@@ -455,6 +455,7 @@ public class LoginGUI extends javax.swing.JFrame {
         register_btn.setBorderPainted(false);
         register_btn.setContentAreaFilled(false);
         register_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        register_btn.setFocusPainted(false);
         register_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 register_btnActionPerformed(evt);
@@ -551,6 +552,7 @@ public class LoginGUI extends javax.swing.JFrame {
         signin_btn1.setBorderPainted(false);
         signin_btn1.setContentAreaFilled(false);
         signin_btn1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        signin_btn1.setFocusPainted(false);
 
         backbtn1.setFont(new java.awt.Font("Unispace", 0, 48)); // NOI18N
         backbtn1.setForeground(new java.awt.Color(117, 105, 109));
