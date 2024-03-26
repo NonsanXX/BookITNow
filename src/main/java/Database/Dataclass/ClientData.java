@@ -4,8 +4,6 @@
  */
 package Database.Dataclass;
 
-import Database.Exception.ClientDataConstructureException;
-
 import java.util.HashMap;
 
 import java.lang.reflect.Field;
@@ -22,6 +20,8 @@ public class ClientData {
     public static final String FIELD_ENGLISH_NAME = "englishName";
     public static final String FIELD_ENGLISH_SURNAME = "englishSurname";
     public static final String FIELD_EMAIL = "email";
+    public static final String FIELD_STUDENT_ID = "studentID";
+    public static final String FIELD_PASSCODE = "passcode";
     public static final String FIELD_ACCESS_LEVEL = "accessLevel";
     
     public static final long accessLevelClient = 0l;
@@ -51,14 +51,15 @@ public class ClientData {
         this.accessLevel = accessLevel;
     }
     
-    public ClientData(HashMap<String, Object> fieldMap) throws ClientDataConstructureException{
-        try {
-            for(String s : fieldMap.keySet()){
-                getClass().getDeclaredField(s).set(this, fieldMap.get(s));
-            }
-        } catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException ex) {
-            throw new ClientDataConstructureException("Invalid fieldName or Invalid fieldType.");
-        }
+    public ClientData(HashMap<String, Object> fieldMap){
+        this.thaiName = (String) fieldMap.get(FIELD_THAI_NAME);
+        this.thaiSurname = (String) fieldMap.get(FIELD_THAI_SURNAME);
+        this.englishName = (String) fieldMap.get(FIELD_ENGLISH_NAME);
+        this.englishSurname = (String) fieldMap.get(FIELD_ENGLISH_SURNAME);
+        this.email = (String) fieldMap.get(FIELD_EMAIL);
+        this.studentID = (String) fieldMap.get(FIELD_STUDENT_ID);
+        this.passcode = hashing((String) fieldMap.get(FIELD_PASSCODE));
+        this.accessLevel = (long) fieldMap.get(FIELD_ACCESS_LEVEL);
     }
     
     public String getThaiName() {
@@ -138,15 +139,14 @@ public class ClientData {
          * @return HashMap between Field and it's value
          */
         HashMap<String, Object> h = new HashMap<>();
-        Class<?> thisObject = getClass();
-        Field[] fields = thisObject.getDeclaredFields();
-        for(Field field : fields){
-            try {
-                h.put(field.getName(), field.get(this));
-            } catch (IllegalArgumentException | IllegalAccessException ex) {
-                Logger.getLogger(ClientData.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        h.put(FIELD_THAI_NAME, thaiName);
+        h.put(FIELD_THAI_SURNAME, thaiName);
+        h.put(FIELD_ENGLISH_NAME, thaiName);
+        h.put(FIELD_ENGLISH_SURNAME, thaiName);
+        h.put(FIELD_EMAIL, email);
+        h.put(FIELD_STUDENT_ID, studentID);
+        h.put(FIELD_PASSCODE, passcode);
+        h.put(FIELD_ACCESS_LEVEL, accessLevel);
         return h;
     }
 }
