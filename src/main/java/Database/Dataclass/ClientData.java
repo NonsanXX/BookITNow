@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  *
  * @author phump
  */
-public class ClientData {
+public class ClientData {  
     private String thaiName;
     private String thaiSurname;
     private String englishName;
@@ -119,8 +119,8 @@ public class ClientData {
         return hashing(passcode).equals(this.passcode);
     }
     
-    public static String hashing(String passCode){
-        return org.apache.commons.codec.digest.DigestUtils.sha256Hex(passCode);
+    public static String hashing(String passcode){
+        return org.apache.commons.codec.digest.DigestUtils.sha256Hex(passcode);
     }
 
     public HashMap<String, Object> toHashMap(){
