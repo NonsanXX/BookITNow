@@ -52,25 +52,27 @@ public class UserAccountManagement extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/demo-profile.png"))); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Noto Sans Thai", 0, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("FreesiaUPC", 0, 30)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("นายห้างมักเสี่ยว เจตจรูญ");
 
-        jLabel3.setFont(new java.awt.Font("Noto Sans Thai", 0, 24)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("FreesiaUPC", 0, 30)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Mr.Hangmaksaew Jetjarun");
 
-        jLabel4.setFont(new java.awt.Font("Noto Sans Thai", 0, 24)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("FreesiaUPC", 0, 30)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("รหัสนักศึกษา : 6x070xxx");
 
         jLabel5.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel5.setFont(new java.awt.Font("Noto Sans Thai", 1, 24)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("FreesiaUPC", 1, 36)); // NOI18N
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/history.png"))); // NOI18N
         jLabel5.setText("Booking History");
         jLabel5.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
 
-        jLabel6.setFont(new java.awt.Font("Noto Sans Thai", 1, 24)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("FreesiaUPC", 1, 36)); // NOI18N
         jLabel6.setText("เปลี่ยนรหัสผ่าน");
+        jLabel6.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         jPasswordField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
@@ -92,17 +94,17 @@ public class UserAccountManagement extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Noto Sans Thai", 0, 24)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("FreesiaUPC", 0, 30)); // NOI18N
         jLabel7.setText("รหัสผ่านใหม่");
 
-        jLabel8.setFont(new java.awt.Font("Noto Sans Thai", 0, 24)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("FreesiaUPC", 0, 30)); // NOI18N
         jLabel8.setText("รหัสผ่านเก่า");
 
-        jLabel9.setFont(new java.awt.Font("Noto Sans Thai", 0, 24)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("FreesiaUPC", 0, 30)); // NOI18N
         jLabel9.setText("ยืนยันรหัสผ่านใหม่");
 
         jButton1.setBackground(new java.awt.Color(255, 51, 51));
-        jButton1.setFont(new java.awt.Font("Noto Sans Thai", 0, 18)); // NOI18N
+        jButton1.setFont(new java.awt.Font("FreesiaUPC", 0, 24)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("ยืนยัน");
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -158,18 +160,18 @@ public class UserAccountManagement extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel5)))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -178,7 +180,7 @@ public class UserAccountManagement extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12))
