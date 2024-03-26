@@ -451,7 +451,7 @@ public class LoginGUI extends javax.swing.JFrame {
         register_btn.setBackground(new java.awt.Color(0, 0, 0));
         register_btn.setFont(new java.awt.Font("Noto Sans Thai", 0, 24)); // NOI18N
         register_btn.setForeground(new java.awt.Color(255, 255, 255));
-        register_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/register.png"))); // NOI18N
+        register_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/register.png"))); // NOI18N
         register_btn.setBorderPainted(false);
         register_btn.setContentAreaFilled(false);
         register_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
