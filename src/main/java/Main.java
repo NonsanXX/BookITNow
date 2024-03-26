@@ -1,6 +1,5 @@
 import Database.*;
 import Database.Dataclass.ClientData;
-import Database.Exception.ClientDataConstructureException;
 import Database.Exception.ClientNotFoundException;
 import Firebase.FirebaseServiceAccount;
 
@@ -30,9 +29,9 @@ public class Main {
             ClientDatabase.updateClient("101", ClientData.FIELD_THAI_NAME, "Normal Client");
             ClientDatabase.updateClient("102", ClientData.FIELD_ENGLISH_NAME, "New");
             
-            ClientDatabase.deleteClient("100");
-            ClientDatabase.deleteClient("101");
-            ClientDatabase.deleteClient("102");
+//            ClientDatabase.deleteClient("100");
+//            ClientDatabase.deleteClient("101");
+//            ClientDatabase.deleteClient("102");
         } catch (URISyntaxException | IOException  ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } finally{
