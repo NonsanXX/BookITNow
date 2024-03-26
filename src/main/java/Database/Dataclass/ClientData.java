@@ -16,7 +16,17 @@ import java.util.logging.Logger;
  *
  * @author phump
  */
-public class ClientData {  
+public class ClientData {
+    public static final String FIELD_THAI_NAME = "thaiName";
+    public static final String FIELD_THAI_SURNAME = "thaiSurname";
+    public static final String FIELD_ENGLISH_NAME = "englishName";
+    public static final String FIELD_ENGLISH_SURNAME = "englishSurname";
+    public static final String FIELD_EMAIL = "email";
+    public static final String FIELD_ACCESS_LEVEL = "accessLevel";
+    
+    public static final long accessLevelClient = 0l;
+    public static final long accessLevelAdmin = 1l;
+    
     private String thaiName;
     private String thaiSurname;
     private String englishName;
