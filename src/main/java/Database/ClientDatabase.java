@@ -13,24 +13,28 @@ import com.google.cloud.firestore.DocumentSnapshot;
 
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author phump
  */
 public class ClientDatabase extends Database{
-    public static HashMap<String, Object> getClient(String clientstdID) throws ClientNotFoundException{
+    public static HashMap<String, Object> getClientHashMap(String clientstdID) throws ClientNotFoundException{
+        return getClientObject(clientstdID).toHashMap();
+    }
+    
+    public static ClientData getClientObject(String clientstdID)throws ClientNotFoundException{
         DocumentReference docRef = db.collection(Database.CLIENT_COLLECTION).document(clientstdID);
-        DocumentSnapshot document;
         try {
-            document = docRef.get().get();
+            return docRef.get().get().toObject(ClientData.class);
         } catch (InterruptedException | ExecutionException ex) {
             throw new ClientNotFoundException("client "+clientstdID+" not found in collection Database.CLIENT_COLLECTION");
         }
-        return (HashMap<String, Object>) document.getData();
     }
     
     public static boolean updateClient(String clientstdID, String updateField, Object updateValue) throws ClientNotFoundException{
-        HashMap<String, Object> client = getClient(clientstdID);
+        HashMap<String, Object> client = getClientHashMap(clientstdID);
         if(client.containsKey(updateField)){
             client.replace(updateField, updateValue);
             addClient(client);

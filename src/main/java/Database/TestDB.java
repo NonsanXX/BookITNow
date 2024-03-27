@@ -21,17 +21,7 @@ public class TestDB {
             ClientData user3 = new ClientData();
             user3.setStudentID("102");
             
-            ClientDatabase.addClient(user1);
-            ClientDatabase.addClient(user2);
-            ClientDatabase.addClient(user3);
             
-            ClientDatabase.updateClient("100", ClientData.FIELD_ACCESS_LEVEL, 1000000);
-            ClientDatabase.updateClient("101", ClientData.FIELD_THAI_NAME, "Normal Client");
-            ClientDatabase.updateClient("102", ClientData.FIELD_ENGLISH_NAME, "New");
-            
-//            ClientDatabase.deleteClient("100");
-//            ClientDatabase.deleteClient("101");
-//            ClientDatabase.deleteClient("102");
         } catch (URISyntaxException | IOException  ex) {
             Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         } finally{
