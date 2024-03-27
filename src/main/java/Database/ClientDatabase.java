@@ -50,4 +50,5 @@ public class ClientDatabase extends Database{
     public static void deleteClient(String clientstdID){
         getDb().collection(Database.CLIENT_COLLECTION).document(clientstdID).delete();
     }
+
 }
