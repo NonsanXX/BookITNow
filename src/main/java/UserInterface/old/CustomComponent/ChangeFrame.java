@@ -1,4 +1,4 @@
-package UserInterface.CustomComponent;
+package UserInterface.old.CustomComponent;
 
 import javax.swing.JFrame;
 
