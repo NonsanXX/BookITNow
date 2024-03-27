@@ -6,15 +6,15 @@ package Database.Dataclass;
 
 import java.util.HashMap;
 
-import java.lang.reflect.Field;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author phump
  */
-public class ClientData {
+public class ClientData{
+
+    /**
+     *
+     */
     public static final String FIELD_THAI_NAME = "thaiName";
     public static final String FIELD_THAI_SURNAME = "thaiSurname";
     public static final String FIELD_ENGLISH_NAME = "englishName";
