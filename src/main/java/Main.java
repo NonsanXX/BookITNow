@@ -9,7 +9,7 @@ import java.net.URISyntaxException;
 public class Main {
     private static JFrame loginF;
     
-    public static void main(String args[]) throws URISyntaxException, IOException {
+    public static void main(String[] args) throws URISyntaxException, IOException {
         try {
             FirebaseServiceAccount.initFirebase();
         } catch (URISyntaxException | IOException e) {
