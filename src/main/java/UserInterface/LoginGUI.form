@@ -385,7 +385,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel5" min="-2" pref="39" max="-2" attributes="0"/>
-                      <EmptySpace pref="31" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="register_btn" max="32767" attributes="0"/>
@@ -474,23 +474,23 @@
                           <EmptySpace min="29" pref="29" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" alignment="0" groupAlignment="2" attributes="0">
-                                  <Component id="student_id" alignment="2" min="-2" pref="594" max="-2" attributes="0"/>
+                                  <Component id="student_id_tf" alignment="2" min="-2" pref="594" max="-2" attributes="0"/>
                                   <Component id="email_tf" alignment="2" min="-2" pref="851" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="password" min="-2" pref="400" max="-2" attributes="0"/>
+                                  <Component id="password_tf" min="-2" pref="400" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                                  <Component id="c_password" min="-2" pref="400" max="-2" attributes="0"/>
+                                  <Component id="c_password_tf" min="-2" pref="400" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
-                                  <Component id="name_en" min="-2" pref="400" max="-2" attributes="0"/>
+                                  <Component id="name_en_tf" min="-2" pref="400" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                                  <Component id="surname_en" min="-2" pref="400" max="-2" attributes="0"/>
+                                  <Component id="surname_en_tf" min="-2" pref="400" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
-                                  <Component id="name_th" min="-2" pref="400" max="-2" attributes="0"/>
+                                  <Component id="name_th_tf" min="-2" pref="400" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                                  <Component id="surname_th" min="-2" pref="400" max="-2" attributes="0"/>
+                                  <Component id="surname_th_tf" min="-2" pref="400" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace pref="67" max="32767" attributes="0"/>
@@ -502,22 +502,22 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="name_th" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                              <Component id="surname_th" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                              <Component id="name_th_tf" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                              <Component id="surname_th_tf" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="name_en" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                              <Component id="surname_en" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                              <Component id="name_en_tf" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                              <Component id="surname_en_tf" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="email_tf" min="-2" pref="45" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                          <Component id="student_id" min="-2" pref="45" max="-2" attributes="0"/>
+                          <Component id="student_id_tf" min="-2" pref="45" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="password" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                              <Component id="c_password" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                              <Component id="password_tf" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                              <Component id="c_password_tf" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="15" max="32767" attributes="0"/>
                       </Group>
@@ -525,7 +525,7 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JTextField" name="name_th">
+                <Component class="javax.swing.JTextField" name="name_th_tf">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="22" green="22" red="22" type="rgb"/>
@@ -544,12 +544,11 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="name_thFocusGained"/>
-                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="name_thFocusLost"/>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="name_thActionPerformed"/>
+                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="name_th_tfFocusGained"/>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="name_th_tfFocusLost"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JTextField" name="surname_th">
+                <Component class="javax.swing.JTextField" name="surname_th_tf">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="22" green="22" red="22" type="rgb"/>
@@ -568,11 +567,11 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="surname_thFocusGained"/>
-                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="surname_thFocusLost"/>
+                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="surname_th_tfFocusGained"/>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="surname_th_tfFocusLost"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JTextField" name="name_en">
+                <Component class="javax.swing.JTextField" name="name_en_tf">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="22" green="22" red="22" type="rgb"/>
@@ -591,11 +590,11 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="name_enFocusGained"/>
-                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="name_enFocusLost"/>
+                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="name_en_tfFocusGained"/>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="name_en_tfFocusLost"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JTextField" name="surname_en">
+                <Component class="javax.swing.JTextField" name="surname_en_tf">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="22" green="22" red="22" type="rgb"/>
@@ -614,8 +613,8 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="surname_enFocusGained"/>
-                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="surname_enFocusLost"/>
+                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="surname_en_tfFocusGained"/>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="surname_en_tfFocusLost"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="email_tf">
@@ -641,7 +640,7 @@
                     <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="email_tfFocusLost"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JPasswordField" name="password">
+                <Component class="javax.swing.JPasswordField" name="password_tf">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="22" green="22" red="22" type="rgb"/>
@@ -663,11 +662,11 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="passwordFocusGained"/>
-                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="passwordFocusLost"/>
+                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="password_tfFocusGained"/>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="password_tfFocusLost"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JPasswordField" name="c_password">
+                <Component class="javax.swing.JPasswordField" name="c_password_tf">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="22" green="22" red="22" type="rgb"/>
@@ -689,11 +688,11 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="c_passwordFocusGained"/>
-                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="c_passwordFocusLost"/>
+                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="c_password_tfFocusGained"/>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="c_password_tfFocusLost"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JTextField" name="student_id">
+                <Component class="javax.swing.JTextField" name="student_id_tf">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="22" green="22" red="22" type="rgb"/>
@@ -712,8 +711,8 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="student_idFocusGained"/>
-                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="student_idFocusLost"/>
+                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="student_id_tfFocusGained"/>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="student_id_tfFocusLost"/>
                   </Events>
                 </Component>
               </SubComponents>

@@ -140,9 +140,9 @@ public class ClientData{
          */
         HashMap<String, Object> h = new HashMap<>();
         h.put(FIELD_THAI_NAME, thaiName);
-        h.put(FIELD_THAI_SURNAME, thaiName);
-        h.put(FIELD_ENGLISH_NAME, thaiName);
-        h.put(FIELD_ENGLISH_SURNAME, thaiName);
+        h.put(FIELD_THAI_SURNAME, thaiSurname);
+        h.put(FIELD_ENGLISH_NAME, englishName);
+        h.put(FIELD_ENGLISH_SURNAME, englishSurname);
         h.put(FIELD_EMAIL, email);
         h.put(FIELD_STUDENT_ID, studentID);
         h.put(FIELD_PASSCODE, passcode);
