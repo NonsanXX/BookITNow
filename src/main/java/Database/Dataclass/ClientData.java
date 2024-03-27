@@ -131,7 +131,7 @@ public class ClientData{
     }
     
     public static String hashing(String passcode){
-        return org.apache.commons.codec.digest.DigestUtils.sha256Hex(passcode);
+        return passcode.length() < 64 ? org.apache.commons.codec.digest.DigestUtils.sha256Hex(passcode) : passcode;
     }
 
     public HashMap<String, Object> toHashMap(){

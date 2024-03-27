@@ -58,10 +58,6 @@ public class ClientDatabase extends Database{
         if(checkUserExist(std_id)){
             try {
                 ClientData user = getClientObject(std_id);
-                System.out.println(user.getPasscode());
-                System.out.println(ClientData.hashing(password));
-                System.out.println(ClientData.hashing(password).equals(user.getPasscode()));
-                System.out.println(user.comparePasscode(password));
                 return user.comparePasscode(password);
             } catch (ClientNotFoundException e) {
                 return false;
@@ -76,7 +72,6 @@ public class ClientDatabase extends Database{
     public static boolean checkUserExist(String stud_id){
         try {
             ClientData clientobj = getClientObject(stud_id);
-            System.out.println(clientobj);
             return clientobj != null;
         } catch (ClientNotFoundException e) {
             e.printStackTrace();
