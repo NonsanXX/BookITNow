@@ -32,8 +32,8 @@ public class ClientDatabase extends Database{
         }
     }
     
-    public static boolean updateClient(String clientID, String updateField, Object updateValue) throws ClientNotFoundException{
-        HashMap<String, Object> client = getClientHashMap(clientID);
+    public static boolean updateClient(String clientstdID, String updateField, Object updateValue) throws ClientNotFoundException{
+        HashMap<String, Object> client = getClientHashMap(clientstdID);
         if(client.containsKey(updateField)){
             client.replace(updateField, updateValue);
             addClient(client);
@@ -42,9 +42,8 @@ public class ClientDatabase extends Database{
         return false;
     }
 
-    // register new user to the database
     // true - register success
-    // false - register failure
+    // false - register failed
     public static boolean register(String name_th, String surname_th, String name_en, String surname_en, String email, String stud_id,
                                    char[] password){
         if(!checkUserExist(stud_id)){
@@ -54,12 +53,30 @@ public class ClientDatabase extends Database{
         return false;
     }
 
+    // validate login credentials by checking to see if username/password pair exists in the database
+    public static boolean validateLogin(String std_id, String password) {
+        if(checkUserExist(std_id)){
+            try {
+                ClientData user = getClientObject(std_id);
+                System.out.println(user.getPasscode());
+                System.out.println(ClientData.hashing(password));
+                System.out.println(ClientData.hashing(password).equals(user.getPasscode()));
+                System.out.println(user.comparePasscode(password));
+                return user.comparePasscode(password);
+            } catch (ClientNotFoundException e) {
+                return false;
+            }
+        }
+        return false;
+    }
+
     // check if username already exists in the database
-    // false - user doesn't exists
+    // false - user doesn't exist
     // true - user exists in the database
     public static boolean checkUserExist(String stud_id){
         try {
             ClientData clientobj = getClientObject(stud_id);
+            System.out.println(clientobj);
             return clientobj != null;
         } catch (ClientNotFoundException e) {
             e.printStackTrace();

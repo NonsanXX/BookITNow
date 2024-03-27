@@ -133,6 +133,11 @@ public class LoginGUI extends javax.swing.JFrame {
         signin_btn.setContentAreaFilled(false);
         signin_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         signin_btn.setFocusPainted(false);
+        signin_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                signin_btnActionPerformed(evt);
+            }
+        });
 
         fgt_pass.setFont(new java.awt.Font("FreesiaUPC", 0, 26)); // NOI18N
         fgt_pass.setForeground(new java.awt.Color(117, 105, 109));
@@ -540,7 +545,7 @@ public class LoginGUI extends javax.swing.JFrame {
         forget_email.setBackground(new java.awt.Color(34, 34, 34));
         forget_email.setFont(new java.awt.Font("FreesiaUPC", 0, 36)); // NOI18N
         forget_email.setForeground(new java.awt.Color(117, 105, 109));
-        forget_email.setText("อีเมล / E-mail");
+        forget_email.setText("อีเมล / Email");
         forget_email.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 0, 0));
         forget_email.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -902,6 +907,16 @@ public class LoginGUI extends javax.swing.JFrame {
         forget_studid.setForeground(tf_lostfocus_color);
         forget_email.setForeground(tf_lostfocus_color);
     }//GEN-LAST:event_backbtn1ActionPerformed
+
+    private void signin_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signin_btnActionPerformed
+        System.out.println(stud_id_tf.getText() + new String(pass_tf.getPassword()));
+        if (ClientDatabase.validateLogin(stud_id_tf.getText(), new String(pass_tf.getPassword()))){
+         JOptionPane.showMessageDialog(LoginGUI.this,"Login Success");
+     } else {
+         JOptionPane.showMessageDialog(LoginGUI.this,"Login Failed!");
+     }
+
+    }
 
     private String validateUserInput(String name_th, String surname_th, String name_en, String surname_en, String email, String stud_id,
                                      char[] password, char[] rePassword) {
