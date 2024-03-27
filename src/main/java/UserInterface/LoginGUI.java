@@ -5,6 +5,7 @@
 package UserInterface;
 
 import Database.ClientDatabase;
+import org.checkerframework.checker.units.qual.C;
 
 import javax.swing.*;
 import java.awt.Color;
@@ -133,6 +134,11 @@ public class LoginGUI extends javax.swing.JFrame {
         signin_btn.setContentAreaFilled(false);
         signin_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         signin_btn.setFocusPainted(false);
+        signin_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                signin_btnActionPerformed(evt);
+            }
+        });
 
         fgt_pass.setFont(new java.awt.Font("FreesiaUPC", 0, 26)); // NOI18N
         fgt_pass.setForeground(new java.awt.Color(117, 105, 109));
@@ -540,7 +546,7 @@ public class LoginGUI extends javax.swing.JFrame {
         forget_email.setBackground(new java.awt.Color(34, 34, 34));
         forget_email.setFont(new java.awt.Font("FreesiaUPC", 0, 36)); // NOI18N
         forget_email.setForeground(new java.awt.Color(117, 105, 109));
-        forget_email.setText("อีเมล / E-mail");
+        forget_email.setText("อีเมล / Email");
         forget_email.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 0, 0));
         forget_email.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -643,14 +649,14 @@ public class LoginGUI extends javax.swing.JFrame {
     private void stud_id_tfFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_stud_id_tfFocusGained
         if (stud_id_tf.getText().equals("รหัสนักศึกษา / Student ID")){
             stud_id_tf.setText("");
-            stud_id_tf.setForeground(new Color(255,255,255));
+            stud_id_tf.setForeground(tf_Focus_color);
         }
     }//GEN-LAST:event_stud_id_tfFocusGained
 
     private void stud_id_tfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_stud_id_tfFocusLost
         if (stud_id_tf.getText().isEmpty()){
             stud_id_tf.setText("รหัสนักศึกษา / Student ID");
-            stud_id_tf.setForeground(new Color(117,105,109));
+            stud_id_tf.setForeground(tf_lostFocus_color);
        }
     }//GEN-LAST:event_stud_id_tfFocusLost
 
@@ -662,7 +668,7 @@ public class LoginGUI extends javax.swing.JFrame {
         if (pass_tf.getText().equals("รหัสผ่าน / Password")){
             pass_tf.setText("");
             pass_tf.setEchoChar('*');
-            pass_tf.setForeground(new Color(255,255,255));
+            pass_tf.setForeground(tf_Focus_color);
         }
     }//GEN-LAST:event_pass_tfFocusGained
 
@@ -670,7 +676,7 @@ public class LoginGUI extends javax.swing.JFrame {
         if (pass_tf.getText().isEmpty()){
             pass_tf.setText("รหัสผ่าน / Password");
             pass_tf.setEchoChar((char) 0);
-            pass_tf.setForeground(new Color(117,105,109));
+            pass_tf.setForeground(tf_lostFocus_color);
         }
     }//GEN-LAST:event_pass_tfFocusLost
 
@@ -679,7 +685,7 @@ public class LoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_fgt_passMouseEntered
 
     private void fgt_passMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fgt_passMouseExited
-        fgt_pass.setForeground(new Color(117,105,109));
+        fgt_pass.setForeground(tf_lostFocus_color);
     }//GEN-LAST:event_fgt_passMouseExited
 
     private void signup_btnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signup_btnMouseEntered
@@ -687,7 +693,7 @@ public class LoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_signup_btnMouseEntered
 
     private void signup_btnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signup_btnMouseExited
-        signup_btn.setForeground(new Color(117,105,109));
+        signup_btn.setForeground(tf_lostFocus_color);
     }//GEN-LAST:event_signup_btnMouseExited
 
     private void contact_btnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contact_btnMouseEntered
@@ -695,7 +701,7 @@ public class LoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_contact_btnMouseEntered
 
     private void contact_btnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contact_btnMouseExited
-        contact_btn.setForeground(new Color(117,105,109));
+        contact_btn.setForeground(tf_lostFocus_color);
     }//GEN-LAST:event_contact_btnMouseExited
 
     private void signup_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signup_btnMouseClicked
@@ -730,7 +736,7 @@ public class LoginGUI extends javax.swing.JFrame {
                 cardLayout.show(MainPanel, "LoginPanel");
                 resetRegTF();
                 // create a result dialog
-                JOptionPane.showMessageDialog(LoginGUI.this,"สมัครสมาชิกสำเร็จ");
+                JOptionPane.showMessageDialog(LoginGUI.this,"Register Successful.");
             }else{
                 // register failed (likely due to the user already existing in the database)
                 JOptionPane.showMessageDialog(LoginGUI.this,"This Student ID is already taken.");
@@ -748,70 +754,70 @@ public class LoginGUI extends javax.swing.JFrame {
     private void name_th_tfFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_name_thFocusGained
         if (name_th_tf.getText().equals("ชื่อจริง (ภาษาไทย)")) {
             name_th_tf.setText("");
-            name_th_tf.setForeground(new Color(255,255,255));
+            name_th_tf.setForeground(tf_Focus_color);
         }
     }//GEN-LAST:event_name_thFocusGained
 
     private void name_th_tfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_name_thFocusLost
          if (name_th_tf.getText().isEmpty()) {
             name_th_tf.setText("ชื่อจริง (ภาษาไทย)");
-            name_th_tf.setForeground(new Color(117,105,109));
+            name_th_tf.setForeground(tf_lostFocus_color);
         }
     }//GEN-LAST:event_name_thFocusLost
 
     private void surname_th_tfFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_surname_thFocusGained
         if (surname_th_tf.getText().equals("นามสกุล (ภาษาไทย)")) {
             surname_th_tf.setText("");
-            surname_th_tf.setForeground(new Color(255,255,255));
+            surname_th_tf.setForeground(tf_Focus_color);
         }
     }//GEN-LAST:event_surname_thFocusGained
 
     private void surname_th_tfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_surname_thFocusLost
         if (surname_th_tf.getText().isEmpty()) {
             surname_th_tf.setText("นามสกุล (ภาษาไทย)");
-            surname_th_tf.setForeground(new Color(117,105,109));
+            surname_th_tf.setForeground(tf_lostFocus_color);
         }
     }//GEN-LAST:event_surname_thFocusLost
 
     private void name_en_tfFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_name_enFocusGained
         if (name_en_tf.getText().equals("ชื่อจริง (ภาษาอังกฤษ)")) {
             name_en_tf.setText("");
-            name_en_tf.setForeground(new Color(255,255,255));
+            name_en_tf.setForeground(tf_Focus_color);
         }
     }//GEN-LAST:event_name_enFocusGained
 
     private void name_en_tfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_name_enFocusLost
         if (name_en_tf.getText().isEmpty()) {
             name_en_tf.setText("ชื่อจริง (ภาษาอังกฤษ)");
-            name_en_tf.setForeground(new Color(117,105,109));
+            name_en_tf.setForeground(tf_lostFocus_color);
         }
     }//GEN-LAST:event_name_enFocusLost
 
     private void surname_en_tfFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_surname_enFocusGained
         if (surname_en_tf.getText().equals("นามสกุล (ภาษาอังกฤษ)")) {
             surname_en_tf.setText("");
-            surname_en_tf.setForeground(new Color(255,255,255));
+            surname_en_tf.setForeground(tf_Focus_color);
         }
     }//GEN-LAST:event_surname_enFocusGained
 
     private void surname_en_tfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_surname_enFocusLost
         if (surname_en_tf.getText().isEmpty()) {
             surname_en_tf.setText("นามสกุล (ภาษาอังกฤษ)");
-            surname_en_tf.setForeground(new Color(117,105,109));
+            surname_en_tf.setForeground(tf_lostFocus_color);
         }
     }//GEN-LAST:event_surname_enFocusLost
 
     private void email_tfFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_email_tfFocusGained
         if (email_tf.getText().equals("E-mail")) {
             email_tf.setText("");
-            email_tf.setForeground(new Color(255,255,255));
+            email_tf.setForeground(tf_Focus_color);
         }
     }//GEN-LAST:event_email_tfFocusGained
 
     private void email_tfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_email_tfFocusLost
         if (email_tf.getText().isEmpty()) {
             email_tf.setText("E-mail");
-            email_tf.setForeground(new Color(117,105,109));
+            email_tf.setForeground(tf_lostFocus_color);
         }
     }//GEN-LAST:event_email_tfFocusLost
 
@@ -819,7 +825,7 @@ public class LoginGUI extends javax.swing.JFrame {
         if (new String(password_tf.getPassword()).equals("รหัสผ่าน")){
             password_tf.setText("");
             password_tf.setEchoChar('*');
-            password_tf.setForeground(new Color(255,255,255));
+            password_tf.setForeground(tf_Focus_color);
         }
     }//GEN-LAST:event_passwordFocusGained
 
@@ -827,7 +833,7 @@ public class LoginGUI extends javax.swing.JFrame {
          if (new String(password_tf.getPassword()).isEmpty()){
             password_tf.setText("รหัสผ่าน");
             password_tf.setEchoChar((char) 0);
-            password_tf.setForeground(new Color(117,105,109));
+            password_tf.setForeground(tf_lostFocus_color);
         }
     }//GEN-LAST:event_passwordFocusLost
 
@@ -835,7 +841,7 @@ public class LoginGUI extends javax.swing.JFrame {
         if (new String(c_password_tf.getPassword()).equals("ยืนยันรหัสผ่าน")){
             c_password_tf.setText("");
             c_password_tf.setEchoChar('*');
-            c_password_tf.setForeground(new Color(255,255,255));
+            c_password_tf.setForeground(tf_Focus_color);
         }
     }//GEN-LAST:event_c_passwordFocusGained
 
@@ -843,49 +849,49 @@ public class LoginGUI extends javax.swing.JFrame {
         if (new String(c_password_tf.getPassword()).isEmpty()){
             c_password_tf.setText("ยืนยันรหัสผ่าน");
             c_password_tf.setEchoChar((char) 0);
-            c_password_tf.setForeground(new Color(117,105,109));
+            c_password_tf.setForeground(tf_lostFocus_color);
         }
     }//GEN-LAST:event_c_passwordFocusLost
 
     private void student_id_tfFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_student_idFocusGained
         if (student_id_tf.getText().equals("รหัสนักศึกษา")) {
             student_id_tf.setText("");
-            student_id_tf.setForeground(new Color(255,255,255));
+            student_id_tf.setForeground(tf_Focus_color);
         }
     }//GEN-LAST:event_student_idFocusGained
 
     private void student_id_tfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_student_idFocusLost
          if (student_id_tf.getText().isEmpty()) {
             student_id_tf.setText("รหัสนักศึกษา");
-            student_id_tf.setForeground(new Color(117,105,109));
+            student_id_tf.setForeground(tf_lostFocus_color);
         }
     }//GEN-LAST:event_student_idFocusLost
 
     private void forget_studidFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_forget_studidFocusGained
         if (forget_studid.getText().equals("รหัสนักศึกษา / Student ID")){
             forget_studid.setText("");
-            forget_studid.setForeground(new Color(255,255,255));
+            forget_studid.setForeground(tf_Focus_color);
         }
     }//GEN-LAST:event_forget_studidFocusGained
 
     private void forget_studidFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_forget_studidFocusLost
         if (forget_studid.getText().isEmpty()){
             forget_studid.setText("รหัสนักศึกษา / Student ID");
-            forget_studid.setForeground(new Color(117,105,109));
+            forget_studid.setForeground(tf_lostFocus_color);
        }
     }//GEN-LAST:event_forget_studidFocusLost
 
     private void forget_emailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_forget_emailFocusGained
         if (forget_email.getText().equals("อีเมล / E-mail")){
             forget_email.setText("");
-            forget_email.setForeground(new Color(255,255,255));
+            forget_email.setForeground(tf_Focus_color);
         }
     }//GEN-LAST:event_forget_emailFocusGained
 
     private void forget_emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_forget_emailFocusLost
         if (forget_email.getText().isEmpty()){
             forget_email.setText("อีเมล / E-mail");
-            forget_email.setForeground(new Color(117,105,109));
+            forget_email.setForeground(tf_lostFocus_color);
        }
     }//GEN-LAST:event_forget_emailFocusLost
 
@@ -899,10 +905,26 @@ public class LoginGUI extends javax.swing.JFrame {
         cardLayout.show(MainPanel, "LoginPanel");
         forget_studid.setText("รหัสนักศึกษา / Student ID");
         forget_email.setText("อีเมล / E-mail");
-        forget_studid.setForeground(tf_lostfocus_color);
-        forget_email.setForeground(tf_lostfocus_color);
+        forget_studid.setForeground(tf_lostFocus_color);
+        forget_email.setForeground(tf_lostFocus_color);
     }//GEN-LAST:event_backbtn1ActionPerformed
 
+    private void signin_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signin_btnActionPerformed
+        if (validateLoginInput(stud_id_tf.getText(), new String(pass_tf.getPassword()))){
+            if (ClientDatabase.validateLogin(stud_id_tf.getText(), new String(pass_tf.getPassword()))) {
+                JOptionPane.showMessageDialog(LoginGUI.this, "Login Success");
+            } else {
+                JOptionPane.showMessageDialog(LoginGUI.this, "Login Failed!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(LoginGUI.this, "Please fill out every field / Incorrect Student ID.");
+        }
+
+    }
+    private boolean validateLoginInput(String stud_id, String password){
+        return !stud_id.isEmpty() && !password.isEmpty() && !stud_id.equals("รหัสนักศึกษา / Student ID") && !password.equals("รหัสผ่าน / Password")
+                && stud_id.length() == 8;
+    }
     private String validateUserInput(String name_th, String surname_th, String name_en, String surname_en, String email, String stud_id,
                                      char[] password, char[] rePassword) {
         // All fields must have a value
@@ -918,8 +940,8 @@ public class LoginGUI extends javax.swing.JFrame {
         }
 
         // Password must be at least 6 characters long
-        if (password.length < 6) {
-            return "Password must be at least 6 characters long.";
+        if (password.length < 6 || password.length > 60) {
+            return "Password must be at least 6 characters long / Maximum 60.";
         }
 
         // Password and rePassword must be the same
@@ -942,21 +964,21 @@ public class LoginGUI extends javax.swing.JFrame {
     }
     private void resetRegTF(){
         name_th_tf.setText(df_name_th);
-        name_th_tf.setForeground(tf_lostfocus_color);
+        name_th_tf.setForeground(tf_lostFocus_color);
         surname_th_tf.setText(df_surname_th);
-        surname_th_tf.setForeground(tf_lostfocus_color);
+        surname_th_tf.setForeground(tf_lostFocus_color);
         name_en_tf.setText(df_name_en);
-        name_en_tf.setForeground(tf_lostfocus_color);
+        name_en_tf.setForeground(tf_lostFocus_color);
         surname_en_tf.setText(df_surname_en);
-        surname_en_tf.setForeground(tf_lostfocus_color);
+        surname_en_tf.setForeground(tf_lostFocus_color);
         email_tf.setText(df_email);
-        email_tf.setForeground(tf_lostfocus_color);
+        email_tf.setForeground(tf_lostFocus_color);
         student_id_tf.setText(df_stud_id);
-        student_id_tf.setForeground(tf_lostfocus_color);
+        student_id_tf.setForeground(tf_lostFocus_color);
         password_tf.setText(df_password);
-        password_tf.setForeground(tf_lostfocus_color);
+        password_tf.setForeground(tf_lostFocus_color);
         c_password_tf.setText(df_c_password);
-        c_password_tf.setForeground(tf_lostfocus_color);
+        c_password_tf.setForeground(tf_lostFocus_color);
     }
     /**
      * @param args the command line arguments
@@ -1042,5 +1064,6 @@ public class LoginGUI extends javax.swing.JFrame {
     private final String df_stud_id = "รหัสนักศึกษา";
     private final String df_password = "รหัสผ่าน";
     private final String df_c_password = "ยืนยันรหัสผ่าน";
-    private final Color tf_lostfocus_color = new Color(117,105,109);
+    private final Color tf_Focus_color = new Color(255, 255, 255);
+    private final Color tf_lostFocus_color = new Color(117,105,109);
 }
