@@ -1,15 +1,15 @@
-import Database.*;
+package Database;
+
 import Database.Dataclass.ClientData;
 import Database.Exception.ClientNotFoundException;
 import Firebase.FirebaseServiceAccount;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Main {
+public class TestDB {
     public static void main(String[] args) throws ClientNotFoundException {
         try {
             FirebaseServiceAccount.initFirebase();
@@ -33,12 +33,12 @@ public class Main {
 //            ClientDatabase.deleteClient("101");
 //            ClientDatabase.deleteClient("102");
         } catch (URISyntaxException | IOException  ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         } finally{
             try {
                 Database.getDb().close();
             } catch (Exception ex) {
-                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
