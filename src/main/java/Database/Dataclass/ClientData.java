@@ -35,6 +35,7 @@ public class ClientData{
     private String studentID;
     private String passcode;
     private long accessLevel;
+    private boolean isSecure;
     
     public ClientData(){
         this("", "", "", "", "", "", "", 0);

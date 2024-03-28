@@ -6,7 +6,7 @@ package Database;
 
 import Database.Dataclass.ClientData;
 
-import Database.Exception.ClientNotFoundException;
+import Database.Exception.DatabaseGetInterrupted;
 
 import com.google.cloud.firestore.DocumentReference;
 
@@ -19,20 +19,25 @@ import java.util.concurrent.ExecutionException;
  * @author phump
  */
 public class ClientDatabase extends Database{
-    public static HashMap<String, Object> getClientHashMap(String clientstdID) throws ClientNotFoundException{
-        return getClientObject(clientstdID).toHashMap();
+    public static HashMap<String, Object> getClientHashMap(String clientstdID) throws DatabaseGetInterrupted{
+        DocumentReference docRef = db.collection(Database.CLIENT_COLLECTION).document(clientstdID);
+        try {
+            return (HashMap<String, Object>) docRef.get().get().getData();
+        } catch (InterruptedException | ExecutionException ex) {
+            throw new DatabaseGetInterrupted();
+        }
     }
     
-    public static ClientData getClientObject(String clientstdID)throws ClientNotFoundException{
+    public static ClientData getClientObject(String clientstdID)throws DatabaseGetInterrupted{
         DocumentReference docRef = db.collection(Database.CLIENT_COLLECTION).document(clientstdID);
         try {
             return docRef.get().get().toObject(ClientData.class);
         } catch (InterruptedException | ExecutionException ex) {
-            throw new ClientNotFoundException("client "+clientstdID+" not found in collection Database.CLIENT_COLLECTION");
+            throw new DatabaseGetInterrupted();
         }
     }
     
-    public static boolean updateClient(String clientstdID, String updateField, Object updateValue) throws ClientNotFoundException{
+    public static boolean updateClient(String clientstdID, String updateField, Object updateValue) throws DatabaseGetInterrupted{
         HashMap<String, Object> client = getClientHashMap(clientstdID);
         if(client.containsKey(updateField)){
             client.replace(updateField, updateValue);
@@ -59,7 +64,7 @@ public class ClientDatabase extends Database{
             try {
                 ClientData user = getClientObject(std_id);
                 return user.comparePasscode(password);
-            } catch (ClientNotFoundException e) {
+            } catch (DatabaseGetInterrupted e) {
                 return false;
             }
         }
@@ -73,7 +78,7 @@ public class ClientDatabase extends Database{
         try {
             ClientData clientobj = getClientObject(stud_id);
             return clientobj != null;
-        } catch (ClientNotFoundException e) {
+        } catch (DatabaseGetInterrupted e) {
             e.printStackTrace();
         }
         return false;
