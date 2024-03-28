@@ -5,11 +5,15 @@
 package UserInterface;
 
 import Database.ClientDatabase;
+import Database.Dataclass.ClientData;
+import Database.Exception.DatabaseGetInterrupted;
+import EmailService.EmailSender;
+import Utility.PasswordGenerator;
+import jakarta.mail.MessagingException;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Arrays;
-import java.util.Objects;
 
 /**
  *
@@ -87,7 +91,7 @@ public class LoginGUI extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(21, 31, 44));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/test_logo.png")))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/test_logo.png"))); // NOI18N
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("FreesiaUPC", 0, 24)); // NOI18N
@@ -546,7 +550,7 @@ public class LoginGUI extends javax.swing.JFrame {
         forget_email.setBackground(new java.awt.Color(34, 34, 34));
         forget_email.setFont(new java.awt.Font("FreesiaUPC", 0, 36)); // NOI18N
         forget_email.setForeground(new java.awt.Color(117, 105, 109));
-        forget_email.setText("อีเมล / Email");
+        forget_email.setText("อีเมล / E-mail");
         forget_email.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 0, 0));
         forget_email.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -892,7 +896,6 @@ public class LoginGUI extends javax.swing.JFrame {
             forget_email.setForeground(tf_Focus_color);
         }
     }//GEN-LAST:event_forget_emailFocusGained
-
     private void forget_emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_forget_emailFocusLost
         if (forget_email.getText().isEmpty()){
             forget_email.setText("อีเมล / E-mail");
@@ -915,7 +918,34 @@ public class LoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_backbtn1ActionPerformed
 
     private void forgetpass_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forgetpass_btnActionPerformed
-        // TODO add your handling code here:
+        String std_id = forget_studid.getText();
+        String email = forget_email.getText();
+        if (!std_id.isEmpty() && !email.isEmpty() && !std_id.equals("รหัสนักศึกษา / Student ID") && !email.equals("อีเมล / E-mail")){
+            if (ClientDatabase.checkUserExist(std_id)) {
+                try {
+                    if (email.equals(ClientDatabase.getClientObject(std_id).getEmail())) {
+                        try {
+                            String new_pass = PasswordGenerator.generatePassword(12, true, true, true);
+                            new EmailSender(email, "This is your new password " + new_pass + "\nPlease change your password to new one.");
+                            ClientDatabase.updateClient(std_id, "passcode", ClientData.hashing(new_pass));
+                            JOptionPane.showMessageDialog(LoginGUI.this, "Reset Password Successful!\nPlease check your mailbox.");
+                        } catch (MessagingException mex) {
+                            JOptionPane.showMessageDialog(LoginGUI.this, mex.getMessage());
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(LoginGUI.this, "Incorrect Email.");
+                    }
+                } catch (DatabaseGetInterrupted ex) {
+                    JOptionPane.showMessageDialog(LoginGUI.this, ex.getMessage());
+                }
+            } else {
+                JOptionPane.showMessageDialog(LoginGUI.this, "Incorrect Student ID.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(LoginGUI.this, "Please fill empty container.");
+        }
+
+
     }//GEN-LAST:event_forgetpass_btnActionPerformed
 
     private void signin_btnActionPerformed(java.awt.event.ActionEvent evt) {                                           
