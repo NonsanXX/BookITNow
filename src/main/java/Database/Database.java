@@ -12,6 +12,7 @@ import com.google.cloud.firestore.Firestore;
 public abstract class Database {
     
     public static final String CLIENT_COLLECTION = "Clients";
+    public static final String ROOM_COLLECTION = "Room";
     
     public static Firestore db = null;
     
