@@ -12,6 +12,7 @@ public class Main {
     public static void main(String[] args) throws URISyntaxException, IOException {
         try {
             FirebaseServiceAccount.initFirebase();
+            
         } catch (URISyntaxException | IOException e) {
             throw new RuntimeException(e);
         }

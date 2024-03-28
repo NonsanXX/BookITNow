@@ -8,12 +8,12 @@ package Database.Exception;
  *
  * @author phump
  */
-public class ClientNotFoundException extends Exception{
-    public ClientNotFoundException(){
+public class DatabaseGetInterrupted extends Exception{
+    public DatabaseGetInterrupted(){
         this("");
     }
     
-    public ClientNotFoundException(String s){
+    public DatabaseGetInterrupted(String s){
         super(s);
     }
 }

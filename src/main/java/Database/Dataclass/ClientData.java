@@ -35,6 +35,7 @@ public class ClientData{
     private String studentID;
     private String passcode;
     private long accessLevel;
+    private boolean isSecure;
     
     public ClientData(){
         this("", "", "", "", "", "", "", 0);
@@ -131,7 +132,7 @@ public class ClientData{
     }
     
     public static String hashing(String passcode){
-        return org.apache.commons.codec.digest.DigestUtils.sha256Hex(passcode);
+        return passcode.length() < 64 ? org.apache.commons.codec.digest.DigestUtils.sha256Hex(passcode) : passcode;
     }
 
     public HashMap<String, Object> toHashMap(){
