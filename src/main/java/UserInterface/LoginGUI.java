@@ -13,6 +13,7 @@ import jakarta.mail.MessagingException;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
 /**
@@ -929,8 +930,14 @@ public class LoginGUI extends javax.swing.JFrame {
                             new EmailSender(email, "This is your new password " + new_pass + "\nPlease change your password to new one.");
                             ClientDatabase.updateClient(std_id, "passcode", ClientData.hashing(new_pass));
                             JOptionPane.showMessageDialog(LoginGUI.this, "Reset Password Successful!\nPlease check your mailbox.");
-                        } catch (MessagingException mex) {
-                            JOptionPane.showMessageDialog(LoginGUI.this, mex.getMessage());
+                            java.awt.CardLayout cardLayout = ( java.awt.CardLayout) MainPanel.getLayout();
+                            cardLayout.show(MainPanel, "LoginPanel");
+                            forget_studid.setText("รหัสนักศึกษา / Student ID");
+                            forget_email.setText("อีเมล / E-mail");
+                            forget_studid.setForeground(tf_lostFocus_color);
+                            forget_email.setForeground(tf_lostFocus_color);
+                        } catch (MessagingException | UnsupportedEncodingException ex) {
+                            JOptionPane.showMessageDialog(LoginGUI.this, ex.getMessage());
                         }
                     } else {
                         JOptionPane.showMessageDialog(LoginGUI.this, "Incorrect Email.");
