@@ -15,28 +15,26 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TestDB {
     public static void main(String[] args) throws DatabaseGetInterrupted {
         try {
             FirebaseServiceAccount.initFirebase();
+            ArrayList<String> facilityList = new ArrayList<>(){{
+                add("table");
+                add("body");
+            }};
+            ArrayList<timeRange> openTime = new ArrayList<>(){{
+                add(new timeRange(0, 12));
+                add(new timeRange(15, 20));
+            }};
+            ArrayList<timeRange> reservedTime = new ArrayList<>();
+            HashMap<String, timeRange> currentQueue = new HashMap<>();
+            RoomData rm1 = new RoomData("testRoom", facilityList, "testRoom", openTime, reservedTime, currentQueue);
+            RoomDatabase.addRoom(rm1);
             
-//            ArrayList<String> facilityList = new ArrayList<>(){{
-//                add("Computer");
-//                add("Chair");
-//                add("Person");
-//            }};
-//            
-//            ArrayList<timeRange> availableTime = new ArrayList<>(){{
-//                add(new timeRange(1l, 2l));
-//                add(new timeRange(4l, 12l));
-//            }};
-//            
-//            RoomData rm1 = new RoomData("testRoom", facilityList, "This is test room", availableTime);
-//            RoomDatabase.addRoom(rm1);
-            System.out.println(Database.getDb().collection(Database.ROOM_COLLECTION).document("testRoom").get().get().getData());
-            
-        } catch (URISyntaxException | IOException | InterruptedException | ExecutionException  ex) {
+        } catch (URISyntaxException | IOException   ex) {
             Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         } finally{
             try {
