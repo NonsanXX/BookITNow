@@ -285,9 +285,9 @@ public class RoomRegister extends javax.swing.JFrame {
                 } catch (DatabaseGetInterrupted | InterruptedException ex) {
                     Logger.getLogger(RoomRegister.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                JOptionPane.showMessageDialog(RoomRegister.this, "Add room successful.");
                 new AdminLanding().setVisible(true);
                 this.dispose();
-                System.out.println("Add room Successful.");
             } else {
                 JOptionPane.showMessageDialog(RoomRegister.this, "Please enter valid time.");
             }

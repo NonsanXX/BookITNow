@@ -3,9 +3,7 @@ package UserInterface;/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
-import Database.Dataclass.RoomData;
 import Database.Exception.DatabaseGetInterrupted;
-import Database.Interface.RoomManager;
 import Database.RoomDatabase;
 import RoomPanel.RoomPanel;
 
@@ -13,8 +11,6 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -23,23 +19,14 @@ import java.util.logging.Logger;
 
 public class AdminLanding extends javax.swing.JFrame implements MouseListener{
     ArrayList<String> roomdata = RoomDatabase.getRoomList();
-    int showroom_rows = (int) Math.ceil((double)roomdata.size() / 4);
+    int showroom_rows = Math.max(1, (int) Math.ceil((double)roomdata.size() / 4));
     /**
      * Creates new form landing
      */
     public AdminLanding() {
 
         initComponents();
-        for(String room : roomdata){
-            try {
-                RoomPanel rp = new RoomPanel(RoomDatabase.getRoomObject(room));
-                rp.addMouseListener(this);
-                showroomPanel.add(rp);
-                System.out.println(room);
-            } catch (DatabaseGetInterrupted e) {
-                e.printStackTrace();
-            }
-        }
+        refreshShowroom();
     }
 
     /**
@@ -187,7 +174,7 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
     private void refreshShowroom(){
         showroomPanel.removeAll();
         roomdata = RoomDatabase.getRoomList(); //get new room data from database
-        showroom_rows = (int) Math.ceil((double)roomdata.size() / 4);
+        showroom_rows = Math.max(1, (int) Math.ceil((double)roomdata.size() / 4));
         for(String room : roomdata){
             try {
                 RoomPanel rp = new RoomPanel(RoomDatabase.getRoomObject(room));
