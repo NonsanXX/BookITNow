@@ -7,6 +7,7 @@ import Database.Exception.DatabaseGetInterrupted;
 import Database.RoomDatabase;
 import RoomPanel.RoomPanel;
 
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -182,6 +183,7 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
     private void refreshShowroom(){
         showroomPanel.removeAll();
         roomdata = RoomDatabase.getRoomList(); //get new room data from database
+        showroom_rows = (int) Math.ceil((double)roomdata.size() / 4);
         for(String room : roomdata){
             try {
                 RoomPanel rp = new RoomPanel(RoomDatabase.getRoomObject(room));
@@ -192,6 +194,7 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
                 e.printStackTrace();
             }
         }
+        showroomPanel.setLayout(new GridLayout(showroom_rows, 4, 5, 5));
         showroomPanel.revalidate();
         showroomPanel.repaint();
     }
