@@ -910,7 +910,7 @@ public class LoginGUI extends javax.swing.JFrame {
         forget_email.setForeground(tf_lostFocus_color);
     }//GEN-LAST:event_backbtn1ActionPerformed
 
-    private void signin_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signin_btnActionPerformed
+    private void signin_btnActionPerformed(java.awt.event.ActionEvent evt) {                                           
         String stud_id = stud_id_tf.getText();
 
         if (validateLoginInput(stud_id, new String(pass_tf.getPassword()))){
@@ -918,7 +918,7 @@ public class LoginGUI extends javax.swing.JFrame {
                 try {
                     UserLoginToken.loginUser(ClientDatabase.getClientObject(stud_id));
                     this.dispose();
-                    landing landong = new landing();
+                    AdminLanding landong = new AdminLanding();
                     landong.setVisible(true);
                 } catch (DatabaseGetInterrupted dgi){
                     JOptionPane.showMessageDialog(LoginGUI.this, dgi.getMessage());
