@@ -7,6 +7,7 @@ import Database.Exception.DatabaseGetInterrupted;
 import Database.RoomDatabase;
 import RoomPanel.RoomPanel;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -26,7 +27,7 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
     public AdminLanding() {
 
         initComponents();
-        refreshShowroom();
+
     }
 
     /**
@@ -42,12 +43,18 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         showroomPanel = new javax.swing.JPanel();
+        loading = new javax.swing.JLabel();
         menu_btn = new javax.swing.JButton();
         add_btn = new javax.swing.JButton();
         ref_btn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -57,8 +64,28 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         showroomPanel.setBackground(new java.awt.Color(153, 153, 255));
-        showroomPanel.setPreferredSize(new java.awt.Dimension(800, 3000));
-        showroomPanel.setLayout(new java.awt.GridLayout(showroom_rows, 4, 5, 5));
+        showroomPanel.setPreferredSize( new Dimension(800, 150*showroom_rows));
+
+        loading.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        loading.setText("LOADING...");
+
+        javax.swing.GroupLayout showroomPanelLayout = new javax.swing.GroupLayout(showroomPanel);
+        showroomPanel.setLayout(showroomPanelLayout);
+        showroomPanelLayout.setHorizontalGroup(
+            showroomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, showroomPanelLayout.createSequentialGroup()
+                .addContainerGap(427, Short.MAX_VALUE)
+                .addComponent(loading)
+                .addGap(361, 361, 361))
+        );
+        showroomPanelLayout.setVerticalGroup(
+            showroomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(showroomPanelLayout.createSequentialGroup()
+                .addGap(219, 219, 219)
+                .addComponent(loading)
+                .addContainerGap(2717, Short.MAX_VALUE))
+        );
+
         jScrollPane2.setViewportView(showroomPanel);
 
         menu_btn.setText("menu");
@@ -158,10 +185,25 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ref_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ref_btnActionPerformed
-        refreshShowroom();
-    }//GEN-LAST:event_ref_btnActionPerformed
+    private void ref_btnActionPerformed(java.awt.event.ActionEvent evt) {
 
+        showLoadingIndicator();
+        new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground(){
+                refreshShowroom();
+                return null;
+            }
+        }.execute();
+    }                                       
+    private void showLoadingIndicator() {
+        showroomPanel.removeAll();
+        showroomPanel.setLayout(new GroupLayout(showroomPanel));
+        showroomPanel.add(loading);
+        loading.setVisible(true);
+        showroomPanel.revalidate();
+        showroomPanel.repaint();
+    }
     private void add_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_btnActionPerformed
         new RoomRegister().setVisible(true);
         this.dispose();
@@ -171,11 +213,16 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
         new UserAccountManagement().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_menu_btnActionPerformed
-    private void refreshShowroom(){
-        showroomPanel.removeAll();
-        roomdata = RoomDatabase.getRoomList(); //get new room data from database
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        refreshShowroom();
+    }//GEN-LAST:event_formWindowOpened
+    private void refreshShowroom() {
+        jScrollPane2.getVerticalScrollBar().setValue(jScrollPane2.getVerticalScrollBar().getMinimum());
+        roomdata = RoomDatabase.getRoomList(); // get new room data from database
         showroom_rows = Math.max(1, (int) Math.ceil((double)roomdata.size() / 4));
-        for(String room : roomdata){
+        showroomPanel.removeAll();
+        for (String room : roomdata) {
             try {
                 RoomPanel rp = new RoomPanel(RoomDatabase.getRoomObject(room));
                 rp.addMouseListener(this);
@@ -193,7 +240,7 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -233,6 +280,7 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel loading;
     private javax.swing.JButton menu_btn;
     private javax.swing.JButton ref_btn;
     private javax.swing.JPanel showroomPanel;

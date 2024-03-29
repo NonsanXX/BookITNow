@@ -173,6 +173,8 @@ public class RoomRegister extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(204, 204, 204));
 
+        jSpinner2.setModel(new javax.swing.SpinnerNumberModel(1, 1, 100, 1));
+
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel6.setText("Capacity");
 
