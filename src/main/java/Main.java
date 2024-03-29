@@ -19,6 +19,5 @@ public class Main {
 
         loginF = new LoginGUI();
         loginF.setVisible(true);
-
     }
 }

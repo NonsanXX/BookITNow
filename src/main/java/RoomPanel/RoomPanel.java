@@ -4,6 +4,7 @@
  */
 package RoomPanel;
 import Database.Dataclass.RoomData;
+import javax.swing.JLabel;
 
 /**
  *
@@ -19,6 +20,10 @@ public class RoomPanel extends javax.swing.JPanel {
         room_name.setText(roomdata.getRoomName());
     }
 
+    public String getRoomName() {
+        return room_name.getText();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,7 +58,7 @@ public class RoomPanel extends javax.swing.JPanel {
                 .addContainerGap(100, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel5;

@@ -9,31 +9,31 @@ package Database.Dataclass;
  * @author phump
  */
 public class timeRange {
-    public long time1;
-    public long time2;
+    public Double time1;
+    public Double time2;
     
     public timeRange(){
-        this(0l, 0l);
+        this(0.0, 0.0);
     }
     
-    public timeRange(long time1, long time2){
+    public timeRange(Double time1, Double time2){
         this.time1 = time1;
         this.time2 = time2;
     }
 
-    public long getTime1() {
+    public Double getTime1() {
         return time1;
     }
 
-    public void setTime1(long time1) {
+    public void setTime1(Double time1) {
         this.time1 = time1;
     }
 
-    public long getTime2() {
+    public Double getTime2() {
         return time2;
     }
 
-    public void setTime2(long time2) {
+    public void setTime2(Double time2) {
         this.time2 = time2;
     }
     
@@ -41,7 +41,7 @@ public class timeRange {
      * 
      * @return length of timeRange
      */
-    public long length(){
+    public Double length(){
         return time2 - time1;
     }
     
@@ -60,6 +60,6 @@ public class timeRange {
      * <img src="https://i.stack.imgur.com/6iULg.png" width="600" height="300">
      */
     public boolean isOverlap(timeRange tr){
-        return length() + tr.length() > Long.max(time2, tr.time2) + Long.min(time1, tr.time1);
+        return length() + tr.length() > Double.max(time2, tr.time2) + Double.min(time1, tr.time1);
     }
 }
