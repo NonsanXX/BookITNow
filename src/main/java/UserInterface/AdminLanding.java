@@ -233,6 +233,7 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
             }
         }
         showroomPanel.setLayout(new GridLayout(showroom_rows, 4, 5, 5));
+        showroomPanel.setPreferredSize( new Dimension(800, 150*showroom_rows));
         showroomPanel.revalidate();
         showroomPanel.repaint();
     }
