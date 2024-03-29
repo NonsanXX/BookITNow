@@ -4,12 +4,17 @@
  */
 package UserInterface;
 
+import Firebase.UserLoginToken;
 import Database.ClientDatabase;
 import Database.Exception.DatabaseGetInterrupted;
-import Firebase.UserLoginToken;
-
+import Database.Dataclass.ClientData;
+import Database.Exception.DatabaseGetInterrupted;
+import EmailService.EmailSender;
+import Utility.PasswordGenerator;
+import jakarta.mail.MessagingException;
 import javax.swing.*;
 import java.awt.*;
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
 /**
@@ -69,7 +74,7 @@ public class LoginGUI extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         forget_studid = new javax.swing.JTextField();
         forget_email = new javax.swing.JTextField();
-        signin_btn1 = new javax.swing.JButton();
+        forgetpass_btn = new javax.swing.JButton();
         backbtn1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -243,7 +248,7 @@ public class LoginGUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fgt_pass1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(signup_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 207, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(contacttext, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(contact_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -547,7 +552,7 @@ public class LoginGUI extends javax.swing.JFrame {
         forget_email.setBackground(new java.awt.Color(34, 34, 34));
         forget_email.setFont(new java.awt.Font("FreesiaUPC", 0, 36)); // NOI18N
         forget_email.setForeground(new java.awt.Color(117, 105, 109));
-        forget_email.setText("อีเมล / Email");
+        forget_email.setText("อีเมล / E-mail");
         forget_email.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 0, 0));
         forget_email.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -558,11 +563,16 @@ public class LoginGUI extends javax.swing.JFrame {
             }
         });
 
-        signin_btn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reset_pass.png"))); // NOI18N
-        signin_btn1.setBorderPainted(false);
-        signin_btn1.setContentAreaFilled(false);
-        signin_btn1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        signin_btn1.setFocusPainted(false);
+        forgetpass_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reset_pass.png"))); // NOI18N
+        forgetpass_btn.setBorderPainted(false);
+        forgetpass_btn.setContentAreaFilled(false);
+        forgetpass_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        forgetpass_btn.setFocusPainted(false);
+        forgetpass_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                forgetpass_btnActionPerformed(evt);
+            }
+        });
 
         backbtn1.setFont(new java.awt.Font("Unispace", 0, 48)); // NOI18N
         backbtn1.setForeground(new java.awt.Color(117, 105, 109));
@@ -591,7 +601,7 @@ public class LoginGUI extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(forget_studid, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(forget_email, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(signin_btn1))
+                    .addComponent(forgetpass_btn))
                 .addContainerGap(113, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -611,8 +621,8 @@ public class LoginGUI extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(forget_email, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(signin_btn1)))
-                .addContainerGap(386, Short.MAX_VALUE))
+                        .addComponent(forgetpass_btn)))
+                .addContainerGap(521, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout ForgetPasswordPanelLayout = new javax.swing.GroupLayout(ForgetPasswordPanel);
@@ -888,7 +898,6 @@ public class LoginGUI extends javax.swing.JFrame {
             forget_email.setForeground(tf_Focus_color);
         }
     }//GEN-LAST:event_forget_emailFocusGained
-
     private void forget_emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_forget_emailFocusLost
         if (forget_email.getText().isEmpty()){
             forget_email.setText("อีเมล / E-mail");
@@ -910,10 +919,45 @@ public class LoginGUI extends javax.swing.JFrame {
         forget_email.setForeground(tf_lostFocus_color);
     }//GEN-LAST:event_backbtn1ActionPerformed
 
-    private void signin_btnActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        String stud_id = stud_id_tf.getText();
+    private void forgetpass_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forgetpass_btnActionPerformed
+        String std_id = forget_studid.getText();
+        String email = forget_email.getText();
+        if (!std_id.isEmpty() && !email.isEmpty() && !std_id.equals("รหัสนักศึกษา / Student ID") && !email.equals("อีเมล / E-mail")){
+            if (ClientDatabase.checkUserExist(std_id)) {
+                try {
+                    if (email.equals(ClientDatabase.getClientObject(std_id).getEmail())) {
+                        try {
+                            String new_pass = PasswordGenerator.generatePassword(12, true, true, true);
+                            new EmailSender(email, "This is your new password " + new_pass + "\nPlease change your password to new one.");
+                            ClientDatabase.updateClient(std_id, "passcode", ClientData.hashing(new_pass));
+                            JOptionPane.showMessageDialog(LoginGUI.this, "Reset Password Successful!\nPlease check your mailbox.");
+                            java.awt.CardLayout cardLayout = ( java.awt.CardLayout) MainPanel.getLayout();
+                            cardLayout.show(MainPanel, "LoginPanel");
+                            forget_studid.setText("รหัสนักศึกษา / Student ID");
+                            forget_email.setText("อีเมล / E-mail");
+                            forget_studid.setForeground(tf_lostFocus_color);
+                            forget_email.setForeground(tf_lostFocus_color);
+                        } catch (MessagingException | UnsupportedEncodingException ex) {
+                            JOptionPane.showMessageDialog(LoginGUI.this, ex.getMessage());
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(LoginGUI.this, "Incorrect Email.");
+                    }
+                } catch (DatabaseGetInterrupted ex) {
+                    JOptionPane.showMessageDialog(LoginGUI.this, ex.getMessage());
+                }
+            } else {
+                JOptionPane.showMessageDialog(LoginGUI.this, "Incorrect Student ID.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(LoginGUI.this, "Please fill empty container.");
+        }
 
-        if (validateLoginInput(stud_id, new String(pass_tf.getPassword()))){
+
+    }//GEN-LAST:event_forgetpass_btnActionPerformed
+
+    private void signin_btnActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        if (validateLoginInput(stud_id_tf.getText(), new String(pass_tf.getPassword()))){
             if (ClientDatabase.validateLogin(stud_id_tf.getText(), new String(pass_tf.getPassword()))) {
                 try {
                     UserLoginToken.loginUser(ClientDatabase.getClientObject(stud_id));
@@ -1040,6 +1084,7 @@ public class LoginGUI extends javax.swing.JFrame {
     private javax.swing.JLabel fgt_pass1;
     private javax.swing.JTextField forget_email;
     private javax.swing.JTextField forget_studid;
+    private javax.swing.JButton forgetpass_btn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -1057,7 +1102,6 @@ public class LoginGUI extends javax.swing.JFrame {
     private javax.swing.JPasswordField password_tf;
     private javax.swing.JButton register_btn;
     private javax.swing.JButton signin_btn;
-    private javax.swing.JButton signin_btn1;
     private javax.swing.JLabel signup_btn;
     private javax.swing.JTextField stud_id_tf;
     private javax.swing.JTextField student_id_tf;
