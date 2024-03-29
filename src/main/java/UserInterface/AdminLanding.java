@@ -2,14 +2,13 @@ package UserInterface;/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
 
 import Database.Exception.DatabaseGetInterrupted;
 import Database.RoomDatabase;
-import RoomPanel.*;
+import RoomPanel.RoomPanel;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 /**
@@ -130,6 +129,8 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jScrollPane2.getVerticalScrollBar().setUnitIncrement(16);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -170,7 +171,7 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
     }//GEN-LAST:event_ref_btnActionPerformed
 
     private void add_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_btnActionPerformed
-        // TODO add your handling code here:
+        new RoomRegister().setVisible(true);
     }//GEN-LAST:event_add_btnActionPerformed
 
     private void menu_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_btnActionPerformed
