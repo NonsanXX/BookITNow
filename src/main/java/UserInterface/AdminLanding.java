@@ -167,19 +167,34 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
     }// </editor-fold>//GEN-END:initComponents
 
     private void ref_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ref_btnActionPerformed
-        // TODO add your handling code here:
+        refreshShowroom();
     }//GEN-LAST:event_ref_btnActionPerformed
 
     private void add_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_btnActionPerformed
         new RoomRegister().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_add_btnActionPerformed
 
     private void menu_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_btnActionPerformed
-        UserAccountManagement uam = new UserAccountManagement();
-        uam.setVisible(true);
+        new UserAccountManagement().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_menu_btnActionPerformed
-
+    private void refreshShowroom(){
+        showroomPanel.removeAll();
+        roomdata = RoomDatabase.getRoomList(); //get new room data from database
+        for(String room : roomdata){
+            try {
+                RoomPanel rp = new RoomPanel(RoomDatabase.getRoomObject(room));
+                rp.addMouseListener(this);
+                showroomPanel.add(rp);
+                System.out.println(room);
+            } catch (DatabaseGetInterrupted e) {
+                e.printStackTrace();
+            }
+        }
+        showroomPanel.revalidate();
+        showroomPanel.repaint();
+    }
     /**
      * @param args the command line arguments
      */

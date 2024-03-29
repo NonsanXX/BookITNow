@@ -11,6 +11,7 @@ import Database.RoomDatabase;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 /**
  *
@@ -256,11 +257,12 @@ public class RoomRegister extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void room_reg_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_room_reg_btnActionPerformed
         String roomName = roomname_tf.getText();
-        ArrayList<String> facilityList = new ArrayList<String>();
+        ArrayList<String> facilityList = new ArrayList<>();
         for (JCheckBox checkbox : facilityBtnGroup ) {
             if (checkbox.isSelected()) {
                 facilityList.add(checkbox.getText());
@@ -268,12 +270,22 @@ public class RoomRegister extends javax.swing.JFrame {
             }
         }
         String roomDes = roomdes_ta.getText();
-        timeRange openTime = new timeRange(Double.valueOf((String) opentime.getSelectedItem()), Double.valueOf((String) closetime.getSelectedItem()));
-        ArrayList<timeRange> openTimeList = new ArrayList<timeRange>();
+        timeRange openTime = new timeRange(Double.valueOf((String) Objects.requireNonNull(opentime.getSelectedItem())), Double.valueOf((String) Objects.requireNonNull(closetime.getSelectedItem())));
+        ArrayList<timeRange> openTimeList = new ArrayList<>();
         openTimeList.add(openTime);
-        RoomDatabase.addRoom(new RoomData(roomName,
-                facilityList, roomDes, openTimeList, new ArrayList<>(), new HashMap<>()));
-        System.out.println("Add room Successful.");
+        if (!roomName.isEmpty() && !roomDes.isEmpty()){
+            if (!Objects.equals(openTime.time1, openTime.time2) && openTime.time1 < openTime.time2){
+                RoomDatabase.addRoom(new RoomData(roomName,
+                        facilityList, roomDes, openTimeList, new ArrayList<>(), new HashMap<>()));
+                new AdminLanding().setVisible(true);
+                this.dispose();
+                System.out.println("Add room Successful.");
+            } else {
+                JOptionPane.showMessageDialog(RoomRegister.this, "Please enter valid time.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(RoomRegister.this, "Please enter name / description of the room.");
+        }
     }//GEN-LAST:event_room_reg_btnActionPerformed
 
     /**
