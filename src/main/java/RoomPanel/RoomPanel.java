@@ -36,6 +36,7 @@ public class RoomPanel extends javax.swing.JPanel {
         room_name = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 204, 204));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setPreferredSize(new java.awt.Dimension(300, 150));
 
         room_name.setFont(new java.awt.Font("FreesiaUPC", 0, 36)); // NOI18N
@@ -61,8 +62,6 @@ public class RoomPanel extends javax.swing.JPanel {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JLabel room_name;
     // End of variables declaration//GEN-END:variables
 }
