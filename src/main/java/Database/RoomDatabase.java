@@ -10,11 +10,16 @@ import Database.Dataclass.timeRange;
 import Database.Exception.DatabaseGetInterrupted;
 import Firebase.UserLoginToken;
 
+
 import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.WriteResult;
+import com.google.api.core.ApiFuture;
 
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -22,14 +27,14 @@ import java.util.concurrent.ExecutionException;
  * @author phump
  */
 public class RoomDatabase extends Database{
-    public static String[] getRoomList(){
+    public static ArrayList<String> getRoomList(){
         ArrayList<String> roomList = new ArrayList<>();
         Iterable<DocumentReference> docRef = getDb().collection(ROOM_COLLECTION).listDocuments();
         
         for(DocumentReference dr : docRef){
             roomList.add(dr.getId());
         }
-        return (String[]) roomList.toArray();
+        return roomList;
     }
     
     public static void addRoom(RoomData roomData){
@@ -54,9 +59,21 @@ public class RoomDatabase extends Database{
         }
     }
     
+    public static void deleteRoom(String roomName){
+        getDb().collection(ROOM_COLLECTION).document(roomName).delete();
+    }
+    
     public static boolean reservingRoom(RoomData room, timeRange time){
         boolean result = room.reservingTime(time);
         room.getCurrentQueue().put(UserLoginToken.getClientID(), time);
         return result;
+    }
+    
+    public static void sleepForUpdateTime(ApiFuture<WriteResult> writeResult){
+        try {
+            Thread.sleep(0);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(RoomDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

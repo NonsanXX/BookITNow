@@ -12,8 +12,28 @@ public class timeRange {
     public long time1;
     public long time2;
     
+    public timeRange(){
+        this(0l, 0l);
+    }
+    
     public timeRange(long time1, long time2){
         this.time1 = time1;
+        this.time2 = time2;
+    }
+
+    public long getTime1() {
+        return time1;
+    }
+
+    public void setTime1(long time1) {
+        this.time1 = time1;
+    }
+
+    public long getTime2() {
+        return time2;
+    }
+
+    public void setTime2(long time2) {
         this.time2 = time2;
     }
     
