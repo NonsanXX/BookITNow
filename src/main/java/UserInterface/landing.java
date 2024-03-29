@@ -166,7 +166,9 @@ public class landing extends javax.swing.JFrame {
     }//GEN-LAST:event_add_btnActionPerformed
 
     private void menu_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_btnActionPerformed
-        // TODO add your handling code here:
+        UserAccountManagement uam = new UserAccountManagement();
+        uam.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_menu_btnActionPerformed
 
     /**

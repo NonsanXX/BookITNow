@@ -5,10 +5,11 @@
 package UserInterface;
 
 import Database.ClientDatabase;
-import org.checkerframework.checker.units.qual.C;
+import Database.Exception.DatabaseGetInterrupted;
+import Firebase.UserLoginToken;
 
 import javax.swing.*;
-import java.awt.Color;
+import java.awt.*;
 import java.util.Arrays;
 
 /**
@@ -910,9 +911,18 @@ public class LoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_backbtn1ActionPerformed
 
     private void signin_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signin_btnActionPerformed
-        if (validateLoginInput(stud_id_tf.getText(), new String(pass_tf.getPassword()))){
+        String stud_id = stud_id_tf.getText();
+
+        if (validateLoginInput(stud_id, new String(pass_tf.getPassword()))){
             if (ClientDatabase.validateLogin(stud_id_tf.getText(), new String(pass_tf.getPassword()))) {
-                JOptionPane.showMessageDialog(LoginGUI.this, "Login Success");
+                try {
+                    UserLoginToken.loginUser(ClientDatabase.getClientObject(stud_id));
+                    this.dispose();
+                    landing landong = new landing();
+                    landong.setVisible(true);
+                } catch (DatabaseGetInterrupted dgi){
+                    JOptionPane.showMessageDialog(LoginGUI.this, dgi.getMessage());
+                }
             } else {
                 JOptionPane.showMessageDialog(LoginGUI.this, "Login Failed!");
             }
