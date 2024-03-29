@@ -17,12 +17,8 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        SwingUtilities.invokeLater(() -> { new LoginGUI().setVisible(true); });
+        loginF = new LoginGUI();
+        loginF.setVisible(true);
 
     }
 }
