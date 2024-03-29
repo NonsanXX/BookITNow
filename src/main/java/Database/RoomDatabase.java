@@ -37,8 +37,20 @@ public class RoomDatabase extends Database{
         return roomList;
     }
     
-    public static void addRoom(RoomData roomData){
-        getDb().collection(ROOM_COLLECTION).document((String) roomData.getRoomName()).set(roomData);
+    /**
+     * 
+     * @param roomData Data of the room
+     * @return UpdateTime 
+     * @throws DatabaseGetInterrupted 
+     */
+    public static long addRoom(RoomData roomData) throws DatabaseGetInterrupted{
+        long currentTimeMillis = System.currentTimeMillis();
+        ApiFuture<WriteResult> future = getDb().collection(ROOM_COLLECTION).document((String) roomData.getRoomName()).set(roomData);
+        try {
+            return (Math.abs(future.get().getUpdateTime().getSeconds()*1000 - currentTimeMillis));
+        } catch (InterruptedException | ExecutionException ex) {
+            throw new DatabaseGetInterrupted();
+        }
     }
     
     public static HashMap<String, Object> getRoomHashMap(String roomName) throws DatabaseGetInterrupted{
@@ -69,11 +81,4 @@ public class RoomDatabase extends Database{
         return result;
     }
     
-    public static void sleepForUpdateTime(ApiFuture<WriteResult> writeResult){
-        try {
-            Thread.sleep(0);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(RoomDatabase.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 }

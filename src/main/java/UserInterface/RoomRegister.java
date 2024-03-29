@@ -6,12 +6,15 @@ package UserInterface;
 
 import Database.Dataclass.RoomData;
 import Database.Dataclass.timeRange;
+import Database.Exception.DatabaseGetInterrupted;
 import Database.RoomDatabase;
 
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -275,8 +278,13 @@ public class RoomRegister extends javax.swing.JFrame {
         openTimeList.add(openTime);
         if (!roomName.isEmpty() && !roomDes.isEmpty()){
             if (!Objects.equals(openTime.time1, openTime.time2) && openTime.time1 < openTime.time2){
-                RoomDatabase.addRoom(new RoomData(roomName,
-                        facilityList, roomDes, openTimeList, new ArrayList<>(), new HashMap<>()));
+                try {
+                    long updateTime = RoomDatabase.addRoom(new RoomData(roomName,
+                            facilityList, roomDes, openTimeList, new ArrayList<>(), new HashMap<>()));
+                    Thread.sleep(updateTime);
+                } catch (DatabaseGetInterrupted | InterruptedException ex) {
+                    Logger.getLogger(RoomRegister.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 new AdminLanding().setVisible(true);
                 this.dispose();
                 System.out.println("Add room Successful.");
