@@ -4,14 +4,13 @@
  */
 package UserInterface;
 
-import Firebase.UserLoginToken;
 import Database.ClientDatabase;
-import Database.Exception.DatabaseGetInterrupted;
 import Database.Dataclass.ClientData;
 import Database.Exception.DatabaseGetInterrupted;
 import EmailService.EmailSender;
 import Utility.PasswordGenerator;
 import jakarta.mail.MessagingException;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.UnsupportedEncodingException;
@@ -959,14 +958,7 @@ public class LoginGUI extends javax.swing.JFrame {
     private void signin_btnActionPerformed(java.awt.event.ActionEvent evt) {                                           
         if (validateLoginInput(stud_id_tf.getText(), new String(pass_tf.getPassword()))){
             if (ClientDatabase.validateLogin(stud_id_tf.getText(), new String(pass_tf.getPassword()))) {
-                try {
-                    UserLoginToken.loginUser(ClientDatabase.getClientObject(stud_id));
-                    this.dispose();
-                    AdminLanding landong = new AdminLanding();
-                    landong.setVisible(true);
-                } catch (DatabaseGetInterrupted dgi){
-                    JOptionPane.showMessageDialog(LoginGUI.this, dgi.getMessage());
-                }
+                JOptionPane.showMessageDialog(LoginGUI.this, "Login Success");
             } else {
                 JOptionPane.showMessageDialog(LoginGUI.this, "Login Failed!");
             }
