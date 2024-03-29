@@ -4,13 +4,13 @@
  */
 package UserInterface;
 
+import Firebase.UserLoginToken;
 import Database.ClientDatabase;
 import Database.Dataclass.ClientData;
 import Database.Exception.DatabaseGetInterrupted;
 import EmailService.EmailSender;
 import Utility.PasswordGenerator;
 import jakarta.mail.MessagingException;
-
 import javax.swing.*;
 import java.awt.*;
 import java.io.UnsupportedEncodingException;
@@ -897,6 +897,7 @@ public class LoginGUI extends javax.swing.JFrame {
             forget_email.setForeground(tf_Focus_color);
         }
     }//GEN-LAST:event_forget_emailFocusGained
+
     private void forget_emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_forget_emailFocusLost
         if (forget_email.getText().isEmpty()){
             forget_email.setText("อีเมล / E-mail");
@@ -956,9 +957,18 @@ public class LoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_forgetpass_btnActionPerformed
 
     private void signin_btnActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        if (validateLoginInput(stud_id_tf.getText(), new String(pass_tf.getPassword()))){
+        String stud_id = stud_id_tf.getText();
+
+        if (validateLoginInput(stud_id, new String(pass_tf.getPassword()))){
             if (ClientDatabase.validateLogin(stud_id_tf.getText(), new String(pass_tf.getPassword()))) {
-                JOptionPane.showMessageDialog(LoginGUI.this, "Login Success");
+                try {
+                    UserLoginToken.loginUser(ClientDatabase.getClientObject(stud_id));
+                    this.dispose();
+                    AdminLanding landong = new AdminLanding();
+                    landong.setVisible(true);
+                } catch (DatabaseGetInterrupted dgi){
+                    JOptionPane.showMessageDialog(LoginGUI.this, dgi.getMessage());
+                }
             } else {
                 JOptionPane.showMessageDialog(LoginGUI.this, "Login Failed!");
             }

@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class Main {
-    private static JFrame loginF;
     
     public static void main(String[] args) throws URISyntaxException, IOException {
         try {
@@ -17,8 +16,12 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-        loginF = new LoginGUI();
-        loginF.setVisible(true);
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        SwingUtilities.invokeLater(() -> { new LoginGUI().setVisible(true); });
 
     }
 }
