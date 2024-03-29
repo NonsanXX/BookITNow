@@ -3,17 +3,34 @@ package UserInterface;/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import Database.Exception.DatabaseGetInterrupted;
+import Database.RoomDatabase;
+import RoomPanel.*;
+
+import java.util.ArrayList;
+
 /**
  *
  * @author acer
  */
-public class landing extends javax.swing.JFrame {
 
+public class AdminLanding extends javax.swing.JFrame {
+    ArrayList<String> roomdata = RoomDatabase.getRoomList();
+    int showroom_rows = (int) Math.ceil((double)roomdata.size() / 4);
     /**
      * Creates new form landing
      */
-    public landing() {
+    public AdminLanding() {
+
         initComponents();
+        for(String room : roomdata){
+            try {
+                showroomPanel.add(new RoomPanel(RoomDatabase.getRoomObject(room)));
+                System.out.println(room);
+            } catch (DatabaseGetInterrupted e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
@@ -28,8 +45,7 @@ public class landing extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
+        showroomPanel = new javax.swing.JPanel();
         menu_btn = new javax.swing.JButton();
         add_btn = new javax.swing.JButton();
         ref_btn = new javax.swing.JButton();
@@ -44,24 +60,10 @@ public class landing extends javax.swing.JFrame {
         jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        jPanel3.setBackground(new java.awt.Color(204, 204, 204));
-
-        jPanel5.setBackground(new java.awt.Color(255, 102, 102));
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1030, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
-        );
-
-        jPanel3.add(jPanel5);
-
-        jScrollPane2.setViewportView(jPanel3);
+        showroomPanel.setBackground(new java.awt.Color(153, 153, 255));
+        showroomPanel.setPreferredSize(new java.awt.Dimension(800, 3000));
+        showroomPanel.setLayout(new java.awt.GridLayout(showroom_rows, 4, 5, 5));
+        jScrollPane2.setViewportView(showroomPanel);
 
         menu_btn.setText("menu");
         menu_btn.setMaximumSize(new java.awt.Dimension(33, 28));
@@ -104,8 +106,8 @@ public class landing extends javax.swing.JFrame {
                         .addComponent(menu_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(add_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ref_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ref_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1058, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
@@ -155,6 +157,7 @@ public class landing extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void ref_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ref_btnActionPerformed
@@ -188,20 +191,23 @@ public class landing extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(landing.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminLanding.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(landing.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminLanding.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(landing.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminLanding.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(landing.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminLanding.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new landing().setVisible(true);
+                new AdminLanding().setVisible(true);
             }
         });
     }
@@ -209,11 +215,10 @@ public class landing extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add_btn;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton menu_btn;
     private javax.swing.JButton ref_btn;
+    private javax.swing.JPanel showroomPanel;
     // End of variables declaration//GEN-END:variables
 }
