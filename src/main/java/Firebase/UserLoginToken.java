@@ -14,6 +14,7 @@ public final class UserLoginToken{
     public static String getClientID(){
         return client.getStudentID();
     }
+    public static ClientData getClient() {return  client;}
     
     public static void loginUser(ClientData client){
         UserLoginToken.client = client;

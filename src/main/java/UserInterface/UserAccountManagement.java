@@ -4,6 +4,8 @@
  */
 package UserInterface;
 
+import Firebase.UserLoginToken;
+
 /**
  *
  * @author Nonsan
@@ -54,15 +56,15 @@ public class UserAccountManagement extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("FreesiaUPC", 0, 30)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("นายห้างมักเสี่ยว เจตจรูญ");
+        jLabel2.setText(UserLoginToken.getClient().getThaiName()+" "+UserLoginToken.getClient().getThaiSurname());
 
         jLabel3.setFont(new java.awt.Font("FreesiaUPC", 0, 30)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Mr.Hangmaksaew Jetjarun");
+        jLabel3.setText(UserLoginToken.getClient().getEnglishName()+" "+UserLoginToken.getClient().getEnglishSurname());
 
         jLabel4.setFont(new java.awt.Font("FreesiaUPC", 0, 30)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("รหัสนักศึกษา : 6x070xxx");
+        jLabel4.setText("รหัสนักศึกษา : "+ UserLoginToken.getClient().getStudentID());
 
         jLabel5.setBackground(new java.awt.Color(0, 0, 0));
         jLabel5.setFont(new java.awt.Font("FreesiaUPC", 1, 36)); // NOI18N
