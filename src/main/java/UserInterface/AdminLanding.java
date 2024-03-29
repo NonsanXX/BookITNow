@@ -2,6 +2,9 @@ package UserInterface;/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 import Database.Exception.DatabaseGetInterrupted;
 import Database.RoomDatabase;
@@ -14,7 +17,7 @@ import java.util.ArrayList;
  * @author acer
  */
 
-public class AdminLanding extends javax.swing.JFrame {
+public class AdminLanding extends javax.swing.JFrame implements MouseListener{
     ArrayList<String> roomdata = RoomDatabase.getRoomList();
     int showroom_rows = (int) Math.ceil((double)roomdata.size() / 4);
     /**
@@ -25,7 +28,9 @@ public class AdminLanding extends javax.swing.JFrame {
         initComponents();
         for(String room : roomdata){
             try {
-                showroomPanel.add(new RoomPanel(RoomDatabase.getRoomObject(room)));
+                RoomPanel rp = new RoomPanel(RoomDatabase.getRoomObject(room));
+                rp.addMouseListener(this);
+                showroomPanel.add(rp);
                 System.out.println(room);
             } catch (DatabaseGetInterrupted e) {
                 e.printStackTrace();
@@ -221,4 +226,26 @@ public class AdminLanding extends javax.swing.JFrame {
     private javax.swing.JButton ref_btn;
     private javax.swing.JPanel showroomPanel;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        RoomPanel source = (RoomPanel) e.getComponent();
+        System.out.println(source.getRoomName());
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+    }
 }

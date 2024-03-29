@@ -123,4 +123,11 @@ public class RoomData {
         reservedTime.remove(tr);
         return true;
     }
+    
+    public void updateReservedTime(){
+        
+        for(timeRange tr : reservedTime){
+            
+        }
+    }
 }

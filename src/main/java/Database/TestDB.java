@@ -27,17 +27,20 @@ public class TestDB {
                 add("body");
             }};
             ArrayList<timeRange> openTime = new ArrayList<>(){{
-                add(new timeRange(0, 12));
-                add(new timeRange(15, 20));
+                add(new timeRange(0.0, 12.0));
+                add(new timeRange(15.0, 20.0));
             }};
             ArrayList<timeRange> reservedTime = new ArrayList<>();
             HashMap<String, timeRange> currentQueue = new HashMap<>();
             RoomData rm1 = new RoomData("testFetchTime", facilityList, "testRoom", openTime, reservedTime, currentQueue);
-            RoomDatabase.addRoom(rm1);
+            for(int i=8;i < 50; i++){
+                rm1.setRoomName("Room: "+i+1);
+                RoomDatabase.addRoom(rm1);
+            }
 
             System.out.println(RoomDatabase.getRoomObject(rm1.getRoomName()));
             
-            RoomDatabase.deleteRoom(rm1.getRoomName());
+            //RoomDatabase.deleteRoom(rm1.getRoomName());
 //            for(String s : RoomDatabase.getRoomList()){
 //                System.out.println(s);
 //            }
