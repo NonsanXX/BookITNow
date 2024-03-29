@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class TestDB {
@@ -22,7 +23,7 @@ public class TestDB {
         try {
             FirebaseServiceAccount.initFirebase();
             ArrayList<String> facilityList = new ArrayList<>(){{
-                add("table");
+                add("knife");
                 add("body");
             }};
             ArrayList<timeRange> openTime = new ArrayList<>(){{
@@ -31,9 +32,16 @@ public class TestDB {
             }};
             ArrayList<timeRange> reservedTime = new ArrayList<>();
             HashMap<String, timeRange> currentQueue = new HashMap<>();
-            RoomData rm1 = new RoomData("testRoom", facilityList, "testRoom", openTime, reservedTime, currentQueue);
+            RoomData rm1 = new RoomData("testFetchTime", facilityList, "testRoom", openTime, reservedTime, currentQueue);
             RoomDatabase.addRoom(rm1);
+
+            System.out.println(RoomDatabase.getRoomObject(rm1.getRoomName()));
             
+            RoomDatabase.deleteRoom(rm1.getRoomName());
+//            for(String s : RoomDatabase.getRoomList()){
+//                System.out.println(s);
+//            }
+//            System.out.println(RoomDatabase.getRoomObject(rm1.getRoomName()));
         } catch (URISyntaxException | IOException   ex) {
             Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         } finally{
