@@ -4,7 +4,13 @@
  */
 package UserInterface;
 
+import Database.ClientDatabase;
+import Database.Dataclass.ClientData;
+import Database.Exception.DatabaseGetInterrupted;
 import Firebase.UserLoginToken;
+
+import javax.swing.*;
+import java.util.Arrays;
 
 /**
  *
@@ -31,18 +37,18 @@ public class UserAccountManagement extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        name_th = new javax.swing.JLabel();
+        name_en = new javax.swing.JLabel();
+        student_id = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
-        jPasswordField3 = new javax.swing.JPasswordField();
+        change_pass_old = new javax.swing.JPasswordField();
+        change_pass_new = new javax.swing.JPasswordField();
+        change_pass_new_c = new javax.swing.JPasswordField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        confirmbtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -54,17 +60,17 @@ public class UserAccountManagement extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/demo-profile.png"))); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("FreesiaUPC", 0, 30)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText(UserLoginToken.getClient().getThaiName()+" "+UserLoginToken.getClient().getThaiSurname());
+        name_th.setFont(new java.awt.Font("FreesiaUPC", 0, 30)); // NOI18N
+        name_th.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        name_th.setText(UserLoginToken.getClient().getThaiName()+" "+UserLoginToken.getClient().getThaiSurname());
 
-        jLabel3.setFont(new java.awt.Font("FreesiaUPC", 0, 30)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText(UserLoginToken.getClient().getEnglishName()+" "+UserLoginToken.getClient().getEnglishSurname());
+        name_en.setFont(new java.awt.Font("FreesiaUPC", 0, 30)); // NOI18N
+        name_en.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        name_en.setText(UserLoginToken.getClient().getEnglishName()+" "+UserLoginToken.getClient().getEnglishSurname());
 
-        jLabel4.setFont(new java.awt.Font("FreesiaUPC", 0, 30)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("รหัสนักศึกษา : "+ UserLoginToken.getClient().getStudentID());
+        student_id.setFont(new java.awt.Font("FreesiaUPC", 0, 30)); // NOI18N
+        student_id.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        student_id.setText("รหัสนักศึกษา : "+ UserLoginToken.getClient().getStudentID());
 
         jLabel5.setBackground(new java.awt.Color(0, 0, 0));
         jLabel5.setFont(new java.awt.Font("FreesiaUPC", 1, 36)); // NOI18N
@@ -76,25 +82,9 @@ public class UserAccountManagement extends javax.swing.JFrame {
         jLabel6.setText("เปลี่ยนรหัสผ่าน");
         jLabel6.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
-        jPasswordField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
-            }
-        });
+        change_pass_old.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
-        jPasswordField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField2ActionPerformed(evt);
-            }
-        });
-
-        jPasswordField3.setToolTipText("");
-        jPasswordField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField3ActionPerformed(evt);
-            }
-        });
+        change_pass_new_c.setToolTipText("");
 
         jLabel7.setFont(new java.awt.Font("FreesiaUPC", 0, 30)); // NOI18N
         jLabel7.setText("รหัสผ่านใหม่");
@@ -105,14 +95,14 @@ public class UserAccountManagement extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("FreesiaUPC", 0, 30)); // NOI18N
         jLabel9.setText("ยืนยันรหัสผ่านใหม่");
 
-        jButton1.setBackground(new java.awt.Color(255, 51, 51));
-        jButton1.setFont(new java.awt.Font("FreesiaUPC", 0, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("ยืนยัน");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        confirmbtn.setBackground(new java.awt.Color(255, 51, 51));
+        confirmbtn.setFont(new java.awt.Font("FreesiaUPC", 0, 24)); // NOI18N
+        confirmbtn.setForeground(new java.awt.Color(255, 255, 255));
+        confirmbtn.setText("ยืนยัน");
+        confirmbtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        confirmbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                confirmbtnActionPerformed(evt);
             }
         });
 
@@ -129,9 +119,9 @@ public class UserAccountManagement extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(194, 194, 194)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(name_th, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(name_en, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(student_id, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -144,12 +134,12 @@ public class UserAccountManagement extends javax.swing.JFrame {
                                 .addGap(12, 12, 12)))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(change_pass_old, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(change_pass_new, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(change_pass_new_c, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(38, 38, 38)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(confirmbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -163,28 +153,28 @@ public class UserAccountManagement extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel5)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(name_th, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(name_en, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(student_id, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(change_pass_old, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(change_pass_new, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(change_pass_new_c, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(confirmbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12))
         );
 
@@ -219,21 +209,37 @@ public class UserAccountManagement extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPasswordField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField3ActionPerformed
-
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jPasswordField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField2ActionPerformed
+    private void confirmbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmbtnActionPerformed
+       char[] old_pass = change_pass_old.getPassword();
+       char[] new_pass = change_pass_new.getPassword();
+       char[] new_pass_c = change_pass_new_c.getPassword();
+       if (old_pass.length != 0 && new_pass.length != 0 && new_pass_c.length != 0){
+           if (Arrays.equals(new_pass, new_pass_c)){
+               if (new_pass.length >= 6 && new_pass.length <= 60){
+                   if (ClientData.hashing(new String(old_pass)).equals(UserLoginToken.getClient().getPasscode())) {
+                       try {
+                           ClientDatabase.updateClient(UserLoginToken.getClientID(), "passcode", ClientData.hashing(new String(new_pass)));
+                           UserLoginToken.refreshClient();
+                           JOptionPane.showMessageDialog(UserAccountManagement.this, "Change password successfully!");
+                           change_pass_old.setText("");
+                           change_pass_new.setText("");
+                           change_pass_new_c.setText("");
+                       } catch (DatabaseGetInterrupted ex) {
+                           JOptionPane.showMessageDialog(UserAccountManagement.this, ex.getMessage());
+                       }
+                   } else {
+                       JOptionPane.showMessageDialog(UserAccountManagement.this, "Incorrect old password.");
+                   }
+               } else {
+                   JOptionPane.showMessageDialog(UserAccountManagement.this, "Password must be at least 6 characters.");
+               }
+           } else {
+               JOptionPane.showMessageDialog(UserAccountManagement.this, "New password does not match.");
+           }
+       } else {
+           JOptionPane.showMessageDialog(UserAccountManagement.this, "Please fill out every form before confirm.");
+       }
+    }//GEN-LAST:event_confirmbtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -271,11 +277,11 @@ public class UserAccountManagement extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JPasswordField change_pass_new_c;
+    private javax.swing.JPasswordField change_pass_new;
+    private javax.swing.JPasswordField change_pass_old;
+    private javax.swing.JButton confirmbtn;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -283,8 +289,8 @@ public class UserAccountManagement extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JPasswordField jPasswordField3;
+    private javax.swing.JLabel name_en;
+    private javax.swing.JLabel name_th;
+    private javax.swing.JLabel student_id;
     // End of variables declaration//GEN-END:variables
 }
