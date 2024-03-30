@@ -12,23 +12,29 @@ import java.util.HashMap;
  */
 public class RoomData{
     private String roomName;
+    private String building;
+    private String floor;
     private ArrayList<String> facilityList;
-    private String roomDescription;
     private ArrayList<TimeRange> openTime;
     private ArrayList<TimeRange> reservedTime;
     private HashMap<String, TimeRange> currentQueue;
-    private int capacity;
+    private long capacity;
+    private boolean status;
+    
     public RoomData(){
-        this("", null, "", null, null, null);
+        this("", "", "", null, null, null, null, 0l, false);
     }
     
-    public RoomData(String roomName, ArrayList<String> facilityList, String roomDescription, ArrayList<TimeRange> openTime, ArrayList<TimeRange> reservedTime, HashMap<String, TimeRange> currentQueue){
+    public RoomData(String roomName, String building, String floor, ArrayList<String> facilityList, ArrayList<TimeRange> openTime, ArrayList<TimeRange> reservedTime, HashMap<String, TimeRange> currentQueue, long capaity, boolean status){
         this.roomName = roomName;
+        this.building = building;
+        this.floor = floor;
         this.facilityList = facilityList;
-        this.roomDescription = roomDescription;
         this.openTime = openTime;
         this.reservedTime = reservedTime;
         this.currentQueue = currentQueue;
+        this.capacity = capaity;
+        this.status = status;
     }
 
     public String getRoomName() {
@@ -39,20 +45,28 @@ public class RoomData{
         this.roomName = roomName;
     }
 
+    public String getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(String building) {
+        this.building = building;
+    }
+
+    public String getFloor() {
+        return floor;
+    }
+
+    public void setFloor(String floor) {
+        this.floor = floor;
+    }
+    
     public ArrayList<String> getFacilityList() {
         return facilityList;
     }
 
     public void setFacilityList(ArrayList<String> facilityList) {
         this.facilityList = facilityList;
-    }
-
-    public String getRoomDescription() {
-        return roomDescription;
-    }
-
-    public void setRoomDescription(String roomDescription) {
-        this.roomDescription = roomDescription;
     }
 
     public ArrayList<TimeRange> getOpenTime() {
@@ -97,12 +111,20 @@ public class RoomData{
         this.currentQueue = currentQueue;
     }
 
-    public int getCapacity() {
+    public long getCapacity() {
         return capacity;
     }
 
-    public void setCapacity(int capacity) {
+    public void setCapacity(long capacity) {
         this.capacity = capacity;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
     
     public boolean isSuperRangeOfOpenTime(TimeRange tr){

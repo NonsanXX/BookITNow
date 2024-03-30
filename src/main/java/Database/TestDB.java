@@ -7,6 +7,7 @@ import Firebase.FirebaseServiceAccount;
 import Database.RoomDatabase;
 import Database.Dataclass.RoomData;
 import Database.Dataclass.TimeRange;
+import com.google.cloud.firestore.DocumentReference;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -22,8 +23,9 @@ public class TestDB {
     public static void main(String[] args) throws DatabaseGetInterrupted {
         try {
             FirebaseServiceAccount.initFirebase();
-            TimeRange tr = new TimeRange();
-        } catch (URISyntaxException | IOException   ex) {
+            RoomData rm1 = new RoomData("testRoom", "Pratep", "G", new ArrayList<String>(), new ArrayList<TimeRange>(), new ArrayList<>(), new HashMap<String, TimeRange>(), 0, true);
+            RoomDatabase.addRoom(rm1);
+        } catch (URISyntaxException | IOException    ex) {
             Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         } finally{
             try {
