@@ -280,8 +280,7 @@ public class RoomRegister extends javax.swing.JFrame {
         if (!roomName.isEmpty() && !roomDes.isEmpty()){
             if (!Objects.equals(openTime.time1, openTime.time2) && openTime.time1 < openTime.time2){
                 try {
-                    long updateTime = RoomDatabase.addRoom(new RoomData(roomName,
-                            facilityList, roomDes, openTimeList, new ArrayList<>(), new HashMap<>(), ));
+                    long updateTime = RoomDatabase.addRoom(new RoomData());
                     Thread.sleep(updateTime);
                 } catch (DatabaseGetInterrupted | InterruptedException ex) {
                     Logger.getLogger(RoomRegister.class.getName()).log(Level.SEVERE, null, ex);

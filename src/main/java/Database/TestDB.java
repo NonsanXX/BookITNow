@@ -23,8 +23,8 @@ public class TestDB {
     public static void main(String[] args) throws DatabaseGetInterrupted {
         try {
             FirebaseServiceAccount.initFirebase();
-            RoomData rm1 = new RoomData("testRoom", "Pratep", "G", new ArrayList<String>(), new ArrayList<TimeRange>(), new ArrayList<>(), new HashMap<String, TimeRange>(), 0, true);
-            RoomDatabase.addRoom(rm1);
+            RoomData rm1 = new RoomData("testRoom2", "Pratep", "G", new ArrayList<String>(), new ArrayList<TimeRange>(), new ArrayList<>(), new HashMap<String, TimeRange>(), 0, true);
+            RoomDatabase.deleteRoom("testRoom");
         } catch (URISyntaxException | IOException    ex) {
             Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         } finally{
