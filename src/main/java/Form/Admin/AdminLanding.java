@@ -5,7 +5,7 @@ package Form.Admin;/*
 
 import Database.Exception.DatabaseGetInterrupted;
 import Database.RoomDatabase;
-import RoomPanel.RoomPanel;
+import Form.RoomPanel.RoomPanel;
 
 import javax.swing.*;
 import java.awt.*;
