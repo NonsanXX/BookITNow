@@ -4,7 +4,6 @@
  */
 package Database;
 
-import static Database.Database.db;
 import Database.Dataclass.RoomData;
 import Database.Dataclass.TimeRange;
 import Database.Exception.DatabaseGetInterrupted;
@@ -18,8 +17,6 @@ import com.google.api.core.ApiFuture;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 /**
@@ -89,14 +86,10 @@ public class RoomDatabase extends Database{
      */
     public static long addRoom(RoomData roomData) throws DatabaseGetInterrupted{
         long currentTimeMillis = System.currentTimeMillis();
-        // Write Room -> ROOM_COLLECTION
         ApiFuture<WriteResult> future1 = getDb().collection(ROOM_COLLECTION).document((String) roomData.getRoomName()).set(roomData);
-        // Write RoomRef -> BUILDING_COLLECTION
-        DocumentReference docRef = getDb().collection(ROOM_COLLECTION).document((String) roomData.getRoomName());
-        ApiFuture<WriteResult> future2 = getDb().collection(BUILDING_COLLECTION).document(roomData.getBuilding()).set(docRef);
+        BuildingDatabase.addReference(roomData);
         try {
-            long updateTime = (Math.abs(future1.get().getUpdateTime().getSeconds()*1000 - currentTimeMillis)) + 
-                              (Math.abs(future2.get().getUpdateTime().getSeconds()*1000 - currentTimeMillis));
+            long updateTime = (Math.abs(future1.get().getUpdateTime().getSeconds()*1000 - currentTimeMillis));
             return updateTime;
         } catch (InterruptedException | ExecutionException ex) {
             throw new DatabaseGetInterrupted();
@@ -121,6 +114,11 @@ public class RoomDatabase extends Database{
         }
     }
     
+    public static void deleteRoom(String roomName) throws DatabaseGetInterrupted{
+        getDb().collection(ROOM_COLLECTION).document(roomName).delete();
+        BuildingDatabase.deleteReference(getRoomObject(roomName));
+    }
+    
     public static RoomData loadRoom(DocumentReference docRef) throws DatabaseGetInterrupted{
         try {
             return docRef.get().get().toObject(RoomData.class);
@@ -129,9 +127,7 @@ public class RoomDatabase extends Database{
         }
     }
     
-    public static void deleteRoom(String roomName){
-        getDb().collection(ROOM_COLLECTION).document(roomName).delete();
-    }
+
     
     public static boolean reservingRoom(RoomData room, TimeRange time){
         boolean result = room.reservingTime(time);
@@ -139,4 +135,7 @@ public class RoomDatabase extends Database{
         return result;
     }
     
+    public static DocumentReference getReference(RoomData roomData){
+        return getDb().collection(ROOM_COLLECTION).document(roomData.getRoomName());
+    }
 }
