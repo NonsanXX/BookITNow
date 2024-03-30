@@ -6,6 +6,7 @@ package Database.Dataclass;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 /**
  *
  * @author phump
@@ -16,8 +17,8 @@ public class RoomData{
     private String floor;
     private ArrayList<String> facilityList;
     private ArrayList<TimeRange> openTime;
-    private ArrayList<TimeRange> reservedTime;
-    private HashMap<String, TimeRange> currentQueue;
+    private ArrayList<TimeDate> reservedTime;
+    private HashMap<String, TimeDate> currentQueue;
     private long capacity;
     private boolean status;
     
@@ -25,7 +26,7 @@ public class RoomData{
         this("", "", "", null, null, null, null, 0l, false);
     }
     
-    public RoomData(String roomName, String building, String floor, ArrayList<String> facilityList, ArrayList<TimeRange> openTime, ArrayList<TimeRange> reservedTime, HashMap<String, TimeRange> currentQueue, long capaity, boolean status){
+    public RoomData(String roomName, String building, String floor, ArrayList<String> facilityList, ArrayList<TimeRange> openTime, ArrayList<TimeDate> reservedTime, HashMap<String, TimeDate> currentQueue, long capaity, boolean status){
         this.roomName = roomName;
         this.building = building;
         this.floor = floor;
@@ -95,19 +96,19 @@ public class RoomData{
         return true;
     }
     
-    public ArrayList<TimeRange> getReservedTime() {
+    public ArrayList<TimeDate> getReservedTime() {
         return reservedTime;
     }
 
-    public void setReservedTime(ArrayList<TimeRange> reservedTime) {
+    public void setReservedTime(ArrayList<TimeDate> reservedTime) {
         this.reservedTime = reservedTime;
     }
 
-    public HashMap<String, TimeRange> getCurrentQueue() {
+    public HashMap<String, TimeDate> getCurrentQueue() {
         return currentQueue;
     }
     
-    public void setCurrentQueue(HashMap<String, TimeRange> currentQueue) {
+    public void setCurrentQueue(HashMap<String, TimeDate> currentQueue) {
         this.currentQueue = currentQueue;
     }
 
@@ -136,8 +137,8 @@ public class RoomData{
         return false;
     }
     
-    public boolean isOverlapWithReservedTime(TimeRange tr){
-        for(TimeRange reserved : reservedTime){
+    public boolean isOverlapWithReservedTime(TimeDate tr){
+        for(TimeDate reserved : reservedTime){
             if(reserved.isOverlap(tr)){
                 return true;
             }
@@ -146,15 +147,15 @@ public class RoomData{
     }
     /**
     * To reserve time, it must satisfy three conditions
-    1: Given TimeRange MUST be a subRange of openTime
-    2: Given TimeRange MUST not overlap with any reservedTime
+    1: Given TimeDate MUST be a subRange of openTime
+    2: Given TimeDate MUST not overlap with any reservedTime
     3: Reservation MUST not exceed room capacity
     * 
     * 
     * @param tr Given TimeRange
     * @return true if reserving is complete
     */
-    public boolean reservingTime(TimeRange tr){
+    public boolean reservingTime(TimeDate tr){
         if(isSuperRangeOfOpenTime(tr) && !isOverlapWithReservedTime(tr) && reservedTime.size() < capacity){
             reservedTime.add(tr);
             return true;
@@ -167,7 +168,7 @@ public class RoomData{
      * @param tr Delete TimeRange
      * @return true if there exist TimeRange in reservedTime
      */
-    public boolean unReservedTime(TimeRange tr){
+    public boolean unReservedTime(TimeDate tr){
         if(!reservedTime.contains(tr)){
             return false;
         }
@@ -176,12 +177,16 @@ public class RoomData{
     }
     /**
      * 
+     * @param timeDate - Date in dateTimeFormatter in format dd/MM/YYYY
      * @param time - Time in 24 hours. Time 12.50 means 12:30
      */
-    public void updateReservedTime(Double time){
-        for(TimeRange tr : reservedTime){
-            if(tr.getTime2() > time){
-                unReservedTime(tr);
+    public void updateReservedTime(String timeDate, Double time){
+        TimeDate tester = new TimeDate(0.0, time, timeDate);
+        Iterator<TimeDate> iterator = reservedTime.iterator();
+        while(iterator.hasNext()){
+            TimeDate tr = iterator.next();
+            if(TimeDate.timeDateCompare(tr, tester)){
+                iterator.remove();
             }
         }
     }

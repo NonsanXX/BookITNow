@@ -6,6 +6,7 @@ package Database;
 
 import Database.Dataclass.RoomData;
 import Database.Dataclass.TimeRange;
+import Database.Dataclass.TimeDate;
 import Database.Exception.DatabaseGetInterrupted;
 import Firebase.UserLoginToken;
 
@@ -114,6 +115,10 @@ public class RoomDatabase extends Database{
         }
     }
     
+    public static void updateRoom(RoomData roomData) throws DatabaseGetInterrupted{
+        addRoom(roomData);
+    }
+    
     public static void deleteRoom(String roomName) throws DatabaseGetInterrupted{
         getDb().collection(ROOM_COLLECTION).document(roomName).delete();
         BuildingDatabase.deleteReference(getRoomObject(roomName));
@@ -129,9 +134,12 @@ public class RoomDatabase extends Database{
     
 
     
-    public static boolean reservingRoom(RoomData room, TimeRange time){
+    public static boolean reservingRoom(RoomData room, TimeDate time) throws DatabaseGetInterrupted{
         boolean result = room.reservingTime(time);
-        room.getCurrentQueue().put(UserLoginToken.getClientID(), time);
+        if(result){
+            room.getCurrentQueue().put(UserLoginToken.getClientID(), time);
+            updateRoom(room);
+        }
         return result;
     }
     
