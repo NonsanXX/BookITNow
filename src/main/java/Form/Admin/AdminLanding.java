@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class AdminLanding extends javax.swing.JFrame implements MouseListener{
     ArrayList<String> roomdata = RoomDatabase.getRoomList();
-    int showroom_rows = Math.max(1, (int) Math.ceil((double)roomdata.size() / 4));
+    int showroom_rows = Math.max(3, (int) Math.ceil((double)roomdata.size() / 4));
     /**
      * Creates new form landing
      */
@@ -55,34 +55,31 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel4.setBackground(new java.awt.Color(51, 51, 51));
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-
-        jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        showroomPanel.setBackground(new java.awt.Color(153, 153, 255));
-        showroomPanel.setPreferredSize( new Dimension(800, Math.max(300*showroom_rows, 600)));
+        showroomPanel.setBackground(new java.awt.Color(102, 102, 102));
+        showroomPanel.setPreferredSize( new Dimension(800, Math.max(150*showroom_rows, 600)));
 
-            loading.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-            loading.setText("LOADING...");
+            loading.setFont(new java.awt.Font("FreesiaUPC", 1, 90)); // NOI18N
+            loading.setText("กำลังโหลดข้อมูล...");
 
             javax.swing.GroupLayout showroomPanelLayout = new javax.swing.GroupLayout(showroomPanel);
             showroomPanel.setLayout(showroomPanelLayout);
             showroomPanelLayout.setHorizontalGroup(
                 showroomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, showroomPanelLayout.createSequentialGroup()
-                    .addContainerGap(427, Short.MAX_VALUE)
+                .addGroup(showroomPanelLayout.createSequentialGroup()
+                    .addGap(337, 337, 337)
                     .addComponent(loading)
-                    .addGap(361, 361, 361))
+                    .addContainerGap(346, Short.MAX_VALUE))
             );
             showroomPanelLayout.setVerticalGroup(
                 showroomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(showroomPanelLayout.createSequentialGroup()
-                    .addGap(219, 219, 219)
-                    .addComponent(loading)
-                    .addContainerGap(2717, Short.MAX_VALUE))
+                    .addGap(192, 192, 192)
+                    .addComponent(loading, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(203, Short.MAX_VALUE))
             );
 
             jScrollPane2.setViewportView(showroomPanel);
@@ -112,14 +109,12 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
             jPanel4Layout.setHorizontalGroup(
                 jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
-                    .addGap(45, 45, 45)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addComponent(add_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(ref_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1058, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(18, Short.MAX_VALUE))
+                    .addContainerGap(1022, Short.MAX_VALUE)
+                    .addComponent(add_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(ref_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap())
+                .addComponent(jScrollPane2)
             );
             jPanel4Layout.setVerticalGroup(
                 jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,10 +122,9 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
                     .addContainerGap()
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
                         .addComponent(ref_btn, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                        .addComponent(add_btn, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
+                        .addComponent(add_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE))
             );
 
             jScrollPane2.getVerticalScrollBar().setUnitIncrement(16);
@@ -140,24 +134,19 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
             jPanel1Layout.setHorizontalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(27, 27, 27)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGap(0, 0, Short.MAX_VALUE))
             );
             jPanel1Layout.setVerticalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(30, 30, 30)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(22, 22, 22))
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             );
 
             javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
             getContentPane().setLayout(layout);
             layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(20, 20, 20)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addContainerGap())
             );
@@ -166,7 +155,7 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             );
 
-            pack();
+            setSize(new java.awt.Dimension(1194, 620));
             setLocationRelativeTo(null);
         }// </editor-fold>//GEN-END:initComponents
 
@@ -202,7 +191,7 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
         ref_btn.setEnabled(false);
         jScrollPane2.getVerticalScrollBar().setValue(jScrollPane2.getVerticalScrollBar().getMinimum());
         roomdata = RoomDatabase.getRoomList(); // get new room data from database
-        showroom_rows = Math.max(1, (int) Math.ceil((double)roomdata.size() / 4));
+        showroom_rows = Math.max(3, (int) Math.ceil((double)roomdata.size() / 4));
         showroomPanel.removeAll();
         for (String room : roomdata) {
             try {
@@ -214,8 +203,11 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
                 e.printStackTrace();
             }
         }
+        while (showroomPanel.getComponentCount() < 12){
+            showroomPanel.add(new JLabel());
+        }
         showroomPanel.setLayout(new GridLayout(showroom_rows, 4, 5, 5));
-        showroomPanel.setPreferredSize( new Dimension(800, 150*showroom_rows));
+        showroomPanel.setPreferredSize( new Dimension(800, Math.max(150*showroom_rows, 600)));
         showroomPanel.revalidate();
         showroomPanel.repaint();
         ref_btn.setEnabled(true);

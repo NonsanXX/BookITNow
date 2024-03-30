@@ -350,9 +350,6 @@
                   <SpinnerModel initial="0" maximum="59" minimum="0" numberType="java.lang.Long" stepSize="1" type="number"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="open_minStateChanged"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JSpinner" name="close_min">
               <Properties>

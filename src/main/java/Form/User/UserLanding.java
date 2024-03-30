@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class UserLanding extends javax.swing.JFrame implements MouseListener{
     ArrayList<String> roomdata = RoomDatabase.getRoomList();
-    int showroom_rows = Math.max(1, (int) Math.ceil((double)roomdata.size() / 4));
+    int showroom_rows = Math.max(3, (int) Math.ceil((double)roomdata.size() / 4));
     /**
      * Creates new form landing
      */
@@ -200,7 +200,7 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener{
         ref_btn.setEnabled(false);
         jScrollPane2.getVerticalScrollBar().setValue(jScrollPane2.getVerticalScrollBar().getMinimum());
         roomdata = RoomDatabase.getRoomList(); // get new room data from database
-        showroom_rows = Math.max(1, (int) Math.ceil((double)roomdata.size() / 4));
+        showroom_rows = Math.max(3, (int) Math.ceil((double)roomdata.size() / 4));
         showroomPanel.removeAll();
         for (String room : roomdata) {
             try {
@@ -212,8 +212,11 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener{
                 e.printStackTrace();
             }
         }
+        while (showroomPanel.getComponentCount() < 12){
+            showroomPanel.add(new JLabel());
+        }
         showroomPanel.setLayout(new GridLayout(showroom_rows, 4, 5, 5));
-        showroomPanel.setPreferredSize( new Dimension(800, 150*showroom_rows));
+        showroomPanel.setPreferredSize( new Dimension(800, Math.max(150*showroom_rows, 600)));
         showroomPanel.revalidate();
         showroomPanel.repaint();
         ref_btn.setEnabled(true);
