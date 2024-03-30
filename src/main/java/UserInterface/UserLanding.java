@@ -64,7 +64,7 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener{
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         showroomPanel.setBackground(new java.awt.Color(153, 153, 255));
-        showroomPanel.setPreferredSize( new Dimension(800, 150*showroom_rows));
+        showroomPanel.setPreferredSize( new Dimension(800, Math.max(300*showroom_rows, 600)));
 
         loading.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         loading.setText("LOADING...");

@@ -106,10 +106,9 @@ public class LoginGUI extends javax.swing.JFrame {
         jLabel3.setText("ลงชื่อเข้าใช้");
 
         stud_id_tf.setBackground(new java.awt.Color(34, 34, 34));
-        stud_id_tf.setFont(new java.awt.Font("FreesiaUPC", 0, 30)); // NOI18N
+        stud_id_tf.setFont(new java.awt.Font("FreesiaUPC", 0, 24)); // NOI18N
         stud_id_tf.setForeground(new java.awt.Color(117, 105, 109));
         stud_id_tf.setText("รหัสนักศึกษา / Student ID");
-        stud_id_tf.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 0, 0));
         stud_id_tf.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 stud_id_tfFocusGained(evt);
@@ -120,10 +119,9 @@ public class LoginGUI extends javax.swing.JFrame {
         });
 
         pass_tf.setBackground(new java.awt.Color(34, 34, 34));
-        pass_tf.setFont(new java.awt.Font("FreesiaUPC", 0, 30)); // NOI18N
+        pass_tf.setFont(new java.awt.Font("FreesiaUPC", 0, 24)); // NOI18N
         pass_tf.setForeground(new java.awt.Color(117, 105, 109));
         pass_tf.setText("รหัสผ่าน / Password");
-        pass_tf.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 0, 0));
         pass_tf.setEchoChar((char) 0);
         pass_tf.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -134,11 +132,16 @@ public class LoginGUI extends javax.swing.JFrame {
             }
         });
 
-        signin_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/signin.png"))); // NOI18N
+        signin_btn.setBackground(new java.awt.Color(0, 0, 0));
+        signin_btn.setFont(new java.awt.Font("FreesiaUPC", 1, 30)); // NOI18N
+        signin_btn.setForeground(new java.awt.Color(255, 255, 255));
+        signin_btn.setText("ลงชื่อเข้าใช้");
+        signin_btn.setToolTipText("");
         signin_btn.setBorderPainted(false);
-        signin_btn.setContentAreaFilled(false);
         signin_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         signin_btn.setFocusPainted(false);
+        signin_btn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        signin_btn.putClientProperty("JButton.buttonType", "roundRect");
         signin_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 signin_btnActionPerformed(evt);
@@ -208,7 +211,7 @@ public class LoginGUI extends javax.swing.JFrame {
                 .addGap(158, 158, 158)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(fgt_pass, javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(signin_btn, javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(signin_btn, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.CENTER, jPanel1Layout.createSequentialGroup()
                         .addComponent(fgt_pass1)
                         .addGap(8, 8, 8)
@@ -240,14 +243,14 @@ public class LoginGUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(pass_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
-                .addComponent(signin_btn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(signin_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
                 .addComponent(fgt_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fgt_pass1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(signup_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 207, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(contacttext, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(contact_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -301,10 +304,9 @@ public class LoginGUI extends javax.swing.JFrame {
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(34, 34, 34), 5, true));
 
         name_th_tf.setBackground(new java.awt.Color(34, 34, 34));
-        name_th_tf.setFont(new java.awt.Font("FreesiaUPC", 0, 36)); // NOI18N
+        name_th_tf.setFont(new java.awt.Font("FreesiaUPC", 0, 30)); // NOI18N
         name_th_tf.setForeground(new java.awt.Color(117, 105, 109));
         name_th_tf.setText("ชื่อจริง (ภาษาไทย)");
-        name_th_tf.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));
         name_th_tf.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 name_th_tfFocusGained(evt);
@@ -315,10 +317,9 @@ public class LoginGUI extends javax.swing.JFrame {
         });
 
         surname_th_tf.setBackground(new java.awt.Color(34, 34, 34));
-        surname_th_tf.setFont(new java.awt.Font("FreesiaUPC", 0, 36)); // NOI18N
+        surname_th_tf.setFont(new java.awt.Font("FreesiaUPC", 0, 30)); // NOI18N
         surname_th_tf.setForeground(new java.awt.Color(117, 105, 109));
         surname_th_tf.setText("นามสกุล (ภาษาไทย)");
-        surname_th_tf.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));
         surname_th_tf.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 surname_th_tfFocusGained(evt);
@@ -329,10 +330,9 @@ public class LoginGUI extends javax.swing.JFrame {
         });
 
         name_en_tf.setBackground(new java.awt.Color(34, 34, 34));
-        name_en_tf.setFont(new java.awt.Font("FreesiaUPC", 0, 36)); // NOI18N
+        name_en_tf.setFont(new java.awt.Font("FreesiaUPC", 0, 30)); // NOI18N
         name_en_tf.setForeground(new java.awt.Color(117, 105, 109));
         name_en_tf.setText("ชื่อจริง (ภาษาอังกฤษ)");
-        name_en_tf.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));
         name_en_tf.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 name_en_tfFocusGained(evt);
@@ -343,10 +343,9 @@ public class LoginGUI extends javax.swing.JFrame {
         });
 
         surname_en_tf.setBackground(new java.awt.Color(34, 34, 34));
-        surname_en_tf.setFont(new java.awt.Font("FreesiaUPC", 0, 36)); // NOI18N
+        surname_en_tf.setFont(new java.awt.Font("FreesiaUPC", 0, 30)); // NOI18N
         surname_en_tf.setForeground(new java.awt.Color(117, 105, 109));
         surname_en_tf.setText("นามสกุล (ภาษาอังกฤษ)");
-        surname_en_tf.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));
         surname_en_tf.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 surname_en_tfFocusGained(evt);
@@ -357,10 +356,9 @@ public class LoginGUI extends javax.swing.JFrame {
         });
 
         email_tf.setBackground(new java.awt.Color(34, 34, 34));
-        email_tf.setFont(new java.awt.Font("FreesiaUPC", 0, 36)); // NOI18N
+        email_tf.setFont(new java.awt.Font("FreesiaUPC", 0, 30)); // NOI18N
         email_tf.setForeground(new java.awt.Color(117, 105, 109));
         email_tf.setText("E-mail");
-        email_tf.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));
         email_tf.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 email_tfFocusGained(evt);
@@ -371,10 +369,9 @@ public class LoginGUI extends javax.swing.JFrame {
         });
 
         password_tf.setBackground(new java.awt.Color(34, 34, 34));
-        password_tf.setFont(new java.awt.Font("FreesiaUPC", 0, 36)); // NOI18N
+        password_tf.setFont(new java.awt.Font("FreesiaUPC", 0, 30)); // NOI18N
         password_tf.setForeground(new java.awt.Color(117, 105, 109));
         password_tf.setText("รหัสผ่าน");
-        password_tf.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));
         password_tf.setEchoChar((char) 0);
         password_tf.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -386,10 +383,9 @@ public class LoginGUI extends javax.swing.JFrame {
         });
 
         c_password_tf.setBackground(new java.awt.Color(34, 34, 34));
-        c_password_tf.setFont(new java.awt.Font("FreesiaUPC", 0, 36)); // NOI18N
+        c_password_tf.setFont(new java.awt.Font("FreesiaUPC", 0, 30)); // NOI18N
         c_password_tf.setForeground(new java.awt.Color(117, 105, 109));
         c_password_tf.setText("ยืนยันรหัสผ่าน");
-        c_password_tf.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));
         c_password_tf.setEchoChar((char) 0);
         c_password_tf.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -401,10 +397,9 @@ public class LoginGUI extends javax.swing.JFrame {
         });
 
         student_id_tf.setBackground(new java.awt.Color(34, 34, 34));
-        student_id_tf.setFont(new java.awt.Font("FreesiaUPC", 0, 36)); // NOI18N
+        student_id_tf.setFont(new java.awt.Font("FreesiaUPC", 0, 30)); // NOI18N
         student_id_tf.setForeground(new java.awt.Color(117, 105, 109));
         student_id_tf.setText("รหัสนักศึกษา");
-        student_id_tf.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));
         student_id_tf.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 student_id_tfFocusGained(evt);
@@ -461,11 +456,10 @@ public class LoginGUI extends javax.swing.JFrame {
         );
 
         register_btn.setBackground(new java.awt.Color(0, 0, 0));
-        register_btn.setFont(new java.awt.Font("Noto Sans Thai", 0, 24)); // NOI18N
+        register_btn.setFont(new java.awt.Font("FreesiaUPC", 1, 48)); // NOI18N
         register_btn.setForeground(new java.awt.Color(255, 255, 255));
-        register_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/register.png"))); // NOI18N
+        register_btn.setText("ลงทะเบียน");
         register_btn.setBorderPainted(false);
-        register_btn.setContentAreaFilled(false);
         register_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         register_btn.setFocusPainted(false);
         register_btn.addActionListener(new java.awt.event.ActionListener() {
@@ -488,14 +482,13 @@ public class LoginGUI extends javax.swing.JFrame {
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(136, 136, 136))
             .addGroup(RegisterPanelLayout.createSequentialGroup()
-                .addGroup(RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(RegisterPanelLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(RegisterPanelLayout.createSequentialGroup()
-                        .addGap(339, 339, 339)
-                        .addComponent(register_btn)))
+                .addGap(15, 15, 15)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 27, Short.MAX_VALUE))
+            .addGroup(RegisterPanelLayout.createSequentialGroup()
+                .addGap(352, 352, 352)
+                .addComponent(register_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         RegisterPanelLayout.setVerticalGroup(
             RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -512,8 +505,8 @@ public class LoginGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(register_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(200, 200, 200))
+                .addComponent(register_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(135, 135, 135))
         );
 
         MainPanel.add(RegisterPanel, "RegisterPanel");
@@ -538,7 +531,6 @@ public class LoginGUI extends javax.swing.JFrame {
         forget_studid.setFont(new java.awt.Font("FreesiaUPC", 0, 36)); // NOI18N
         forget_studid.setForeground(new java.awt.Color(117, 105, 109));
         forget_studid.setText("รหัสนักศึกษา / Student ID");
-        forget_studid.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 0, 0));
         forget_studid.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 forget_studidFocusGained(evt);
@@ -552,7 +544,6 @@ public class LoginGUI extends javax.swing.JFrame {
         forget_email.setFont(new java.awt.Font("FreesiaUPC", 0, 36)); // NOI18N
         forget_email.setForeground(new java.awt.Color(117, 105, 109));
         forget_email.setText("อีเมล / E-mail");
-        forget_email.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 0, 0));
         forget_email.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 forget_emailFocusGained(evt);
@@ -562,9 +553,11 @@ public class LoginGUI extends javax.swing.JFrame {
             }
         });
 
-        forgetpass_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reset_pass.png"))); // NOI18N
+        forgetpass_btn.setBackground(new java.awt.Color(0, 0, 0));
+        forgetpass_btn.setFont(new java.awt.Font("FreesiaUPC", 1, 48)); // NOI18N
+        forgetpass_btn.setForeground(new java.awt.Color(255, 255, 255));
+        forgetpass_btn.setText("รีเซ็ตรหัสผ่าน");
         forgetpass_btn.setBorderPainted(false);
-        forgetpass_btn.setContentAreaFilled(false);
         forgetpass_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         forgetpass_btn.setFocusPainted(false);
         forgetpass_btn.addActionListener(new java.awt.event.ActionListener() {
@@ -591,17 +584,24 @@ public class LoginGUI extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(134, Short.MAX_VALUE)
+                .addComponent(jLabel9)
+                .addGap(125, 125, 125))
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(backbtn1)
-                .addGap(82, 82, 82)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel8)
-                    .addComponent(forget_studid, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(forget_email, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(forgetpass_btn))
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(backbtn1)
+                        .addGap(327, 327, 327)
+                        .addComponent(jLabel8))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(268, 268, 268)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(forget_studid, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(forget_email, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(forgetpass_btn))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -612,16 +612,16 @@ public class LoginGUI extends javax.swing.JFrame {
                         .addComponent(backbtn1))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(50, 50, 50)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(forget_studid, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(forget_email, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(forgetpass_btn)))
-                .addContainerGap(521, Short.MAX_VALUE))
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(forget_studid, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(forget_email, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(forgetpass_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(392, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout ForgetPasswordPanelLayout = new javax.swing.GroupLayout(ForgetPasswordPanel);
@@ -657,6 +657,7 @@ public class LoginGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void stud_id_tfFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_stud_id_tfFocusGained
+        System.out.println("StudGainFocus");
         if (stud_id_tf.getText().equals("รหัสนักศึกษา / Student ID")){
             stud_id_tf.setText("");
             stud_id_tf.setForeground(tf_Focus_color);
@@ -664,6 +665,7 @@ public class LoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_stud_id_tfFocusGained
 
     private void stud_id_tfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_stud_id_tfFocusLost
+        System.out.println("StudLostFocus");
         if (stud_id_tf.getText().isEmpty()){
             stud_id_tf.setText("รหัสนักศึกษา / Student ID");
             stud_id_tf.setForeground(tf_lostFocus_color);
@@ -675,6 +677,7 @@ public class LoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void pass_tfFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pass_tfFocusGained
+        System.out.println("Password GainedFocus");
         if (pass_tf.getText().equals("รหัสผ่าน / Password")){
             pass_tf.setText("");
             pass_tf.setEchoChar('*');
@@ -683,6 +686,7 @@ public class LoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_pass_tfFocusGained
 
     private void pass_tfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pass_tfFocusLost
+        System.out.println("Password LostFocus");
         if (pass_tf.getText().isEmpty()){
             pass_tf.setText("รหัสผ่าน / Password");
             pass_tf.setEchoChar((char) 0);
