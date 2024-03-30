@@ -180,6 +180,7 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
                 return null;
             }
         }.execute();
+
     }                                       
     private void showLoadingIndicator() {
         showroomPanel.removeAll();
@@ -198,6 +199,7 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
         refreshShowroom();
     }//GEN-LAST:event_formWindowOpened
     private void refreshShowroom() {
+        ref_btn.setEnabled(false);
         jScrollPane2.getVerticalScrollBar().setValue(jScrollPane2.getVerticalScrollBar().getMinimum());
         roomdata = RoomDatabase.getRoomList(); // get new room data from database
         showroom_rows = Math.max(1, (int) Math.ceil((double)roomdata.size() / 4));
@@ -216,6 +218,7 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
         showroomPanel.setPreferredSize( new Dimension(800, 150*showroom_rows));
         showroomPanel.revalidate();
         showroomPanel.repaint();
+        ref_btn.setEnabled(true);
     }
     
     /**

@@ -6,6 +6,8 @@ package UserInterface;
 
 import Database.Dataclass.RoomData;
 
+import javax.swing.*;
+
 /**
  *
  * @author Administrator
@@ -51,7 +53,7 @@ public class UserDashboard extends javax.swing.JFrame {
         jPanel10 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(9, 26, 88));
 
         jPanel1.setBackground(new java.awt.Color(9, 26, 88));
