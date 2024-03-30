@@ -161,9 +161,8 @@ public class RoomRegister extends javax.swing.JFrame {
         jScrollPane2.setViewportView(roomdes_ta);
         roomdes_ta.getAccessibleContext().setAccessibleParent(roomdes_ta);
 
-        room_reg_btn.setBackground(new java.awt.Color(102, 153, 255));
+        room_reg_btn.setBackground(new java.awt.Color(0, 51, 255));
         room_reg_btn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        room_reg_btn.setForeground(new java.awt.Color(255, 255, 255));
         room_reg_btn.setText("REGISTER");
         room_reg_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -288,7 +287,7 @@ public class RoomRegister extends javax.swing.JFrame {
                     Logger.getLogger(RoomRegister.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 JOptionPane.showMessageDialog(RoomRegister.this, "Add room successful.");
-                new AdminLanding().setVisible(true);
+                LoginGUI.showLandingPage();
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(RoomRegister.this, "Please enter valid time.");

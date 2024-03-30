@@ -964,15 +964,7 @@ public class LoginGUI extends javax.swing.JFrame {
                 try {
                     UserLoginToken.loginUser(ClientDatabase.getClientObject(stud_id));
                     this.dispose();
-                    if (UserLoginToken.getClient().getAccessLevel() == 1){
-                        AdminLanding adminLanding = new AdminLanding();
-                        adminLanding.setVisible(true);
-                        adminLanding.setLocationRelativeTo(null);
-                    } else if (UserLoginToken.getClient().getAccessLevel() == 0){
-                        UserLanding userLanding = new UserLanding();
-                        userLanding.setVisible(true);
-                        userLanding.setLocationRelativeTo(null);
-                    }
+                    showLandingPage();
                 } catch (DatabaseGetInterrupted dgi){
                     JOptionPane.showMessageDialog(LoginGUI.this, dgi.getMessage());
                 }
@@ -1024,6 +1016,17 @@ public class LoginGUI extends javax.swing.JFrame {
 
         // Passes validation
         return "Pass";
+    }
+    public static void showLandingPage() {
+        if (UserLoginToken.getClient().getAccessLevel() == 1) {
+            AdminLanding adminLanding = new AdminLanding();
+            adminLanding.setVisible(true);
+            adminLanding.setLocationRelativeTo(null);
+        } else if (UserLoginToken.getClient().getAccessLevel() == 0) {
+            UserLanding userLanding = new UserLanding();
+            userLanding.setVisible(true);
+            userLanding.setLocationRelativeTo(null);
+        }
     }
     private void resetRegTF(){
         name_th_tf.setText(df_name_th);
