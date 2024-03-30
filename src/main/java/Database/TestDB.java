@@ -6,7 +6,7 @@ import Firebase.FirebaseServiceAccount;
 
 import Database.RoomDatabase;
 import Database.Dataclass.RoomData;
-import Database.Dataclass.timeRange;
+import Database.Dataclass.TimeRange;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -22,29 +22,7 @@ public class TestDB {
     public static void main(String[] args) throws DatabaseGetInterrupted {
         try {
             FirebaseServiceAccount.initFirebase();
-            ArrayList<String> facilityList = new ArrayList<>(){{
-                add("knife");
-                add("body");
-            }};
-            ArrayList<timeRange> openTime = new ArrayList<>(){{
-                add(new timeRange(0.0, 12.0));
-                add(new timeRange(15.0, 20.0));
-            }};
-            ArrayList<timeRange> reservedTime = new ArrayList<>();
-            HashMap<String, timeRange> currentQueue = new HashMap<>();
-            RoomData rm1 = new RoomData("testFetchTime", facilityList, "testRoom", openTime, reservedTime, currentQueue);
-            for(int i=8;i < 50; i++){
-                rm1.setRoomName("Room: "+i+1);
-                RoomDatabase.addRoom(rm1);
-            }
-
-            System.out.println(RoomDatabase.getRoomObject(rm1.getRoomName()));
-            
-            //RoomDatabase.deleteRoom(rm1.getRoomName());
-//            for(String s : RoomDatabase.getRoomList()){
-//                System.out.println(s);
-//            }
-//            System.out.println(RoomDatabase.getRoomObject(rm1.getRoomName()));
+            TimeRange tr = new TimeRange();
         } catch (URISyntaxException | IOException   ex) {
             Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         } finally{
