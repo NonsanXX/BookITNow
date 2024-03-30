@@ -6,7 +6,7 @@ package Database;
 
 import static Database.Database.db;
 import Database.Dataclass.RoomData;
-import Database.Dataclass.timeRange;
+import Database.Dataclass.TimeRange;
 import Database.Exception.DatabaseGetInterrupted;
 import Firebase.UserLoginToken;
 
@@ -35,6 +35,58 @@ public class RoomDatabase extends Database{
             roomList.add(dr.getId());
         }
         return roomList;
+    }
+    
+    public static ArrayList<RoomData> getRoomListObject() throws DatabaseGetInterrupted{
+        ArrayList<RoomData> roomListObject = new ArrayList<>();
+        Iterable<DocumentReference> docRef = getDb().collection(ROOM_COLLECTION).listDocuments();
+        for(DocumentReference d : docRef){
+            try {
+                roomListObject.add(d.get().get().toObject(RoomData.class));
+            } catch (InterruptedException | ExecutionException ex) {
+                throw new DatabaseGetInterrupted();
+            }
+        }
+        return roomListObject;
+    }
+    
+    /**
+     * Filter:  roomName        - Get the room if it contain desirableRoom.roomName<br>
+     *          facilityList    - Get the room if it contain desirableRoom.facilityList<br>
+     *          roomDescription - Get the room if it contain desirableRoom.roomDescriptio<br>
+     *          openTime        - Get the room if it isSuperRange of desirableRoom.openTime<br>
+     *          capacity        - Get the room if it more than or equal to desirableRoom.capacity<br><br>
+     * If the Filter_FIELD is null means that condition is true.<br>
+     * The absence of mention of the fields is not accountable.<br><br>
+     * 
+     * @param desirableRoom The room looking for
+     * @return qualified - Rooms passes all qualification
+     * @throws Database.Exception.DatabaseGetInterrupted 
+     */
+    public static ArrayList<RoomData> filter(RoomData desirableRoom) throws DatabaseGetInterrupted{
+        ArrayList<RoomData> qualified = new ArrayList<>();
+        for(RoomData rm : getRoomListObject()){
+            boolean roomNameCheck, facilityListCheck, roomDescriptionCheck, openTimeCheck, capacityCheck;
+            roomNameCheck = rm.getRoomName().contains(desirableRoom.getRoomName());
+            roomDescriptionCheck = rm.getRoomDescription().contains(desirableRoom.getRoomDescription());
+            capacityCheck = rm.getCapacity() >= desirableRoom.getCapacity();
+            
+            if(desirableRoom.getFacilityList() == null){
+                facilityListCheck = true;
+            } else{
+                facilityListCheck = rm.getFacilityList().containsAll(desirableRoom.getFacilityList());
+            }
+            
+            if(desirableRoom.getOpenTime() == null){
+                openTimeCheck = true;
+            } else{
+            openTimeCheck = rm.checkOpenTimeList(desirableRoom.getOpenTime());
+            }
+            if(roomNameCheck && facilityListCheck && roomDescriptionCheck && openTimeCheck && capacityCheck){
+                qualified.add(rm);
+            }
+        }
+        return qualified;
     }
     
     /**
@@ -75,7 +127,7 @@ public class RoomDatabase extends Database{
         getDb().collection(ROOM_COLLECTION).document(roomName).delete();
     }
     
-    public static boolean reservingRoom(RoomData room, timeRange time){
+    public static boolean reservingRoom(RoomData room, TimeRange time){
         boolean result = room.reservingTime(time);
         room.getCurrentQueue().put(UserLoginToken.getClientID(), time);
         return result;

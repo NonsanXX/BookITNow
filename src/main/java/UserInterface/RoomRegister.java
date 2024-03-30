@@ -5,7 +5,7 @@
 package UserInterface;
 
 import Database.Dataclass.RoomData;
-import Database.Dataclass.timeRange;
+import Database.Dataclass.TimeRange;
 import Database.Exception.DatabaseGetInterrupted;
 import Database.RoomDatabase;
 
@@ -275,8 +275,8 @@ public class RoomRegister extends javax.swing.JFrame {
             }
         }
         String roomDes = roomdes_ta.getText();
-        timeRange openTime = new timeRange(Double.valueOf((String) Objects.requireNonNull(opentime.getSelectedItem())), Double.valueOf((String) Objects.requireNonNull(closetime.getSelectedItem())));
-        ArrayList<timeRange> openTimeList = new ArrayList<>();
+        TimeRange openTime = new TimeRange(Double.valueOf((String) Objects.requireNonNull(opentime.getSelectedItem())), Double.valueOf((String) Objects.requireNonNull(closetime.getSelectedItem())));
+        ArrayList<TimeRange> openTimeList = new ArrayList<>();
         openTimeList.add(openTime);
         if (!roomName.isEmpty() && !roomDes.isEmpty()){
             if (!Objects.equals(openTime.time1, openTime.time2) && openTime.time1 < openTime.time2){

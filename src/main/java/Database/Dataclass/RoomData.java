@@ -10,18 +10,19 @@ import java.util.HashMap;
  *
  * @author phump
  */
-public class RoomData {
+public class RoomData{
     private String roomName;
     private ArrayList<String> facilityList;
     private String roomDescription;
-    private ArrayList<timeRange> openTime;
-    private ArrayList<timeRange> reservedTime;
-    private HashMap<String, timeRange> currentQueue;
+    private ArrayList<TimeRange> openTime;
+    private ArrayList<TimeRange> reservedTime;
+    private HashMap<String, TimeRange> currentQueue;
+    private int capacity;
     public RoomData(){
         this("", null, "", null, null, null);
     }
     
-    public RoomData(String roomName, ArrayList<String> facilityList, String roomDescription, ArrayList<timeRange> openTime, ArrayList<timeRange> reservedTime, HashMap<String, timeRange> currentQueue){
+    public RoomData(String roomName, ArrayList<String> facilityList, String roomDescription, ArrayList<TimeRange> openTime, ArrayList<TimeRange> reservedTime, HashMap<String, TimeRange> currentQueue){
         this.roomName = roomName;
         this.facilityList = facilityList;
         this.roomDescription = roomDescription;
@@ -54,32 +55,58 @@ public class RoomData {
         this.roomDescription = roomDescription;
     }
 
-    public ArrayList<timeRange> getOpenTime() {
+    public ArrayList<TimeRange> getOpenTime() {
         return openTime;
     }
 
-    public void setOpenTime(ArrayList<timeRange> openTime) {
+    public void setOpenTime(ArrayList<TimeRange> openTime) {
         this.openTime = openTime;
     }
 
-    public ArrayList<timeRange> getReservedTime() {
+    public boolean checkOpenTime(TimeRange checkTime){
+        for(TimeRange tr : openTime){
+            if(tr.isSuperRange(checkTime)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean checkOpenTimeList(ArrayList<TimeRange> checkTimeRange){
+        for(TimeRange tr : checkTimeRange){
+            if(!checkOpenTime(tr)){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public ArrayList<TimeRange> getReservedTime() {
         return reservedTime;
     }
 
-    public void setReservedTime(ArrayList<timeRange> reservedTime) {
+    public void setReservedTime(ArrayList<TimeRange> reservedTime) {
         this.reservedTime = reservedTime;
     }
 
-    public HashMap<String, timeRange> getCurrentQueue() {
+    public HashMap<String, TimeRange> getCurrentQueue() {
         return currentQueue;
     }
-
-    public void setCurrentQueue(HashMap<String, timeRange> currentQueue) {
+    
+    public void setCurrentQueue(HashMap<String, TimeRange> currentQueue) {
         this.currentQueue = currentQueue;
     }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
     
-    public boolean isSuperRangeOfOpenTime(timeRange tr){
-        for(timeRange open : openTime){
+    public boolean isSuperRangeOfOpenTime(TimeRange tr){
+        for(TimeRange open : openTime){
             if(open.isSuperRange(tr)){
                 return true;
             }
@@ -87,8 +114,8 @@ public class RoomData {
         return false;
     }
     
-    public boolean isOverlapWithReservedTime(timeRange tr){
-        for(timeRange reserved : reservedTime){
+    public boolean isOverlapWithReservedTime(TimeRange tr){
+        for(TimeRange reserved : reservedTime){
             if(reserved.isOverlap(tr)){
                 return true;
             }
@@ -96,15 +123,17 @@ public class RoomData {
         return false;
     }
     /**
-    * To reserve time, it must satisfy two conditions
-    * 1: Given timeRange MUST be a subRange of openTime
-    * 2: Given timeRange MUST not overlap with any reservedTime
+    * To reserve time, it must satisfy three conditions
+    1: Given TimeRange MUST be a subRange of openTime
+    2: Given TimeRange MUST not overlap with any reservedTime
+    3: Reservation MUST not exceed room capacity
     * 
-    * @param tr Given timeRange
+    * 
+    * @param tr Given TimeRange
     * @return true if reserving is complete
     */
-    public boolean reservingTime(timeRange tr){
-        if(isSuperRangeOfOpenTime(tr) && !isOverlapWithReservedTime(tr)){
+    public boolean reservingTime(TimeRange tr){
+        if(isSuperRangeOfOpenTime(tr) && !isOverlapWithReservedTime(tr) && reservedTime.size() < capacity){
             reservedTime.add(tr);
             return true;
         }
@@ -112,22 +141,26 @@ public class RoomData {
     }
     
     /**
-     * Delete timeRange in reservedTime if there exist timeRange
-     * @param tr Delete timeRange
-     * @return true if there exist timeRange in reservedTime
+     * Delete TimeRange in reservedTime if there exist TimeRange
+     * @param tr Delete TimeRange
+     * @return true if there exist TimeRange in reservedTime
      */
-    public boolean unReservedTime(timeRange tr){
+    public boolean unReservedTime(TimeRange tr){
         if(!reservedTime.contains(tr)){
             return false;
         }
         reservedTime.remove(tr);
         return true;
     }
-    
-    public void updateReservedTime(){
-        
-        for(timeRange tr : reservedTime){
-            
+    /**
+     * 
+     * @param time - Time in 24 hours. Time 12.50 means 12:30
+     */
+    public void updateReservedTime(Double time){
+        for(TimeRange tr : reservedTime){
+            if(tr.getTime2() > time){
+                unReservedTime(tr);
+            }
         }
     }
 }
