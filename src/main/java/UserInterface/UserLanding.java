@@ -3,6 +3,7 @@ package UserInterface;/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import Database.Dataclass.RoomData;
 import Database.Exception.DatabaseGetInterrupted;
 import Database.RoomDatabase;
 import RoomPanel.RoomPanel;
@@ -274,6 +275,11 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener{
     public void mouseClicked(MouseEvent e) {
         RoomPanel source = (RoomPanel) e.getComponent();
         System.out.println(source.getRoomName());
+        try {
+            new UserDashboard(RoomDatabase.getRoomObject(source.getRoomName())).setVisible(true);
+        } catch (DatabaseGetInterrupted ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
