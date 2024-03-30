@@ -51,15 +51,15 @@ public class RoomDatabase extends Database{
     }
     
     /**
-     * Filter:  roomName        - Get the room if it contain desirableRoom.roomName
-     *          facilityList    - Get the room if it contain desirableRoom.facilityList
-     *          roomDescription - Get the room if it contain desirableRoom.roomDescription
-     *          openTime        - Get the room if it isSuperRange of desirableRoom.openTime
-     *          capacity        - Get the room if it more than or equal to desirableRoom.capacity
-     * If the Filter_FIELD is null means that condition is true.
-     * The absence of mention of the fields is not accountable.
+     * Filter:  roomName        - Get the room if it contain desirableRoom.roomName<br>
+     *          facilityList    - Get the room if it contain desirableRoom.facilityList<br>
+     *          roomDescription - Get the room if it contain desirableRoom.roomDescriptio<br>
+     *          openTime        - Get the room if it isSuperRange of desirableRoom.openTime<br>
+     *          capacity        - Get the room if it more than or equal to desirableRoom.capacity<br><br>
+     * If the Filter_FIELD is null means that condition is true.<br>
+     * The absence of mention of the fields is not accountable.<br><br>
      * 
-     * @param desirableRoom - The room looking for
+     * @param desirableRoom The room looking for
      * @return qualified - Rooms passes all qualification
      * @throws Database.Exception.DatabaseGetInterrupted 
      */
