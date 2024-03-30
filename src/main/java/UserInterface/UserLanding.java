@@ -3,6 +3,7 @@ package UserInterface;/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import Database.Dataclass.RoomData;
 import Database.Exception.DatabaseGetInterrupted;
 import Database.RoomDatabase;
 import RoomPanel.RoomPanel;
@@ -18,13 +19,13 @@ import java.util.ArrayList;
  * @author acer
  */
 
-public class AdminLanding extends javax.swing.JFrame implements MouseListener{
+public class UserLanding extends javax.swing.JFrame implements MouseListener{
     ArrayList<String> roomdata = RoomDatabase.getRoomList();
     int showroom_rows = Math.max(1, (int) Math.ceil((double)roomdata.size() / 4));
     /**
      * Creates new form landing
      */
-    public AdminLanding() {
+    public UserLanding() {
 
         initComponents();
 
@@ -44,7 +45,7 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
         jScrollPane2 = new javax.swing.JScrollPane();
         showroomPanel = new javax.swing.JPanel();
         loading = new javax.swing.JLabel();
-        add_btn = new javax.swing.JButton();
+        menu_btn = new javax.swing.JButton();
         ref_btn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -87,13 +88,13 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
 
         jScrollPane2.setViewportView(showroomPanel);
 
-        add_btn.setText("Add");
-        add_btn.setMaximumSize(new java.awt.Dimension(33, 28));
-        add_btn.setMinimumSize(new java.awt.Dimension(33, 28));
-        add_btn.setPreferredSize(new java.awt.Dimension(33, 28));
-        add_btn.addActionListener(new java.awt.event.ActionListener() {
+        menu_btn.setText("menu");
+        menu_btn.setMaximumSize(new java.awt.Dimension(33, 28));
+        menu_btn.setMinimumSize(new java.awt.Dimension(33, 28));
+        menu_btn.setPreferredSize(new java.awt.Dimension(33, 28));
+        menu_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                add_btnActionPerformed(evt);
+                menu_btnActionPerformed(evt);
             }
         });
 
@@ -113,10 +114,10 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(45, 45, 45)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(add_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(menu_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(ref_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1058, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
@@ -125,9 +126,9 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
-                    .addComponent(ref_btn, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                    .addComponent(add_btn, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ref_btn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(menu_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -171,7 +172,6 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
     }// </editor-fold>//GEN-END:initComponents
 
     private void ref_btnActionPerformed(java.awt.event.ActionEvent evt) {
-
         showLoadingIndicator();
         new SwingWorker<Void, Void>() {
             @Override
@@ -180,7 +180,6 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
                 return null;
             }
         }.execute();
-
     }                                       
     private void showLoadingIndicator() {
         showroomPanel.removeAll();
@@ -190,10 +189,10 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
         showroomPanel.revalidate();
         showroomPanel.repaint();
     }
-    private void add_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_btnActionPerformed
-        new RoomRegister().setVisible(true);
+    private void menu_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_btnActionPerformed
+        new UserAccountManagement().setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_add_btnActionPerformed
+    }//GEN-LAST:event_menu_btnActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         refreshShowroom();
@@ -238,14 +237,18 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminLanding.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserLanding.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminLanding.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserLanding.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminLanding.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserLanding.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminLanding.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserLanding.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -254,17 +257,17 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminLanding().setVisible(true);
+                new UserLanding().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton add_btn;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel loading;
+    private javax.swing.JButton menu_btn;
     private javax.swing.JButton ref_btn;
     private javax.swing.JPanel showroomPanel;
     // End of variables declaration//GEN-END:variables
@@ -273,6 +276,11 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
     public void mouseClicked(MouseEvent e) {
         RoomPanel source = (RoomPanel) e.getComponent();
         System.out.println(source.getRoomName());
+        try {
+            new UserDashboard(RoomDatabase.getRoomObject(source.getRoomName())).setVisible(true);
+        } catch (DatabaseGetInterrupted ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
