@@ -2,19 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package UserInterface;
-
-import Database.Dataclass.RoomData;
-import Database.Dataclass.TimeRange;
-import Database.Exception.DatabaseGetInterrupted;
-import Database.RoomDatabase;
-
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+package Form.Admin;
 
 /**
  *
