@@ -30,7 +30,6 @@ public class RoomDatabase extends Database{
     public static ArrayList<String> getRoomList(){
         ArrayList<String> roomList = new ArrayList<>();
         Iterable<DocumentReference> docRef = getDb().collection(ROOM_COLLECTION).listDocuments();
-        
         for(DocumentReference dr : docRef){
             roomList.add(dr.getId());
         }
@@ -53,10 +52,11 @@ public class RoomDatabase extends Database{
     /**
      * Filter:  roomName        - Get the room if it contain desirableRoom.roomName<br>
      *          facilityList    - Get the room if it contain desirableRoom.facilityList<br>
-     *          roomDescription - Get the room if it contain desirableRoom.roomDescriptio<br>
+     *          building        - Get the room if it contain desirableRoom.building<br>
+     *          floor           - Get the room if it equal to desirableRoom.floor<br>
      *          openTime        - Get the room if it isSuperRange of desirableRoom.openTime<br>
      *          capacity        - Get the room if it more than or equal to desirableRoom.capacity<br><br>
-     * If the Filter_FIELD is null means that condition is true.<br>
+     * If the Filter_FIELD is null or empty String means that condition is true.<br>
      * The absence of mention of the fields is not accountable.<br><br>
      * 
      * @param desirableRoom The room looking for
@@ -66,23 +66,15 @@ public class RoomDatabase extends Database{
     public static ArrayList<RoomData> filter(RoomData desirableRoom) throws DatabaseGetInterrupted{
         ArrayList<RoomData> qualified = new ArrayList<>();
         for(RoomData rm : getRoomListObject()){
-            boolean roomNameCheck, facilityListCheck, roomDescriptionCheck, openTimeCheck, capacityCheck;
+            boolean roomNameCheck, buildingCheck, floorCheck, facilityListCheck, openTimeCheck, capacityCheck;
             roomNameCheck = rm.getRoomName().contains(desirableRoom.getRoomName());
-            roomDescriptionCheck = rm.getRoomDescription().contains(desirableRoom.getRoomDescription());
+            buildingCheck = rm.getBuilding().contains(desirableRoom.getBuilding());
+            floorCheck = rm.getFloor().equals(desirableRoom.getFloor());
             capacityCheck = rm.getCapacity() >= desirableRoom.getCapacity();
-            
-            if(desirableRoom.getFacilityList() == null){
-                facilityListCheck = true;
-            } else{
-                facilityListCheck = rm.getFacilityList().containsAll(desirableRoom.getFacilityList());
-            }
-            
-            if(desirableRoom.getOpenTime() == null){
-                openTimeCheck = true;
-            } else{
-            openTimeCheck = rm.checkOpenTimeList(desirableRoom.getOpenTime());
-            }
-            if(roomNameCheck && facilityListCheck && roomDescriptionCheck && openTimeCheck && capacityCheck){
+            facilityListCheck = (desirableRoom.getFacilityList() == null) ? true : rm.getFacilityList().containsAll(desirableRoom.getFacilityList());
+            openTimeCheck = (desirableRoom.getOpenTime() == null) ? true : rm.checkOpenTimeList(desirableRoom.getOpenTime());
+
+            if(roomNameCheck && buildingCheck && floorCheck && facilityListCheck && openTimeCheck && capacityCheck){
                 qualified.add(rm);
             }
         }
@@ -97,9 +89,15 @@ public class RoomDatabase extends Database{
      */
     public static long addRoom(RoomData roomData) throws DatabaseGetInterrupted{
         long currentTimeMillis = System.currentTimeMillis();
-        ApiFuture<WriteResult> future = getDb().collection(ROOM_COLLECTION).document((String) roomData.getRoomName()).set(roomData);
+        // Write Room -> ROOM_COLLECTION
+        ApiFuture<WriteResult> future1 = getDb().collection(ROOM_COLLECTION).document((String) roomData.getRoomName()).set(roomData);
+        // Write RoomRef -> BUILDING_COLLECTION
+        DocumentReference docRef = getDb().collection(ROOM_COLLECTION).document((String) roomData.getRoomName());
+        ApiFuture<WriteResult> future2 = getDb().collection(BUILDING_COLLECTION).document(roomData.getBuilding()).set(docRef);
         try {
-            return (Math.abs(future.get().getUpdateTime().getSeconds()*1000 - currentTimeMillis));
+            long updateTime = (Math.abs(future1.get().getUpdateTime().getSeconds()*1000 - currentTimeMillis)) + 
+                              (Math.abs(future2.get().getUpdateTime().getSeconds()*1000 - currentTimeMillis));
+            return updateTime;
         } catch (InterruptedException | ExecutionException ex) {
             throw new DatabaseGetInterrupted();
         }
@@ -116,6 +114,14 @@ public class RoomDatabase extends Database{
     
     public static RoomData getRoomObject(String roomName)throws DatabaseGetInterrupted{
         DocumentReference docRef = db.collection(Database.ROOM_COLLECTION).document(roomName);
+        try {
+            return docRef.get().get().toObject(RoomData.class);
+        } catch (InterruptedException | ExecutionException ex) {
+            throw new DatabaseGetInterrupted();
+        }
+    }
+    
+    public static RoomData loadRoom(DocumentReference docRef) throws DatabaseGetInterrupted{
         try {
             return docRef.get().get().toObject(RoomData.class);
         } catch (InterruptedException | ExecutionException ex) {
