@@ -964,8 +964,15 @@ public class LoginGUI extends javax.swing.JFrame {
                 try {
                     UserLoginToken.loginUser(ClientDatabase.getClientObject(stud_id));
                     this.dispose();
-                    AdminLanding landong = new AdminLanding();
-                    landong.setVisible(true);
+                    if (UserLoginToken.getClient().getAccessLevel() == 1){
+                        AdminLanding adminLanding = new AdminLanding();
+                        adminLanding.setVisible(true);
+                        adminLanding.setLocationRelativeTo(null);
+                    } else if (UserLoginToken.getClient().getAccessLevel() == 0){
+                        UserLanding userLanding = new UserLanding();
+                        userLanding.setVisible(true);
+                        userLanding.setLocationRelativeTo(null);
+                    }
                 } catch (DatabaseGetInterrupted dgi){
                     JOptionPane.showMessageDialog(LoginGUI.this, dgi.getMessage());
                 }
