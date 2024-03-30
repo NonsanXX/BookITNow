@@ -102,42 +102,7 @@ public class RoomRegister extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-<<<<<<< Updated upstream
-    private void room_reg_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_room_reg_btnActionPerformed
-        String roomName = roomname_tf.getText();
-        ArrayList<String> facilityList = new ArrayList<>();
-        for (JCheckBox checkbox : facilityBtnGroup ) {
-            if (checkbox.isSelected()) {
-                facilityList.add(checkbox.getText());
-                System.out.println("Add checkbox "+ checkbox.getText());
-            }
-        }
-        String roomDes = roomdes_ta.getText();
-        TimeRange openTime = new TimeRange(Double.valueOf((String) Objects.requireNonNull(opentime.getSelectedItem())), Double.valueOf((String) Objects.requireNonNull(closetime.getSelectedItem())));
-        ArrayList<TimeRange> openTimeList = new ArrayList<>();
-        openTimeList.add(openTime);
-        if (!roomName.isEmpty() && !roomDes.isEmpty()){
-            if (!Objects.equals(openTime.time1, openTime.time2) && openTime.time1 < openTime.time2){
-                try {
-                    long updateTime = RoomDatabase.addRoom(new RoomData());
-                    Thread.sleep(updateTime);
-                } catch (DatabaseGetInterrupted | InterruptedException ex) {
-                    Logger.getLogger(RoomRegister.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                JOptionPane.showMessageDialog(RoomRegister.this, "Add room successful.");
-                LoginGUI.showLandingPage();
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(RoomRegister.this, "Please enter valid time.");
-            }
-        } else {
-            JOptionPane.showMessageDialog(RoomRegister.this, "Please enter name / description of the room.");
-        }
-    }//GEN-LAST:event_room_reg_btnActionPerformed
-
-=======
->>>>>>> Stashed changes
+    
     /**
      * @param args the command line arguments
      */
