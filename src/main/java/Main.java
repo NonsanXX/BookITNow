@@ -1,6 +1,9 @@
 
 import Firebase.FirebaseServiceAccount;
 import UserInterface.*;
+import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+
 import javax.swing.*;
 
 import java.io.IOException;
@@ -17,7 +20,11 @@ public class Main {
         }
 
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.setLookAndFeel(new FlatMacDarkLaf());
+            UIManager.put( "Button.arc", 999 );
+            UIManager.put( "Component.arc", 999 );
+            UIManager.put( "ProgressBar.arc", 999 );
+            UIManager.put( "TextComponent.arc", 999 );
         } catch (Exception e) {
             e.printStackTrace();
         }

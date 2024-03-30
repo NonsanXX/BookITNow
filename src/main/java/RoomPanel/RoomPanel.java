@@ -35,7 +35,6 @@ public class RoomPanel extends javax.swing.JPanel {
 
         room_name = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 204, 204));
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setPreferredSize(new java.awt.Dimension(300, 150));
 
