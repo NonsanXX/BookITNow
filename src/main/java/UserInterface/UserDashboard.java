@@ -53,7 +53,7 @@ public class UserDashboard extends javax.swing.JFrame {
         jPanel10 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(9, 26, 88));
 
         jPanel1.setBackground(new java.awt.Color(9, 26, 88));
@@ -175,7 +175,7 @@ public class UserDashboard extends javax.swing.JFrame {
         jLabel4.setText("Booking Info/Editing Book");
 
         jButton1.setBackground(new java.awt.Color(255, 255, 153));
-        jButton1.setText("CHECK-IN");
+        jButton1.setText("BOOKING");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
