@@ -4,7 +4,9 @@
  */
 package Form.RoomPanel;
 import Database.Dataclass.RoomData;
-import javax.swing.JLabel;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  *
@@ -17,7 +19,9 @@ public class RoomPanel extends javax.swing.JPanel {
      */
     public RoomPanel(RoomData roomdata) {
         initComponents();
-        room_name.setText(roomdata.getRoomName());
+        room_name.setText("ห้อง : "+roomdata.getRoomName());
+        building.setText("อาคาร : "+roomdata.getBuilding());
+        floor.setText("ชั้น : "+roomdata.getFloor());
     }
 
     public String getRoomName() {
@@ -34,40 +38,59 @@ public class RoomPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         room_name = new javax.swing.JLabel();
+        building = new javax.swing.JLabel();
+        floor = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        setPreferredSize(new java.awt.Dimension(300, 150));
+        setPreferredSize(new java.awt.Dimension(300, 250));
 
         room_name.setFont(new java.awt.Font("FreesiaUPC", 0, 36)); // NOI18N
         room_name.setText("ห้อง : ");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/room_icon.png"))); // NOI18N
+        building.setFont(new java.awt.Font("FreesiaUPC", 0, 36)); // NOI18N
+        building.setText("อาคาร : ");
+
+        floor.setFont(new java.awt.Font("FreesiaUPC", 0, 36)); // NOI18N
+        floor.setText("ชั้น : ");
+
+        jLabel1.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/room_icon.png")).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(room_name, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(building, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(floor, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(room_name, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(room_name, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(building, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(floor, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel building;
+    private javax.swing.JLabel floor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel room_name;
     // End of variables declaration//GEN-END:variables
