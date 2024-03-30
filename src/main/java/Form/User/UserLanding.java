@@ -1,9 +1,8 @@
-package UserInterface;/*
+package Form.User;/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
-import Database.Dataclass.RoomData;
 import Database.Exception.DatabaseGetInterrupted;
 import Database.RoomDatabase;
 import RoomPanel.RoomPanel;

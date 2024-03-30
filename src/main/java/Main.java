@@ -1,7 +1,6 @@
 
 import Firebase.FirebaseServiceAccount;
-import UserInterface.*;
-import com.formdev.flatlaf.FlatLightLaf;
+import Form.*;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 
 import javax.swing.*;

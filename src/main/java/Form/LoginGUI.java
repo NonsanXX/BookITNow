@@ -2,13 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package UserInterface;
+package Form;
 
 import Firebase.UserLoginToken;
 import Database.ClientDatabase;
 import Database.Dataclass.ClientData;
 import Database.Exception.DatabaseGetInterrupted;
 import EmailService.EmailSender;
+import Form.Admin.AdminLanding;
+import Form.User.UserLanding;
 import Utility.PasswordGenerator;
 import jakarta.mail.MessagingException;
 import javax.swing.*;
