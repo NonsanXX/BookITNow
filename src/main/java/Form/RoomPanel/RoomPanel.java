@@ -13,12 +13,14 @@ import java.awt.*;
  * @author Nonsan
  */
 public class RoomPanel extends javax.swing.JPanel {
+    String realroomname;
 
     /**
      * Creates new form RoomPanel
      */
     public RoomPanel(RoomData roomdata) {
         initComponents();
+        this.realroomname = roomdata.getRoomName();
         room_name.setText("ห้อง : "+roomdata.getRoomName());
         building.setText("อาคาร : "+roomdata.getBuilding());
         floor.setText("ชั้น : "+roomdata.getFloor());
@@ -27,7 +29,7 @@ public class RoomPanel extends javax.swing.JPanel {
     public String getRoomName() {
         return room_name.getText();
     }
-    
+    public String getRealroomname(){return realroomname;}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
