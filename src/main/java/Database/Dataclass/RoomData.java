@@ -121,7 +121,7 @@ public class RoomData{
         this.capacity = capacity;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 

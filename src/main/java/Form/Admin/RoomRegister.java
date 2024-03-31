@@ -43,17 +43,17 @@ public class RoomRegister extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         room_name_label = new javax.swing.JLabel();
         room_name_tf = new javax.swing.JTextField();
-        building_tf = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         capacity_spin = new javax.swing.JSpinner();
         jLabel5 = new javax.swing.JLabel();
+        building_tf = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         floor_tf = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         open_hour = new javax.swing.JSpinner();
-        close_hour = new javax.swing.JSpinner();
-        jLabel8 = new javax.swing.JLabel();
         open_min = new javax.swing.JSpinner();
+        jLabel8 = new javax.swing.JLabel();
+        close_hour = new javax.swing.JSpinner();
         close_min = new javax.swing.JSpinner();
         jLabel9 = new javax.swing.JLabel();
         status = new javax.swing.JComboBox<>();
@@ -86,8 +86,6 @@ public class RoomRegister extends javax.swing.JFrame {
 
         room_name_tf.setFont(new java.awt.Font("FreesiaUPC", 0, 24)); // NOI18N
 
-        building_tf.setFont(new java.awt.Font("FreesiaUPC", 0, 24)); // NOI18N
-
         jLabel4.setFont(new java.awt.Font("FreesiaUPC", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("จำนวนคน");
@@ -99,6 +97,8 @@ public class RoomRegister extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("อาคาร");
         jLabel5.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
+        building_tf.setFont(new java.awt.Font("FreesiaUPC", 0, 24)); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("FreesiaUPC", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -119,14 +119,14 @@ public class RoomRegister extends javax.swing.JFrame {
             }
         });
 
-        close_hour.setModel(new javax.swing.SpinnerNumberModel(Long.valueOf(0L), Long.valueOf(0L), Long.valueOf(23L), Long.valueOf(1L)));
+        open_min.setModel(new javax.swing.SpinnerNumberModel(Long.valueOf(0L), Long.valueOf(0L), Long.valueOf(59L), Long.valueOf(1L)));
 
         jLabel8.setFont(new java.awt.Font("FreesiaUPC", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("เวลาปิด");
         jLabel8.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
-        open_min.setModel(new javax.swing.SpinnerNumberModel(Long.valueOf(0L), Long.valueOf(0L), Long.valueOf(59L), Long.valueOf(1L)));
+        close_hour.setModel(new javax.swing.SpinnerNumberModel(Long.valueOf(0L), Long.valueOf(0L), Long.valueOf(23L), Long.valueOf(1L)));
 
         close_min.setModel(new javax.swing.SpinnerNumberModel(Long.valueOf(0L), Long.valueOf(0L), Long.valueOf(59L), Long.valueOf(1L)));
 
@@ -219,8 +219,8 @@ public class RoomRegister extends javax.swing.JFrame {
                         .addComponent(jSeparator1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(cancel_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -358,7 +358,10 @@ public class RoomRegister extends javax.swing.JFrame {
 
     private void add_roomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_roomActionPerformed
         String roomName = room_name_tf.getText();
-        String roomNamePlusBuilding = building_tf.getText()+"-"+room_name_tf.getText();
+        if (!roomName.contains(building_tf.getText()+"-")){
+            System.out.println("I will add building for u");
+            roomName = building_tf.getText()+"-"+roomName;
+        }
         int capacity = (int)capacity_spin.getValue();
         String building = building_tf.getText();
         String floor = floor_tf.getText();
@@ -379,7 +382,7 @@ public class RoomRegister extends javax.swing.JFrame {
             if (openHour == closeHour && openMin < closeMin || closeHour > openHour){
                 try {
                     if (RoomDatabase.getRoomObject(roomName) == null){
-                        RoomData roomData = new RoomData(roomNamePlusBuilding, building, floor, facilityList, timeRange, new ArrayList<>(), new HashMap<>(), capacity, available);
+                        RoomData roomData = new RoomData(roomName, building, floor, facilityList, timeRange, new ArrayList<>(), new HashMap<>(), capacity, available);
                         try {
                             RoomDatabase.addRoom(roomData);
                         } catch (DatabaseGetInterrupted e) {

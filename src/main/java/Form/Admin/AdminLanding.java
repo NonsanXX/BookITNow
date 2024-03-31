@@ -3,6 +3,7 @@ package Form.Admin;/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import Database.Dataclass.RoomData;
 import Database.Exception.DatabaseGetInterrupted;
 import Database.RoomDatabase;
 import Form.RoomPanel.RoomPanel;
@@ -266,6 +267,20 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
     public void mouseClicked(MouseEvent e) {
         RoomPanel source = (RoomPanel) e.getComponent();
         System.out.println(source.getRoomName());
+        RoomEdit roomEdit;
+        try {
+            System.out.println("Checking...");
+            if (RoomDatabase.getRoomObject(source.getRealroomname()) != null){
+                roomEdit = new RoomEdit(RoomDatabase.getRoomObject(source.getRealroomname()));
+                roomEdit.setVisible(true);
+                roomEdit.setAlwaysOnTop(true);
+            } else {
+                JOptionPane.showMessageDialog(AdminLanding.this, "Can't find this room, Maybe try refreshing this page.");
+                refreshShowroom();
+            }
+        } catch (DatabaseGetInterrupted ex) {
+            JOptionPane.showMessageDialog(AdminLanding.this, ex.getMessage());
+        }
     }
 
     @Override
