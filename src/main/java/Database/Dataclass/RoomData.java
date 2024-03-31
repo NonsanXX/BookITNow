@@ -35,7 +35,7 @@ public class RoomData implements RoomReservedTime<JTable>{
         this("", "", "", null, null, null, null, 0l, false);
     }
     
-    public RoomData(String roomName, String building, String floor, ArrayList<String> facilityList, ArrayList<TimeRange> openTime, ArrayList<TimeDate> reservedTime, HashMap<String, TimeDate> currentQueue, long capaity, boolean status){
+    public RoomData(String roomName, String building, String floor, ArrayList<String> facilityList, ArrayList<TimeRange> openTime, ArrayList<TimeDate> reservedTime, HashMap<String, TimeDate> currentQueue, long capacity, boolean status){
         this.roomName = roomName;
         this.building = building;
         this.floor = floor;
@@ -43,7 +43,7 @@ public class RoomData implements RoomReservedTime<JTable>{
         this.openTime = openTime;
         this.reservedTime = reservedTime;
         this.currentQueue = currentQueue;
-        this.capacity = capaity;
+        this.capacity = capacity;
         this.status = status;
     }
     
@@ -159,14 +159,13 @@ public class RoomData implements RoomReservedTime<JTable>{
     * To reserve time, it must satisfy three conditions
     1: Given TimeDate MUST be a subRange of openTime
     2: Given TimeDate MUST not overlap with any reservedTime
-    3: Reservation MUST not exceed room capacity
     * 
     * 
     * @param tr Given TimeRange
     * @return true if reserving is complete
     */
     public boolean reservingTime(TimeDate tr){
-        if(isSuperRangeOfOpenTime(tr) && !isOverlapWithReservedTime(tr) && reservedTime.size() < capacity){
+        if(isSuperRangeOfOpenTime(tr) && !isOverlapWithReservedTime(tr)){
             reservedTime.add(tr);
             return true;
         }
@@ -174,7 +173,7 @@ public class RoomData implements RoomReservedTime<JTable>{
     }
     
     public boolean checkReservingTime(TimeDate tr){
-        return isSuperRangeOfOpenTime(tr) && !isOverlapWithReservedTime(tr) && reservedTime.size() < capacity;
+        return isSuperRangeOfOpenTime(tr) && !isOverlapWithReservedTime(tr);
     }
     
     /**
