@@ -38,8 +38,9 @@ public class TestDB {
             //ClientHistoryDatabase.updateHistory("66070162", ClientHistoryDatabase.createEmptyHistory());
             UserLoginToken.loginUser(ClientDatabase.getClientObject("66070305")); //bypass login session
             
-            RoomDatabase.reservingRoom(RoomDatabase.getRoomObject("IT-IT-Kuy"), new TimeDate(0.0, 1.0, TimeDate.getDateNow()));
+            //RoomDatabase.reservingRoom(RoomDatabase.getRoomObject("IT-IT-Tutor"), new TimeDate(0.0, 1.0, TimeDate.getDateNow()));
             
+            RoomDatabase.getRoomObject("IT-IT-Tutor").report();
             ClientDatabase.getClientObject("66070305").report();
             
         } catch (URISyntaxException | IOException    ex) {

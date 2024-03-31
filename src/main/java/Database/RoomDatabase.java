@@ -137,7 +137,10 @@ public class RoomDatabase extends Database{
         if(result){
             room.reservingTime(time);
             room.getCurrentQueue().put(UserLoginToken.getClientID(), time);
-            ClientHistoryDatabase.addHistory(UserLoginToken.getClientID(), new HistoryData(TimeDate.getTimeStamp(), time, room.getRoomName()));
+            HistoryData hn = new HistoryData(TimeDate.getTimeStamp(), time, room.getRoomName());
+            ClientHistoryDatabase.addHistory(UserLoginToken.getClientID(), hn);
+            hn.setRecorded(UserLoginToken.getClientID());
+            RoomHistoryDatabase.addHistory(room.getRoomName(), hn);
             updateRoom(room);
         }
         return result;
