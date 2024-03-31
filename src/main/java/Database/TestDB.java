@@ -33,21 +33,26 @@ import java.awt.*;
 import javax.swing.*;
 import Database.Dataclass.CommentData;
 
-public class TestDB {
+import java.awt.event.*;
+
+public class TestDB{
+    private static RoomSearcher rs = new RoomSearcher();
     public static void main(String[] args) throws DatabaseGetInterrupted {
+        rs.roomName.setText("IT");
         try {
             FirebaseServiceAccount.initFirebase();
             //ClientHistoryDatabase.updateHistory("66070162", ClientHistoryDatabase.createEmptyHistory());
             UserLoginToken.loginUser(ClientDatabase.getClientObject("66070305")); //bypass login session
-            RoomData rm = RoomDatabase.getRoomObject("IT-IT-HIY");
-            RoomDatabase.reservingRoom(rm, new TimeDate(0.0, 1.0, TimeDate.getDateNow()));
-            JFrame frame = new JFrame();
-            JScrollPane scrollPane = new JScrollPane(RoomDatabase.getRoomObject("IT-IT-HIY").reservedTimeReport());
-            frame.add(scrollPane);
             
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.pack();
-            frame.setVisible(true);
+//            RoomData rm = RoomDatabase.getRoomObject("IT-IT-HIY");
+//            RoomDatabase.reservingRoom(rm, new TimeDate(0.0, 1.0, TimeDate.getDateNow()));
+            TimeDate t1 = new TimeDate(0.0, 1.0, "01/04/2024");
+            TimeDate t2 = new TimeDate(0.0, 1.0, "01/05/2024");
+            
+            System.out.println(t1.isOverlap(t2));
+//            for(String feedback : FeedbackDatabase.getFeedback()){
+//                System.out.println(feedback);
+//            }
         } catch (URISyntaxException | IOException    ex) {
             Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         } finally{
