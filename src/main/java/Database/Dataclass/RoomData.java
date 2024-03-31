@@ -38,6 +38,7 @@ public class RoomData{
         this.capacity = capaity;
         this.status = status;
     }
+    
 
     public String getRoomName() {
         return roomName;

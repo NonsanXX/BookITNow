@@ -28,6 +28,8 @@ import Database.ClientHistoryDatabase;
 import Database.Dataclass.HistoryData;
 
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import javax.swing.*;
 
 public class TestDB {
     public static void main(String[] args) throws DatabaseGetInterrupted {
@@ -35,11 +37,17 @@ public class TestDB {
             FirebaseServiceAccount.initFirebase();
             //ClientHistoryDatabase.updateHistory("66070162", ClientHistoryDatabase.createEmptyHistory());
             UserLoginToken.loginUser(ClientDatabase.getClientObject("66070162")); //bypass login session
-            RoomData rm = RoomDatabase.getRoomObject("reservative");
-            rm.updateReservedTime("05/05/2567", 12.0);
-            RoomDatabase.updateRoom(rm);
-//            TimeDate reserveTime = new TimeDate(16.5, 20.0, TimeDate.getDateNow());
-//            RoomDatabase.reservingRoom(RoomDatabase.getRoomObject("reservative"), reserveTime);
+            ArrayList<HistoryData> readData = ClientHistoryDatabase.readHistory("66070162");
+            
+            JFrame frame = new JFrame();
+            JTable table = new JTable(ClientHistoryDatabase.createDefaultTableModel(readData));
+            JScrollPane scrollPane = new JScrollPane(table);
+            frame.add(scrollPane);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.pack();
+            frame.setVisible(true);
+//            TimeDate reserveTime = new TimeDate(0.5, 1.5, TimeDate.getDateNow());
+//            RoomDatabase.reservingRoom(RoomDatabase.getRoomObject("IT-Peer"), reserveTime);
             
         } catch (URISyntaxException | IOException    ex) {
             Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
