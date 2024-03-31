@@ -6,17 +6,25 @@ package Database.Interface;
 
 import Database.Dataclass.RoomData;
 import Database.Dataclass.ClientData;
+import Database.Dataclass.TimeDate;
+import Database.Dataclass.HistoryData;
 
+import java.util.HashMap;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author phump
  */
 public interface ClientHistoryStatisticReport extends StatisticReport {
-    /**
-     * 
-     * @param roomData Room that user make an reservation.
-     * @param timeStamp Time that user make an reservation.
-     * @return true if add complete, false if not.
-     */
-    public abstract boolean addHistory(RoomData roomData, long timeStamp);
+    
+    public abstract DefaultTableModel createDefaultTableModel(Iterable<HistoryData> data);
+    
+    public abstract ArrayList<HistoryData> readHistory(String ID);
+
+    public abstract void updateHistory(String clientStdID, ArrayList<HistoryData> data);
+    
+    public abstract boolean addHistory(String ID, HistoryData<RoomData> historyData);
+    
+
 }

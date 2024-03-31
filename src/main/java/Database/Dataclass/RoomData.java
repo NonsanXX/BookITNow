@@ -164,6 +164,10 @@ public class RoomData{
         return false;
     }
     
+    public boolean checkReservingTime(TimeDate tr){
+        return isSuperRangeOfOpenTime(tr) && !isOverlapWithReservedTime(tr) && reservedTime.size() < capacity;
+    }
+    
     /**
      * Delete TimeRange in reservedTime if there exist TimeRange
      * @param tr Delete TimeRange

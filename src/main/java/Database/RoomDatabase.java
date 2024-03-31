@@ -5,7 +5,7 @@
 package Database;
 
 import Database.Dataclass.RoomData;
-import Database.Dataclass.TimeRange;
+import Database.Dataclass.HistoryData;
 import Database.Dataclass.TimeDate;
 import Database.Exception.DatabaseGetInterrupted;
 import Firebase.UserLoginToken;
@@ -135,9 +135,11 @@ public class RoomDatabase extends Database{
 
     
     public static boolean reservingRoom(RoomData room, TimeDate time) throws DatabaseGetInterrupted{
-        boolean result = room.reservingTime(time);
+        boolean result = room.checkReservingTime(time);
         if(result){
+            room.reservingTime(time);
             room.getCurrentQueue().put(UserLoginToken.getClientID(), time);
+            ClientHistoryDatabase.addHistory(UserLoginToken.getClientID(), new HistoryData<RoomData>(TimeDate.getTimeStamp(), time, room));
             updateRoom(room);
         }
         return result;

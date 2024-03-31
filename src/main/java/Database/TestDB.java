@@ -24,41 +24,23 @@ import java.util.HashMap;
 
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import Database.ClientHistoryDatabase;
+import Database.Dataclass.HistoryData;
+
+import javax.swing.table.DefaultTableModel;
 
 public class TestDB {
     public static void main(String[] args) throws DatabaseGetInterrupted {
         try {
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/YYYY");
-            
             FirebaseServiceAccount.initFirebase();
-            
-//            UserLoginToken.loginUser(ClientDatabase.getClientObject("66070305"));
-//            
-//            String date = dtf.format(LocalDateTime.now());
-//            
-//            TimeDate res = new TimeDate(12.0, 20.0, date);
+            //ClientHistoryDatabase.updateHistory("66070162", ClientHistoryDatabase.createEmptyHistory());
+            UserLoginToken.loginUser(ClientDatabase.getClientObject("66070162")); //bypass login session
             RoomData rm = RoomDatabase.getRoomObject("reservative");
-//            System.out.println(rm.getReservedTime().size());
-            rm.updateReservedTime("05/04/2024", 0.0);
+            rm.updateReservedTime("05/05/2567", 12.0);
             RoomDatabase.updateRoom(rm);
-//            System.out.println(rm.getReservedTime().size());
-            //RoomDatabase.updateRoom(rm);
-//            RoomDatabase.reservingRoom(RoomDatabase.getRoomObject("reservative"), res);
-//            ArrayList<String> facilityList = new ArrayList<>(){{
-//                add("Sooksan");
-//                add("Whiteboard");
-//                add("Grade");
-//            }};
-//            ArrayList<TimeRange> openTime = new ArrayList<>(){{
-//                add(new TimeRange(0.0, 4.0));
-//                add(new TimeRange(12.0, 15.0));
-//                add(new TimeRange(16.5, 22.45));
-//            }};
-//            ArrayList<TimeDate> reservedTime = new ArrayList<>();
-//            HashMap<String, TimeDate> currentQueue = new HashMap<>();
-//            RoomData rm = new RoomData("reservative", "IT", "-100", facilityList, openTime, reservedTime, currentQueue, 100, true);
-//            RoomDatabase.addRoom(rm);
-//            
+//            TimeDate reserveTime = new TimeDate(16.5, 20.0, TimeDate.getDateNow());
+//            RoomDatabase.reservingRoom(RoomDatabase.getRoomObject("reservative"), reserveTime);
+            
         } catch (URISyntaxException | IOException    ex) {
             Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         } finally{

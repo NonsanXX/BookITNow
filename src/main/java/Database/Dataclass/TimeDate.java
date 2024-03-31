@@ -6,6 +6,7 @@ package Database.Dataclass;
 
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 /**
  *
  * @author phump
@@ -57,5 +58,14 @@ public class TimeDate extends TimeRange{
             return timeDate2.getTime2() > timeDate1.getTime2();
         }
         return result < 0;
+    }
+    
+    public static String getDateNow(){
+        return FORMATTER.format(LocalDate.now());
+    }
+    
+    public static String getTimeStamp(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return formatter.format(LocalDateTime.now());
     }
 }

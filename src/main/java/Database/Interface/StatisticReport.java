@@ -10,5 +10,5 @@ import javax.swing.table.DefaultTableModel;
  * @author phump
  */
 public interface StatisticReport {
-    public abstract DefaultTableModel report();
+    public abstract DefaultTableModel report();;
 }
