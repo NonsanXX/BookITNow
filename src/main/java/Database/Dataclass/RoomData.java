@@ -111,7 +111,7 @@ public class RoomData implements StatisticReport<JFrame>{
     public void setReservedTime(ArrayList<TimeDate> reservedTime) {
         this.reservedTime = reservedTime;
     }
-
+    
     public HashMap<String, TimeDate> getCurrentQueue() {
         return currentQueue;
     }
