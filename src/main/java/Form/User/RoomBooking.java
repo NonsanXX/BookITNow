@@ -270,7 +270,10 @@ public class RoomBooking extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(RoomBooking.this, "Book successful.");
                 this.dispose();
             } else {
-                JOptionPane.showMessageDialog(RoomBooking.this, "This period of time has someone already book it.\nPlease book another period of time.");
+                JOptionPane.showMessageDialog(RoomBooking.this, "The selected time period is not available." +
+                        "\nEither the room has already been booked during that time," +
+                        "\nor the requested time falls outside the room's operating hours." +
+                        "\nPlease choose a different time period for your booking.");
             }
         } catch (DatabaseGetInterrupted e) {
             JOptionPane.showMessageDialog(RoomBooking.this, "Error, please try again later.");
