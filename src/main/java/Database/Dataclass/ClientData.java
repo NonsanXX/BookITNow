@@ -160,7 +160,7 @@ public class ClientData implements StatisticReport<Object>{
     @Override
     public JFrame report() {
         try{
-            JFrame frame = new JFrame();
+            JFrame frame = new JFrame(studentID);
             JTable table = new JTable(createDefaultTableModel(studentID));
             table.getTableHeader().setReorderingAllowed(false);
             table.setCellSelectionEnabled(false);

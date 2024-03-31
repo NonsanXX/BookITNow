@@ -4,6 +4,12 @@
  */
 package Database.Dataclass;
 
+import static Database.RoomHistoryDatabase.createDefaultTableModel;
+import Database.Exception.DatabaseGetInterrupted;
+import Database.Interface.StatisticReport;
+
+import javax.swing.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -12,7 +18,7 @@ import java.util.Map;
  *
  * @author phump
  */
-public class RoomData{
+public class RoomData implements StatisticReport<JFrame>{
     private String roomName;
     private String building;
     private String floor;
@@ -202,6 +208,26 @@ public class RoomData{
             if(TimeDate.timeDateCompare(entry.getValue(), tester)){
                 currentQueueIterator.remove();
             }
+        }
+    }
+
+    @Override
+    public JFrame report() {
+        try{
+            JFrame frame = new JFrame(roomName);
+            JTable table = new JTable(createDefaultTableModel(roomName));
+            table.getTableHeader().setReorderingAllowed(false);
+            table.setCellSelectionEnabled(false);
+            
+            JScrollPane scrollPane = new JScrollPane(table);
+            frame.add(scrollPane);
+            
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.pack();
+            frame.setVisible(true);
+            return frame;
+        } catch(DatabaseGetInterrupted ex){
+            return null;
         }
     }
 }
