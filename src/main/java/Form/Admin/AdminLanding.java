@@ -6,6 +6,8 @@ package Form.Admin;/*
 import Database.Dataclass.RoomData;
 import Database.Exception.DatabaseGetInterrupted;
 import Database.RoomDatabase;
+import Firebase.UserLoginToken;
+import Form.LoginGUI;
 import Form.RoomPanel.RoomPanel;
 
 import javax.swing.*;
@@ -47,6 +49,10 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
         loading = new javax.swing.JLabel();
         add_btn = new javax.swing.JButton();
         ref_btn = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        user_menu = new javax.swing.JMenu();
+        logout_item = new javax.swing.JMenuItem();
+        about_menu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("BookITNow");
@@ -81,7 +87,7 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
             .addGroup(showroomPanelLayout.createSequentialGroup()
                 .addGap(192, 192, 192)
                 .addComponent(loading, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(207, Short.MAX_VALUE))
+                .addContainerGap(184, Short.MAX_VALUE))
         );
 
         jScrollPane2.setViewportView(showroomPanel);
@@ -126,7 +132,7 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
                     .addComponent(ref_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(add_btn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE))
         );
 
         jScrollPane2.getVerticalScrollBar().setUnitIncrement(16);
@@ -143,6 +149,23 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        user_menu.setText("Hello, Administator");
+
+        logout_item.setText("Logout");
+        logout_item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logout_itemActionPerformed(evt);
+            }
+        });
+        user_menu.add(logout_item);
+
+        jMenuBar1.add(user_menu);
+
+        about_menu.setText("About");
+        jMenuBar1.add(about_menu);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -190,6 +213,18 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         refreshShowroom();
     }//GEN-LAST:event_formWindowOpened
+
+    private void logout_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logout_itemActionPerformed
+        int choice = JOptionPane.showConfirmDialog(AdminLanding.this,
+            "Do you want to logout?", "Logout",
+            JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
+        if (choice == JOptionPane.YES_OPTION) {
+            UserLoginToken.logoutUser();
+            this.dispose();
+            new LoginGUI().setVisible(true);
+        }
+    }//GEN-LAST:event_logout_itemActionPerformed
     private void refreshShowroom() {
         ref_btn.setEnabled(false);
         jScrollPane2.getVerticalScrollBar().setValue(jScrollPane2.getVerticalScrollBar().getMinimum());
@@ -255,13 +290,17 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu about_menu;
     private javax.swing.JButton add_btn;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel loading;
+    private javax.swing.JMenuItem logout_item;
     private javax.swing.JButton ref_btn;
     private javax.swing.JPanel showroomPanel;
+    private javax.swing.JMenu user_menu;
     // End of variables declaration//GEN-END:variables
 
     @Override

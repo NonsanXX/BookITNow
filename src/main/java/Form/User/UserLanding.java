@@ -3,10 +3,12 @@ package Form.User;/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import Firebase.UserLoginToken;
 import Form.Admin.*;
 import Database.Dataclass.RoomData;
 import Database.Exception.DatabaseGetInterrupted;
 import Database.RoomDatabase;
+import Form.LoginGUI;
 import Form.RoomPanel.RoomPanel;
 
 import javax.swing.*;
@@ -47,6 +49,11 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener{
         showroomPanel = new javax.swing.JPanel();
         loading = new javax.swing.JLabel();
         ref_btn = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        user_menu = new javax.swing.JMenu();
+        change_pass_item = new javax.swing.JMenuItem();
+        logout_item = new javax.swing.JMenuItem();
+        about_menu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("BookITNow");
@@ -74,18 +81,19 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener{
             .addGroup(showroomPanelLayout.createSequentialGroup()
                 .addGap(337, 337, 337)
                 .addComponent(loading)
-                .addContainerGap(346, Short.MAX_VALUE))
+                .addContainerGap(370, Short.MAX_VALUE))
         );
         showroomPanelLayout.setVerticalGroup(
             showroomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(showroomPanelLayout.createSequentialGroup()
-                .addGap(192, 192, 192)
+                .addGap(245, 245, 245)
                 .addComponent(loading, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(207, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
 
         jScrollPane2.setViewportView(showroomPanel);
 
+        ref_btn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         ref_btn.setText("Refresh");
         ref_btn.setMaximumSize(new java.awt.Dimension(33, 28));
         ref_btn.setMinimumSize(new java.awt.Dimension(33, 28));
@@ -101,7 +109,7 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener{
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(1094, Short.MAX_VALUE)
+                .addContainerGap(1118, Short.MAX_VALUE)
                 .addComponent(ref_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addComponent(jScrollPane2)
@@ -110,9 +118,9 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener{
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(ref_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE))
+                .addComponent(ref_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jScrollPane2.getVerticalScrollBar().setUnitIncrement(16);
@@ -121,29 +129,50 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener{
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        user_menu.setText("Hi, "+ UserLoginToken.getClient().getEnglishName() +" "+ UserLoginToken.getClient().getEnglishSurname());
+
+        change_pass_item.setText("Change Password");
+        change_pass_item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                change_pass_itemActionPerformed(evt);
+            }
+        });
+        user_menu.add(change_pass_item);
+
+        logout_item.setText("Logout");
+        logout_item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logout_itemActionPerformed(evt);
+            }
+        });
+        user_menu.add(logout_item);
+
+        jMenuBar1.add(user_menu);
+
+        about_menu.setText("About");
+        jMenuBar1.add(about_menu);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(1194, 620));
+        setSize(new java.awt.Dimension(1220, 620));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -170,6 +199,23 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener{
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         refreshShowroom();
     }//GEN-LAST:event_formWindowOpened
+
+    private void logout_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logout_itemActionPerformed
+        int choice = JOptionPane.showConfirmDialog(UserLanding.this,
+                "Do you want to logout?", "Logout",
+                JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
+        if (choice == JOptionPane.YES_OPTION) {
+            UserLoginToken.logoutUser();
+            this.dispose();
+            new LoginGUI().setVisible(true);
+        }
+
+    }//GEN-LAST:event_logout_itemActionPerformed
+
+    private void change_pass_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_change_pass_itemActionPerformed
+       new UserAccountManagement().setVisible(true);
+    }//GEN-LAST:event_change_pass_itemActionPerformed
     private void refreshShowroom() {
         ref_btn.setEnabled(false);
         jScrollPane2.getVerticalScrollBar().setValue(jScrollPane2.getVerticalScrollBar().getMinimum());
@@ -239,12 +285,17 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu about_menu;
+    private javax.swing.JMenuItem change_pass_item;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel loading;
+    private javax.swing.JMenuItem logout_item;
     private javax.swing.JButton ref_btn;
     private javax.swing.JPanel showroomPanel;
+    private javax.swing.JMenu user_menu;
     // End of variables declaration//GEN-END:variables
 
     @Override
