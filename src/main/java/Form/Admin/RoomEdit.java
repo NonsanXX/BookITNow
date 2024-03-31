@@ -424,7 +424,7 @@ public class RoomEdit extends javax.swing.JFrame {
         } else {
             facilityList = (ArrayList<String>) facility_JList.getSelectedValuesList();
         }
-        if (!roomName.isEmpty() && capacity != 0 && !building.isEmpty() && !floor.isEmpty()){
+        if (capacity != 0 && !building.isEmpty() && !floor.isEmpty()){
             if (openHour == closeHour && openMin < closeMin || closeHour > openHour){
                 RoomData roomData = new RoomData(roomName, building, floor, facilityList, timeRange, new ArrayList<>(), new HashMap<>(), capacity, available);
                 try {
