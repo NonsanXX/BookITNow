@@ -4,14 +4,12 @@
  */
 package Database;
 
-import Database.Dataclass.ClientData;
-import Database.Dataclass.RoomData;
 import Database.Dataclass.HistoryData;
 import Database.Dataclass.TimeDate;
 import Database.Exception.DatabaseGetInterrupted;
+import Database.Interface.StatisticReport;
 import javax.swing.table.DefaultTableModel;
 
-import Database.Interface.ClientHistoryStatisticReport;
 import java.util.concurrent.ExecutionException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,8 +23,17 @@ public class ClientHistoryDatabase extends Database{
     private static final String HISTORY_FIELD_NAME = "table";
     public static final Object[] columName = {"RID", "TimeStamp", "Reservation detail", "Room"};
     
+    public static DefaultTableModel createDefaultTableModel(String clientStdID) throws DatabaseGetInterrupted{
+        return createDefaultTableModel(readHistory(clientStdID));
+    }
+    
     public static DefaultTableModel createDefaultTableModel(ArrayList<HistoryData> data){
-        DefaultTableModel table = new DefaultTableModel(columName, 0);
+        DefaultTableModel table = new DefaultTableModel(columName, 0){
+            @Override
+            public boolean isCellEditable(int row, int colum){
+                return false;
+            }
+        };
         int rowCount = 1;
         for(HistoryData historyData : data){
             table.addRow(new Object[]{rowCount, historyData.getTimeStamp(), historyData.getTimeDate(), historyData.getRecorded()});
@@ -57,7 +64,6 @@ public class ClientHistoryDatabase extends Database{
         HashMap<String, Object> push = new HashMap<>();
         push.put(HISTORY_FIELD_NAME, data);
         getDb().collection(CLIENT_HISTORY_COLLECTION).document(clientStdID).set(push);
-        System.out.println("Updated");
     }
     
     public static boolean addHistory(String clientStdID, HistoryData history) throws DatabaseGetInterrupted{
