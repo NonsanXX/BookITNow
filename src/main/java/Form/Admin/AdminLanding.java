@@ -270,9 +270,14 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
         RoomEdit roomEdit;
         try {
             System.out.println("Checking...");
-            roomEdit = new RoomEdit(RoomDatabase.getRoomObject(source.getRealroomname()));
-            roomEdit.setVisible(true);
-            roomEdit.setAlwaysOnTop(true);
+            if (RoomDatabase.getRoomObject(source.getRealroomname()) != null){
+                roomEdit = new RoomEdit(RoomDatabase.getRoomObject(source.getRealroomname()));
+                roomEdit.setVisible(true);
+                roomEdit.setAlwaysOnTop(true);
+            } else {
+                JOptionPane.showMessageDialog(AdminLanding.this, "Can't find this room, Maybe try refreshing this page.");
+                refreshShowroom();
+            }
         } catch (DatabaseGetInterrupted ex) {
             JOptionPane.showMessageDialog(AdminLanding.this, ex.getMessage());
         }
