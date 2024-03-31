@@ -68,6 +68,7 @@ public class RoomRegister extends javax.swing.JFrame {
         description = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("RoomRegister");
         setResizable(false);
 
         jPanel4.setBackground(new java.awt.Color(24, 24, 24));
