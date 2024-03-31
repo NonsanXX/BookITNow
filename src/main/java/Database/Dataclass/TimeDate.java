@@ -66,6 +66,11 @@ public class TimeDate extends TimeRange{
         return result < 0;
     }
     
+    public static Double getTimeNow(){
+        LocalDateTime now = LocalDateTime.now();
+        return now.getHour() + now.getMinute()/60.0;
+    }
+    
     public static String getDateNow(){
         return FORMATTER.format(LocalDate.now());
     }
@@ -81,6 +86,6 @@ public class TimeDate extends TimeRange{
     
     @Override
     public String toString(){
-        return String.format("%s - %s | %s", toPoint60(time1), toPoint60(time2), timeDate);
+        return String.format("%s - %s, %s", toPoint60(time1), toPoint60(time2), timeDate);
     }
 }

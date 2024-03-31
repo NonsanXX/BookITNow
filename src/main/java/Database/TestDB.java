@@ -39,18 +39,10 @@ public class TestDB {
             FirebaseServiceAccount.initFirebase();
             //ClientHistoryDatabase.updateHistory("66070162", ClientHistoryDatabase.createEmptyHistory());
             UserLoginToken.loginUser(ClientDatabase.getClientObject("66070305")); //bypass login session
-            
-            //RoomDatabase.reservingRoom(RoomDatabase.getRoomObject("IT-IT-Tutor"), new TimeDate(0.0, 1.0, TimeDate.getDateNow()));
-            
-//            RoomDatabase.getRoomObject("IT-IT-Tutor").report();
-//            ClientDatabase.getClientObject("66070305").report();
-            //RoomCommentDatabase.addComment("IT-IT-HIY", new CommentData("@null", "this room ....", 3l));
-            
-            //System.out.println(ClientDatabase.getClientObject("66070162").getEnglishName());
-            
-            JScrollPane scrollPane = new JScrollPane(new ClientDatabase().report());
-            
+            RoomData rm = RoomDatabase.getRoomObject("IT-IT-HIY");
+            RoomDatabase.reservingRoom(rm, new TimeDate(0.0, 1.0, TimeDate.getDateNow()));
             JFrame frame = new JFrame();
+            JScrollPane scrollPane = new JScrollPane(RoomDatabase.getRoomObject("IT-IT-HIY").reservedTimeReport());
             frame.add(scrollPane);
             
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
