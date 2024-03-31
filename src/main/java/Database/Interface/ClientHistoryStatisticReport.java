@@ -24,7 +24,7 @@ public interface ClientHistoryStatisticReport extends StatisticReport {
 
     public abstract void updateHistory(String clientStdID, ArrayList<HistoryData> data);
     
-    public abstract boolean addHistory(String ID, HistoryData<RoomData> historyData);
+    public abstract boolean addHistory(String ID, HistoryData historyData);
     
 
 }

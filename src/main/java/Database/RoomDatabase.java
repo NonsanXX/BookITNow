@@ -132,14 +132,12 @@ public class RoomDatabase extends Database{
         }
     }
     
-
-    
     public static boolean reservingRoom(RoomData room, TimeDate time) throws DatabaseGetInterrupted{
         boolean result = room.checkReservingTime(time);
         if(result){
             room.reservingTime(time);
             room.getCurrentQueue().put(UserLoginToken.getClientID(), time);
-            ClientHistoryDatabase.addHistory(UserLoginToken.getClientID(), new HistoryData<RoomData>(TimeDate.getTimeStamp(), time, room));
+            ClientHistoryDatabase.addHistory(UserLoginToken.getClientID(), new HistoryData(TimeDate.getTimeStamp(), time, room.getRoomName()));
             updateRoom(room);
         }
         return result;
