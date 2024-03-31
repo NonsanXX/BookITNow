@@ -50,28 +50,33 @@
                       <Component id="jLabel2" max="32767" attributes="0"/>
                       <Component id="jSeparator2" max="32767" attributes="0"/>
                       <Component id="jSeparator3" alignment="0" max="32767" attributes="0"/>
+                      <Component id="book_btn" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               <Component id="jSeparator1" alignment="0" min="-2" pref="198" max="-2" attributes="0"/>
                               <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="close_hour" min="-2" pref="69" max="-2" attributes="0"/>
+                                      <Component id="exit_hour" min="-2" pref="69" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="close_min" min="-2" pref="69" max="-2" attributes="0"/>
+                                      <Component id="exit_min" min="-2" pref="69" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="jLabel7" min="-2" pref="72" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="open_hour" min="-2" pref="69" max="-2" attributes="0"/>
+                                      <Component id="enter_hour" min="-2" pref="69" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="open_min" min="-2" pref="69" max="-2" attributes="0"/>
+                                      <Component id="enter_min" min="-2" pref="69" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Component id="jLabel8" alignment="0" min="-2" pref="69" max="-2" attributes="0"/>
-                              <Component id="jSpinner1" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="datePicker1" min="-2" pref="210" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace min="0" pref="118" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="108" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -91,21 +96,26 @@
                   <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="open_hour" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                      <Component id="open_min" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="enter_hour" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="enter_min" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="jLabel7" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel8" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="close_hour" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                      <Component id="close_min" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="exit_hour" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="exit_min" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jSeparator3" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jSpinner1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="302" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel9" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="datePicker1" min="-2" pref="30" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="244" max="32767" attributes="0"/>
+                  <Component id="book_btn" min="-2" pref="43" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -113,20 +123,20 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
+            <Property name="text" type="java.lang.String" value="&#xe23;&#xe30;&#xe1a;&#xe1a;&#xe08;&#xe2d;&#xe07;&#xe2b;&#xe49;&#xe2d;&#xe07;"/>
+            <Property name="verticalAlignment" type="int" value="3"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="FreesiaUPC" size="48" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&#xe23;&#xe30;&#xe1a;&#xe1a;&#xe08;&#xe2d;&#xe07;&#xe2b;&#xe49;&#xe2d;&#xe07;"/>
-            <Property name="verticalAlignment" type="int" value="3"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
+            <Property name="text" type="java.lang.String" value="&#xe0a;&#xe37;&#xe48;&#xe2d;&#xe2b;&#xe49;&#xe2d;&#xe07; :"/>
+            <Property name="verticalAlignment" type="int" value="3"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="FreesiaUPC" size="24" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&#xe0a;&#xe37;&#xe48;&#xe2d;&#xe2b;&#xe49;&#xe2d;&#xe07; :"/>
-            <Property name="verticalAlignment" type="int" value="3"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator1">
@@ -135,24 +145,24 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
+            <Property name="text" type="java.lang.String" value="&#xe40;&#xe27;&#xe25;&#xe32;&#xe40;&#xe02;&#xe49;&#xe32;"/>
+            <Property name="verticalAlignment" type="int" value="3"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="FreesiaUPC" size="24" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&#xe40;&#xe27;&#xe25;&#xe32;&#xe40;&#xe02;&#xe49;&#xe32;"/>
-            <Property name="verticalAlignment" type="int" value="3"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="open_hour">
+        <Component class="javax.swing.JSpinner" name="enter_hour">
           <Properties>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
               <SpinnerModel initial="0" maximum="23" minimum="0" numberType="java.lang.Long" stepSize="1" type="number"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="open_hourStateChanged"/>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="enter_hourStateChanged"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JSpinner" name="open_min">
+        <Component class="javax.swing.JSpinner" name="enter_min">
           <Properties>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
               <SpinnerModel initial="0" maximum="59" minimum="0" numberType="java.lang.Long" stepSize="1" type="number"/>
@@ -161,21 +171,21 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
+            <Property name="text" type="java.lang.String" value="&#xe40;&#xe27;&#xe25;&#xe32;&#xe2d;&#xe2d;&#xe01;"/>
+            <Property name="verticalAlignment" type="int" value="3"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="FreesiaUPC" size="24" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&#xe40;&#xe27;&#xe25;&#xe32;&#xe2d;&#xe2d;&#xe01;"/>
-            <Property name="verticalAlignment" type="int" value="3"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="close_hour">
+        <Component class="javax.swing.JSpinner" name="exit_hour">
           <Properties>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
               <SpinnerModel initial="0" maximum="23" minimum="0" numberType="java.lang.Long" stepSize="1" type="number"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="close_min">
+        <Component class="javax.swing.JSpinner" name="exit_min">
           <Properties>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
               <SpinnerModel initial="0" maximum="59" minimum="0" numberType="java.lang.Long" stepSize="1" type="number"/>
@@ -184,10 +194,35 @@
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator3">
         </Component>
-        <Component class="javax.swing.JSpinner" name="jSpinner1">
+        <Component class="com.github.lgooddatepicker.components.DatePicker" name="datePicker1">
           <Properties>
-            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-              <SpinnerModel initial="now" minimum="now" stepSize="5" type="date"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="FreesiaUPC" size="24" style="0"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="settings.setDateRangeLimits(today, today.plusYears(1));"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new com.github.lgooddatepicker.components.DatePicker(settings)"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="DatePickerSettings settings = new DatePickerSettings();&#xa;        settings.setColor(DateArea.CalendarBackgroundNormalDates, UIManager.getColor(&quot;Panel.background&quot;));&#xa;        settings.setColor(DateArea.BackgroundOverallCalendarPanel, UIManager.getColor(&quot;Panel.background&quot;));&#xa;        settings.setColor(DateArea.TextFieldBackgroundValidDate, UIManager.getColor(&quot;TextField.background&quot;));&#xa;        settings.setColor(DateArea.CalendarBackgroundSelectedDate, UIManager.getColor(&quot;Table.selectionBackground&quot;));&#xa;        settings.setColor(DateArea.BackgroundTopLeftLabelAboveWeekNumbers, UIManager.getColor(&quot;Label.background&quot;));&#xa;        settings.setColor(DateArea.BackgroundMonthAndYearMenuLabels, UIManager.getColor(&quot;Label.background&quot;));&#xa;        settings.setColor(DateArea.BackgroundTodayLabel, UIManager.getColor(&quot;Label.background&quot;));&#xa;        settings.setColor(DateArea.BackgroundClearLabel, UIManager.getColor(&quot;Button.background&quot;));&#xa;        settings.setColor(DateArea.CalendarTextNormalDates, UIManager.getColor(&quot;Label.foreground&quot;));&#xa;        settings.setColor(DateArea.CalendarBorderSelectedDate, UIManager.getColor(&quot;Table.selectionBackground&quot;).darker());&#xa;        settings.setColor(DateArea.BackgroundCalendarPanelLabelsOnHover, UIManager.getColor(&quot;ComboBox.buttonHighlight&quot;));&#xa;        settings.setColor(DateArea.CalendarTextWeekdays, UIManager.getColor(&quot;Button.foreground&quot;));&#xa;        settings.setColorBackgroundWeekdayLabels(UIManager.getColor(&quot;Button.background&quot;), true);&#xa;        settings.setColor(DateArea.DatePickerTextValidDate, UIManager.getColor(&quot;TextField.foreground&quot;));&#xa;        settings.setFontCalendarDateLabels(new Font(&quot;FreesiaUPC&quot;, 0, 24));&#xa;        settings.setAllowEmptyDates(false);&#xa;        settings.setAllowKeyboardEditing(false);"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="book_btn">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#xe08;&#xe2d;&#xe07;&#xe2b;&#xe49;&#xe2d;&#xe07;"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="FreesiaUPC" size="24" style="1"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="book_btnActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel9">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#xe27;&#xe31;&#xe19;&#xe17;&#xe35;&#xe48;"/>
+            <Property name="verticalAlignment" type="int" value="3"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="FreesiaUPC" size="24" style="1"/>
             </Property>
           </Properties>
         </Component>

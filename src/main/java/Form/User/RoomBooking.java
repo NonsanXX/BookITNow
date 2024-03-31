@@ -6,19 +6,32 @@ package Form.User;
 import javax.swing.*;
 import javax.swing.text.DateFormatter;
 import java.awt.*;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 import Database.Dataclass.RoomData;
+import Database.Dataclass.TimeDate;
+import Database.Exception.DatabaseGetInterrupted;
+import Database.RoomDatabase;
+import com.github.lgooddatepicker.components.DatePickerSettings;
+import com.github.lgooddatepicker.components.DatePickerSettings.*;
 
 /**
  *
  * @author Nonsan
  */
 public class RoomBooking extends javax.swing.JFrame {
-
+    final RoomData roomData;
+    final LocalDate today = LocalDate.now();
     /**
      * Creates new form RoomBooking
      */
     public RoomBooking(RoomData roomdata) {
+        this.roomData = roomdata;
         initComponents();
+        datePicker1.setDateToToday();
     }
 
     /**
@@ -36,47 +49,79 @@ public class RoomBooking extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel7 = new javax.swing.JLabel();
-        open_hour = new javax.swing.JSpinner();
-        open_min = new javax.swing.JSpinner();
+        enter_hour = new javax.swing.JSpinner();
+        enter_min = new javax.swing.JSpinner();
         jLabel8 = new javax.swing.JLabel();
-        close_hour = new javax.swing.JSpinner();
-        close_min = new javax.swing.JSpinner();
+        exit_hour = new javax.swing.JSpinner();
+        exit_min = new javax.swing.JSpinner();
         jSeparator3 = new javax.swing.JSeparator();
-        jSpinner1 = new javax.swing.JSpinner();
+        DatePickerSettings settings = new DatePickerSettings();
+        settings.setColor(DateArea.CalendarBackgroundNormalDates, UIManager.getColor("Panel.background"));
+        settings.setColor(DateArea.BackgroundOverallCalendarPanel, UIManager.getColor("Panel.background"));
+        settings.setColor(DateArea.TextFieldBackgroundValidDate, UIManager.getColor("TextField.background"));
+        settings.setColor(DateArea.CalendarBackgroundSelectedDate, UIManager.getColor("Table.selectionBackground"));
+        settings.setColor(DateArea.BackgroundTopLeftLabelAboveWeekNumbers, UIManager.getColor("Label.background"));
+        settings.setColor(DateArea.BackgroundMonthAndYearMenuLabels, UIManager.getColor("Label.background"));
+        settings.setColor(DateArea.BackgroundTodayLabel, UIManager.getColor("Label.background"));
+        settings.setColor(DateArea.BackgroundClearLabel, UIManager.getColor("Button.background"));
+        settings.setColor(DateArea.CalendarTextNormalDates, UIManager.getColor("Label.foreground"));
+        settings.setColor(DateArea.CalendarBorderSelectedDate, UIManager.getColor("Table.selectionBackground").darker());
+        settings.setColor(DateArea.BackgroundCalendarPanelLabelsOnHover, UIManager.getColor("ComboBox.buttonHighlight"));
+        settings.setColor(DateArea.CalendarTextWeekdays, UIManager.getColor("Button.foreground"));
+        settings.setColorBackgroundWeekdayLabels(UIManager.getColor("Button.background"), true);
+        settings.setColor(DateArea.DatePickerTextValidDate, UIManager.getColor("TextField.foreground"));
+        settings.setFontCalendarDateLabels(new Font("FreesiaUPC", 0, 24));
+        settings.setAllowEmptyDates(false);
+        settings.setAllowKeyboardEditing(false);
+        datePicker1 = new com.github.lgooddatepicker.components.DatePicker(settings);
+        book_btn = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("RoomBooking");
 
-        jLabel1.setFont(new java.awt.Font("FreesiaUPC", 1, 48)); // NOI18N
         jLabel1.setText("ระบบจองห้อง");
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabel1.setFont(new java.awt.Font("FreesiaUPC", 1, 48)); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("FreesiaUPC", 1, 24)); // NOI18N
         jLabel2.setText("ชื่อห้อง :");
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabel2.setFont(new java.awt.Font("FreesiaUPC", 1, 24)); // NOI18N
 
-        jLabel7.setFont(new java.awt.Font("FreesiaUPC", 1, 24)); // NOI18N
         jLabel7.setText("เวลาเข้า");
         jLabel7.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabel7.setFont(new java.awt.Font("FreesiaUPC", 1, 24)); // NOI18N
 
-        open_hour.setModel(new javax.swing.SpinnerNumberModel(Long.valueOf(0L), Long.valueOf(0L), Long.valueOf(23L), Long.valueOf(1L)));
-        open_hour.addChangeListener(new javax.swing.event.ChangeListener() {
+        enter_hour.setModel(new javax.swing.SpinnerNumberModel(Long.valueOf(0L), Long.valueOf(0L), Long.valueOf(23L), Long.valueOf(1L)));
+        enter_hour.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                open_hourStateChanged(evt);
+                enter_hourStateChanged(evt);
             }
         });
 
-        open_min.setModel(new javax.swing.SpinnerNumberModel(Long.valueOf(0L), Long.valueOf(0L), Long.valueOf(59L), Long.valueOf(1L)));
+        enter_min.setModel(new javax.swing.SpinnerNumberModel(Long.valueOf(0L), Long.valueOf(0L), Long.valueOf(59L), Long.valueOf(1L)));
 
-        jLabel8.setFont(new java.awt.Font("FreesiaUPC", 1, 24)); // NOI18N
         jLabel8.setText("เวลาออก");
         jLabel8.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabel8.setFont(new java.awt.Font("FreesiaUPC", 1, 24)); // NOI18N
 
-        close_hour.setModel(new javax.swing.SpinnerNumberModel(Long.valueOf(0L), Long.valueOf(0L), Long.valueOf(23L), Long.valueOf(1L)));
+        exit_hour.setModel(new javax.swing.SpinnerNumberModel(Long.valueOf(0L), Long.valueOf(0L), Long.valueOf(23L), Long.valueOf(1L)));
 
-        close_min.setModel(new javax.swing.SpinnerNumberModel(Long.valueOf(0L), Long.valueOf(0L), Long.valueOf(59L), Long.valueOf(1L)));
+        exit_min.setModel(new javax.swing.SpinnerNumberModel(Long.valueOf(0L), Long.valueOf(0L), Long.valueOf(59L), Long.valueOf(1L)));
 
-        jSpinner1.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), new java.util.Date(), null, java.util.Calendar.DAY_OF_MONTH));
+        datePicker1.setFont(new java.awt.Font("FreesiaUPC", 0, 24)); // NOI18N
+
+        book_btn.setText("จองห้อง");
+        book_btn.setFont(new java.awt.Font("FreesiaUPC", 1, 24)); // NOI18N
+        book_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                book_btnActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("วันที่");
+        jLabel9.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabel9.setFont(new java.awt.Font("FreesiaUPC", 1, 24)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -88,24 +133,28 @@ public class RoomBooking extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator2)
                     .addComponent(jSeparator3)
+                    .addComponent(book_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(close_hour, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(exit_hour, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(close_min, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(exit_min, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(open_hour, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(enter_hour, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(open_min, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(enter_min, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 118, Short.MAX_VALUE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(18, 18, 18)
+                                .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 108, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -121,20 +170,26 @@ public class RoomBooking extends javax.swing.JFrame {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(open_hour, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(open_min, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(enter_hour, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(enter_min, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(close_hour, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(close_min, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(exit_hour, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(exit_min, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(302, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 244, Short.MAX_VALUE)
+                .addComponent(book_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
+
+        settings.setDateRangeLimits(today, today.plusYears(1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -153,22 +208,46 @@ public class RoomBooking extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void open_hourStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_open_hourStateChanged
-        if ((long)open_hour.getValue() >= (long)close_hour.getValue()){
-            close_hour.setModel(new javax.swing.SpinnerNumberModel(
-                Long.valueOf((long) open_hour.getValue()),
-                Long.valueOf((long) open_hour.getValue()),
+    private void enter_hourStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_enter_hourStateChanged
+        if ((long)enter_hour.getValue() >= (long)exit_hour.getValue()){
+            exit_hour.setModel(new javax.swing.SpinnerNumberModel(
+                Long.valueOf((long) enter_hour.getValue()),
+                Long.valueOf((long) enter_hour.getValue()),
                 Long.valueOf(23L),
                 Long.valueOf(1L)));
         }
-        else if ((long)open_hour.getValue() < (long)close_hour.getValue()){
-            close_hour.setModel(new javax.swing.SpinnerNumberModel(
-                Long.valueOf((long) close_hour.getValue()),
-                Long.valueOf((long) open_hour.getValue()),
+        else if ((long)enter_hour.getValue() < (long)exit_hour.getValue()){
+            exit_hour.setModel(new javax.swing.SpinnerNumberModel(
+                Long.valueOf((long) exit_hour.getValue()),
+                Long.valueOf((long) enter_hour.getValue()),
                 Long.valueOf(23L),
                 Long.valueOf(1L)));
         }
-    }//GEN-LAST:event_open_hourStateChanged
+    }//GEN-LAST:event_enter_hourStateChanged
+
+    private void book_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_book_btnActionPerformed
+        LocalDate selectedDate = datePicker1.getDate();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String formattedDate = selectedDate.format(formatter);
+        System.out.println("Formatted Date: " + formattedDate);
+
+        long enterHour = (long) enter_hour.getValue();
+        long enterMin = (long) enter_min.getValue();
+        long exitHour = (long) exit_hour.getValue();
+        long exitMin = (long) exit_min.getValue();
+
+        TimeDate timeDate = new TimeDate((enterHour + enterMin/60.0), (exitHour + exitMin/60.0), formattedDate);
+        try {
+            if (RoomDatabase.reservingRoom(roomData, timeDate)){
+                JOptionPane.showMessageDialog(RoomBooking.this, "Book successful.");
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(RoomBooking.this, "This period of time has someone already book it.\nPlease book another period of time.");
+            }
+        } catch (DatabaseGetInterrupted e) {
+            JOptionPane.showMessageDialog(RoomBooking.this, "Error, please try again later.");
+        }
+    }//GEN-LAST:event_book_btnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -206,18 +285,20 @@ public class RoomBooking extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JSpinner close_hour;
-    private javax.swing.JSpinner close_min;
+    private javax.swing.JButton book_btn;
+    private com.github.lgooddatepicker.components.DatePicker datePicker1;
+    private javax.swing.JSpinner enter_hour;
+    private javax.swing.JSpinner enter_min;
+    private javax.swing.JSpinner exit_hour;
+    private javax.swing.JSpinner exit_min;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner open_hour;
-    private javax.swing.JSpinner open_min;
     // End of variables declaration//GEN-END:variables
 }
