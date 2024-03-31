@@ -5,9 +5,10 @@
 package Database.Interface;
 
 /**
- * @param <Infographic> Ex. DefaultTableModel, JTable, Graph, ..., etc.
+ *
  * @author phump
+ * @param <Infographic>
  */
-public interface StatisticReport<Infographic> {
-    public abstract Infographic report();;
+public interface RoomReservedTime<Infographic> extends StatisticReport<Infographic>{
+    public abstract Infographic reservedTimeReport();
 }

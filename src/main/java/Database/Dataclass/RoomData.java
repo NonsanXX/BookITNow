@@ -4,6 +4,14 @@
  */
 package Database.Dataclass;
 
+import static Database.RoomHistoryDatabase.createDefaultTableModel;
+import Database.Exception.DatabaseGetInterrupted;
+import Database.Interface.RoomReservedTime;
+import Database.RoomDatabase;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -12,7 +20,7 @@ import java.util.Map;
  *
  * @author phump
  */
-public class RoomData{
+public class RoomData implements RoomReservedTime<JTable>{
     private String roomName;
     private String building;
     private String floor;
@@ -38,6 +46,7 @@ public class RoomData{
         this.capacity = capaity;
         this.status = status;
     }
+    
 
     public String getRoomName() {
         return roomName;
@@ -104,7 +113,7 @@ public class RoomData{
     public void setReservedTime(ArrayList<TimeDate> reservedTime) {
         this.reservedTime = reservedTime;
     }
-
+    
     public HashMap<String, TimeDate> getCurrentQueue() {
         return currentQueue;
     }
@@ -184,8 +193,10 @@ public class RoomData{
      * 
      * @param timeDate - Date in dateTimeFormatter in format dd/MM/YYYY
      * @param time - Time in 24 hours. Time 12.50 means 12:30
+     * @return true if complete update
+     * @throws Database.Exception.DatabaseGetInterrupted
      */
-    public void updateReservedTime(String timeDate, Double time){
+    public Boolean updateReservedTime(String timeDate, Double time) throws DatabaseGetInterrupted{
         TimeDate tester = new TimeDate(0.0, time, timeDate);
         Iterator<TimeDate> reservedTimeIterator = reservedTime.iterator();
         while(reservedTimeIterator.hasNext()){
@@ -201,6 +212,43 @@ public class RoomData{
             if(TimeDate.timeDateCompare(entry.getValue(), tester)){
                 currentQueueIterator.remove();
             }
+        }
+        RoomDatabase.updateRoom(this);
+        return true;
+    }
+
+    @Override
+    public JTable report() {
+        try{
+            JTable table = new JTable(createDefaultTableModel(roomName));
+            table.getTableHeader().setReorderingAllowed(false);
+            table.setCellSelectionEnabled(false);
+            return table;
+        } catch(DatabaseGetInterrupted ex){
+            return null;
+        }
+    }
+
+    @Override
+    public JTable reservedTimeReport() {
+        Object[] columName = {"Date", "Time"};
+        try {
+            Boolean wait = updateReservedTime(TimeDate.getDateNow(), TimeDate.getTimeNow());
+            while(!wait){}
+            DefaultTableModel model = new DefaultTableModel(columName, 0);
+            
+            for(TimeDate time : reservedTime){
+                Object[] rowData = {time.getTimeDate(), TimeDate.toPoint60(time.getTime1())+" - "+TimeDate.toPoint60(time.getTime2())};
+                model.addRow(rowData);
+            }
+            
+            JTable table = new JTable(model);
+            table.getTableHeader().setReorderingAllowed(false);
+            table.setCellSelectionEnabled(false);
+            
+            return table;
+        } catch (DatabaseGetInterrupted ex) {
+            return null;
         }
     }
 }

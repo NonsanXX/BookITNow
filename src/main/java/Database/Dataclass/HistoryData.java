@@ -3,27 +3,29 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Database.Dataclass;
-
 /**
  *
  * @author phump
- * @param <Dataclass>
  */
-public class HistoryData<Dataclass> {
+public class HistoryData {
+    public static final String TIMESTAMP_FIELD_NAME = "timeStamp";
+    public static final String TIMEDATE_FIELD_NAME = "timeDate";
+    public static final String RECORDED_FIELD_NAME = "recorded";
+    
     private String timeStamp;
     private TimeDate timeDate;
-    private Dataclass dataclass;
+    private String recorded;
     
     public HistoryData(){
         this("", null, null);
     }
     
-    public HistoryData(String timeStamp, TimeDate timeDate, Dataclass dataclass) {
+    public HistoryData(String timeStamp, TimeDate timeDate, String roomName) {
         this.timeStamp = timeStamp;
         this.timeDate = timeDate;
-        this.dataclass = dataclass;
+        this.recorded = roomName;
     }
-
+    
     public String getTimeStamp() {
         return timeStamp;
     }
@@ -40,15 +42,15 @@ public class HistoryData<Dataclass> {
         this.timeDate = timeDate;
     }
 
-    public Dataclass getDataclass() {
-        return dataclass;
+    public String getRecorded() {
+        return recorded;
     }
 
-    public void setDataclass(Dataclass dataclass) {
-        this.dataclass = dataclass;
+    public void setRecorded(String recorded) {
+        this.recorded = recorded;
     }
     
     public Object[] toRowData(long rid){
-        return new Object[]{rid, timeStamp, timeDate, dataclass};
+        return new Object[]{rid, timeStamp, timeDate, recorded};
     }
 }

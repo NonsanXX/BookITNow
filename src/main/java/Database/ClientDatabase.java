@@ -4,21 +4,24 @@
  */
 package Database;
 
+import Database.Interface.StatisticReport;
 import Database.Dataclass.ClientData;
-
 import Database.Exception.DatabaseGetInterrupted;
 
 import com.google.cloud.firestore.DocumentReference;
+import java.awt.Font;
 
-
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author phump
  */
-public class ClientDatabase extends Database{
+public class ClientDatabase extends Database implements StatisticReport<JTable>{
     public static HashMap<String, Object> getClientHashMap(String clientstdID) throws DatabaseGetInterrupted{
         DocumentReference docRef = db.collection(Database.CLIENT_COLLECTION).document(clientstdID);
         try {
@@ -35,6 +38,19 @@ public class ClientDatabase extends Database{
         } catch (InterruptedException | ExecutionException ex) {
             throw new DatabaseGetInterrupted();
         }
+    }
+    
+    public static ArrayList<ClientData> getAllClientData() throws DatabaseGetInterrupted{
+        ArrayList<ClientData> roomListObject = new ArrayList<>();
+        Iterable<DocumentReference> docRef = getDb().collection(CLIENT_COLLECTION).listDocuments();
+        for(DocumentReference d : docRef){
+            try {
+                roomListObject.add(d.get().get().toObject(ClientData.class));
+            } catch (InterruptedException | ExecutionException ex) {
+                throw new DatabaseGetInterrupted();
+            }
+        }
+        return roomListObject;
     }
     
     public static boolean updateClient(String clientstdID, String updateField, Object updateValue) throws DatabaseGetInterrupted{
@@ -93,6 +109,29 @@ public class ClientDatabase extends Database{
     
     public static void deleteClient(String clientstdID){
         getDb().collection(CLIENT_COLLECTION).document(clientstdID).delete();
+        ClientHistoryDatabase.deleteHistory(clientstdID);
     }
-
+    
+    public static DefaultTableModel createDefaultTableModel() throws DatabaseGetInterrupted{
+        Object[] columName = {"Student ID", "Thai Name", "Thai Surname", "English Name", "English Surname", "Email", "Access Level"};
+        DefaultTableModel table = new DefaultTableModel(columName, 0);
+        for(ClientData client : getAllClientData()){
+            Object[] rowData = {client.getStudentID(), client.getThaiName(), client.getThaiSurname(), client.getEnglishName(), client.getEnglishSurname(), client.getEmail(), client.getAccessLevel()};
+            table.addRow(rowData);
+        }
+        return table;
+    }
+    
+    @Override
+    public JTable report() {
+        try {
+            JTable table = new JTable(ClientDatabase.createDefaultTableModel());
+            table.setFont(new Font("FreesiaUPC", 0, 16));
+            table.getTableHeader().setReorderingAllowed(false);
+            table.setCellSelectionEnabled(false);
+            return table;
+        } catch (DatabaseGetInterrupted ex) {
+            return null;
+        }
+    }
 }

@@ -4,13 +4,19 @@
  */
 package Database.Dataclass;
 
+import static Database.ClientHistoryDatabase.createDefaultTableModel;
+import Database.Exception.DatabaseGetInterrupted;
+import Database.Interface.StatisticReport;
+
+import javax.swing.*;
+
 import java.util.HashMap;
 
 /**
  *
  * @author phump
  */
-public class ClientData{
+public class ClientData implements StatisticReport<JTable>{
 
     /**
      *
@@ -149,5 +155,17 @@ public class ClientData{
         h.put(FIELD_PASSCODE, passcode);
         h.put(FIELD_ACCESS_LEVEL, accessLevel);
         return h;
+    }
+    
+    @Override
+    public JTable report() {
+        try{
+            JTable table = new JTable(createDefaultTableModel(studentID));
+            table.getTableHeader().setReorderingAllowed(false);
+            table.setCellSelectionEnabled(false);
+            return table;
+        } catch(DatabaseGetInterrupted ex){
+            return null;
+        }
     }
 }

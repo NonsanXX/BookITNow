@@ -49,7 +49,7 @@ public class RoomDatabase extends Database{
     
     /**
      * Filter:  roomName        - Get the room if it contain desirableRoom.roomName<br>
-     *          facilityList    - Get the room if it contain desirableRoom.facilityList<br>
+     *          facilityList    - Get the room if it containAll desirableRoom.facilityList<br>
      *          building        - Get the room if it contain desirableRoom.building<br>
      *          floor           - Get the room if it equal to desirableRoom.floor<br>
      *          openTime        - Get the room if it isSuperRange of desirableRoom.openTime<br>
@@ -132,14 +132,15 @@ public class RoomDatabase extends Database{
         }
     }
     
-
-    
     public static boolean reservingRoom(RoomData room, TimeDate time) throws DatabaseGetInterrupted{
         boolean result = room.checkReservingTime(time);
         if(result){
             room.reservingTime(time);
             room.getCurrentQueue().put(UserLoginToken.getClientID(), time);
-            ClientHistoryDatabase.addHistory(UserLoginToken.getClientID(), new HistoryData<RoomData>(TimeDate.getTimeStamp(), time, room));
+            HistoryData hn = new HistoryData(TimeDate.getTimeStamp(), time, room.getRoomName());
+            ClientHistoryDatabase.addHistory(UserLoginToken.getClientID(), hn);
+            hn.setRecorded(UserLoginToken.getClientID());
+            RoomHistoryDatabase.addHistory(room.getRoomName(), hn);
             updateRoom(room);
         }
         return result;
