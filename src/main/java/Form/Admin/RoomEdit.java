@@ -12,21 +12,21 @@ import Database.RoomDatabase;
 
 import javax.swing.*;
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  *
  * @author acer
  */
-public class RoomRegister extends javax.swing.JFrame {
-
+public class RoomEdit extends javax.swing.JFrame {
+    String roomName;
     /**
      * Creates new form room_register
      */
-    public RoomRegister() {
+    public RoomEdit(RoomData roomData) {
         initComponents();
+        loadRoomdata(roomData);
+        this.roomName = roomData.getRoomName();
     }
 
     /**
@@ -63,8 +63,9 @@ public class RoomRegister extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         facility1 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        add_room = new javax.swing.JButton();
+        edit_room = new javax.swing.JButton();
         cancel_btn = new javax.swing.JButton();
+        delete_btn = new javax.swing.JLabel();
         description = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -74,7 +75,7 @@ public class RoomRegister extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("FreesiaUPC", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Room Register");
+        jLabel1.setText("Room Editor");
 
         jPanel1.setBackground(new java.awt.Color(24, 24, 24));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(85, 85, 85), 5));
@@ -158,15 +159,15 @@ public class RoomRegister extends javax.swing.JFrame {
         facility1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         facility1.setText("กดปุ่ม CTRL หรือ SHIFT ค้างเพื่อเลือกหลายรายการ");
 
-        add_room.setFont(new java.awt.Font("FreesiaUPC", 1, 24)); // NOI18N
-        add_room.setText("เพิ่มห้อง");
-        add_room.setBorderPainted(false);
-        add_room.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        add_room.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        add_room.setMargin(new java.awt.Insets(15, 5, 5, 5));
-        add_room.addActionListener(new java.awt.event.ActionListener() {
+        edit_room.setFont(new java.awt.Font("FreesiaUPC", 1, 24)); // NOI18N
+        edit_room.setText("แก้ไข");
+        edit_room.setBorderPainted(false);
+        edit_room.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        edit_room.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        edit_room.setMargin(new java.awt.Insets(15, 5, 5, 5));
+        edit_room.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                add_roomActionPerformed(evt);
+                edit_roomActionPerformed(evt);
             }
         });
 
@@ -182,13 +183,21 @@ public class RoomRegister extends javax.swing.JFrame {
             }
         });
 
+        delete_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delete (Custom) .png"))); // NOI18N
+        delete_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        delete_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                delete_btnMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(close_hour, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -203,100 +212,93 @@ public class RoomRegister extends javax.swing.JFrame {
                                     .addComponent(open_hour, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
                                     .addComponent(open_min, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(room_name_label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGap(18, 18, 18)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(capacity_spin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(building_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(room_name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jSeparator1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(room_name_label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(capacity_spin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(building_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(room_name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(edit_room, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(cancel_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(96, 96, 96)))
+                        .addGap(26, 26, 26)
+                        .addComponent(delete_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(facility1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(facility, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(226, 226, 226))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(16, 16, 16)
-                    .addComponent(add_room, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(823, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(facility, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(room_name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(room_name_label, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(capacity_spin, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(building_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(floor_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(open_hour, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(open_min, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(close_hour, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(close_min, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(facility, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(facility1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cancel_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(facility1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addContainerGap(471, Short.MAX_VALUE)
-                    .addComponent(add_room, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
+                    .addComponent(edit_room, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(room_name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(room_name_label, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(capacity_spin, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(building_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(floor_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(open_hour, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(open_min, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(close_hour, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(close_min, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(delete_btn)
+                .addGap(16, 16, 16))
         );
 
         description.setFont(new java.awt.Font("FreesiaUPC", 0, 24)); // NOI18N
         description.setForeground(new java.awt.Color(255, 255, 255));
-        description.setText("เพิ่มห้องเข้าสู่ระบบจองห้อง");
+        description.setText("แก้ไขห้อง");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -321,7 +323,7 @@ public class RoomRegister extends javax.swing.JFrame {
                     .addComponent(description, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -338,7 +340,49 @@ public class RoomRegister extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+    private void loadRoomdata(RoomData roomData){
+        //get data from roomdata
+        String roomName = roomData.getRoomName();
+        if (!roomName.contains(roomData.getBuilding()+"-")){
+            roomName = roomData.getBuilding()+"-"+roomName;
+        }
+        int capacity = (int) roomData.getCapacity();
+        String building = roomData.getBuilding();
+        String floor = roomData.getFloor();
+        long openHour = (long) Math.floor(roomData.getOpenTime().get(0).getTime1());
+        long openMin = (long) (roomData.getOpenTime().get(0).getTime1() % 1 * 60);
+        long closeHour = (long) Math.floor(roomData.getOpenTime().get(0).getTime2());
+        long closeMin = (long) (roomData.getOpenTime().get(0).getTime2() % 1 * 60);
+        ArrayList<String> facilityList = roomData.getFacilityList();
+        boolean available = roomData.getStatus();
+        //assign data to every field
+        room_name_tf.setText(roomName);
+        capacity_spin.setValue(capacity);
+        building_tf.setText(building);
+        floor_tf.setText(floor);
+        open_hour.setValue(openHour);
+        open_min.setValue(openMin);
+        close_hour.setValue(closeHour);
+        close_min.setValue(closeMin);
+        boolean hasSelected = false;
+        System.out.println(facilityList);
+        int[] selectedIndices = new int[facility_JList.getModel().getSize()];
+        for (int i = 0; i < facility_JList.getModel().getSize(); i++) {
+            for (String item : facilityList){
 
+                if (Objects.equals(facility_JList.getModel().getElementAt(i), item)){
+                    selectedIndices[i] = i;
+                    hasSelected = true;
+                }
+            }
+        }
+        System.out.println(Arrays.toString(selectedIndices));
+        if (hasSelected){
+            facility_JList.setSelectedIndices(selectedIndices);
+        }
+
+        status.setSelectedItem((available) ? "เปิด" :  "ปิด");
+    }
     private void open_hourStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_open_hourStateChanged
         if ((long)open_hour.getValue() >= (long)close_hour.getValue()){
             close_hour.setModel(new javax.swing.SpinnerNumberModel(
@@ -356,11 +400,13 @@ public class RoomRegister extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_open_hourStateChanged
 
-    private void add_roomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_roomActionPerformed
+    private void edit_roomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_roomActionPerformed
         String roomName = room_name_tf.getText();
-        if (!roomName.contains(building_tf.getText()+"-")){
-            System.out.println("I will add building for u");
-            roomName = building_tf.getText()+"-"+roomName;
+        String roomNamePlusBuilding;
+        if (roomName.contains(building_tf.getText()+"-")){
+            roomNamePlusBuilding = roomName;
+        } else {
+            roomNamePlusBuilding = building_tf.getText()+"-"+room_name_tf.getText();
         }
         int capacity = (int)capacity_spin.getValue();
         String building = building_tf.getText();
@@ -382,31 +428,44 @@ public class RoomRegister extends javax.swing.JFrame {
             if (openHour == closeHour && openMin < closeMin || closeHour > openHour){
                 try {
                     if (RoomDatabase.getRoomObject(roomName) == null){
-                        RoomData roomData = new RoomData(roomName, building, floor, facilityList, timeRange, new ArrayList<>(), new HashMap<>(), capacity, available);
+                        RoomData roomData = new RoomData(roomNamePlusBuilding, building, floor, facilityList, timeRange, new ArrayList<>(), new HashMap<>(), capacity, available);
                         try {
                             RoomDatabase.addRoom(roomData);
                         } catch (DatabaseGetInterrupted e) {
-                            JOptionPane.showMessageDialog(RoomRegister.this, "Add room error. Please try again later.");
+                            JOptionPane.showMessageDialog(RoomEdit.this, "Add room error. Please try again later.");
                         }
-                        JOptionPane.showMessageDialog(RoomRegister.this, "Add Room Successful!");
+                        JOptionPane.showMessageDialog(RoomEdit.this, "Add Room Successful!");
                         this.dispose();
                     } else {
-                        JOptionPane.showMessageDialog(RoomRegister.this, "This room is already exist. Please Change the name/building of this room.");
+                        JOptionPane.showMessageDialog(RoomEdit.this, "This room is already exist. Please Change the name/building of this room.");
                     }
                 } catch (DatabaseGetInterrupted e) {
                     e.printStackTrace();
                 }
             }else {
-                JOptionPane.showMessageDialog(RoomRegister.this, "Please enter valid time.");
+                JOptionPane.showMessageDialog(RoomEdit.this, "Please enter valid time.");
             }
         } else {
-            JOptionPane.showMessageDialog(RoomRegister.this, "Please fill empty containers.");
+            JOptionPane.showMessageDialog(RoomEdit.this, "Please fill empty containers.");
         }
-    }//GEN-LAST:event_add_roomActionPerformed
+    }//GEN-LAST:event_edit_roomActionPerformed
 
     private void cancel_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_btnActionPerformed
         this.dispose();
     }//GEN-LAST:event_cancel_btnActionPerformed
+
+    private void delete_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_delete_btnMouseClicked
+        int choice = JOptionPane.showConfirmDialog(RoomEdit.this, "Are you sure you want to delete this room?\nThis action cannot be undone.", "Delete room", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+        if (choice == JOptionPane.YES_OPTION) {
+            try {
+                RoomDatabase.deleteRoom(roomName);
+                this.dispose();
+            } catch (DatabaseGetInterrupted e) {
+                JOptionPane.showMessageDialog(RoomEdit.this, e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_delete_btnMouseClicked
     
     /**
      * @param args the command line arguments
@@ -425,32 +484,34 @@ public class RoomRegister extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RoomRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RoomEdit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RoomRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RoomEdit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RoomRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RoomEdit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RoomRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RoomEdit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RoomRegister().setVisible(true);
+                new RoomEdit(null).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton add_room;
     private javax.swing.JTextField building_tf;
     private javax.swing.JButton cancel_btn;
     private javax.swing.JSpinner capacity_spin;
     private javax.swing.JSpinner close_hour;
     private javax.swing.JSpinner close_min;
+    private javax.swing.JLabel delete_btn;
     private javax.swing.JLabel description;
+    private javax.swing.JButton edit_room;
     private javax.swing.JLabel facility;
     private javax.swing.JLabel facility1;
     private javax.swing.JList<String> facility_JList;
