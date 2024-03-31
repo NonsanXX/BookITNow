@@ -40,7 +40,6 @@ public class UserAccountManagement extends javax.swing.JFrame {
         name_th = new javax.swing.JLabel();
         name_en = new javax.swing.JLabel();
         student_id = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         change_pass_old = new javax.swing.JPasswordField();
         change_pass_new = new javax.swing.JPasswordField();
@@ -53,10 +52,7 @@ public class UserAccountManagement extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-
-        jPanel2.setBackground(new java.awt.Color(217, 217, 217));
-        jPanel2.setForeground(new java.awt.Color(127, 127, 127));
+        jPanel2.setBackground(new java.awt.Color(102, 102, 102));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/demo-profile.png"))); // NOI18N
 
@@ -71,12 +67,6 @@ public class UserAccountManagement extends javax.swing.JFrame {
         student_id.setFont(new java.awt.Font("FreesiaUPC", 0, 30)); // NOI18N
         student_id.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         student_id.setText("รหัสนักศึกษา : "+ UserLoginToken.getClient().getStudentID());
-
-        jLabel5.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel5.setFont(new java.awt.Font("FreesiaUPC", 1, 36)); // NOI18N
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/history.png"))); // NOI18N
-        jLabel5.setText("Booking History");
-        jLabel5.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
 
         jLabel6.setFont(new java.awt.Font("FreesiaUPC", 1, 36)); // NOI18N
         jLabel6.setText("เปลี่ยนรหัสผ่าน");
@@ -95,9 +85,7 @@ public class UserAccountManagement extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("FreesiaUPC", 0, 30)); // NOI18N
         jLabel9.setText("ยืนยันรหัสผ่านใหม่");
 
-        confirmbtn.setBackground(new java.awt.Color(255, 51, 51));
         confirmbtn.setFont(new java.awt.Font("FreesiaUPC", 0, 24)); // NOI18N
-        confirmbtn.setForeground(new java.awt.Color(255, 255, 255));
         confirmbtn.setText("ยืนยัน");
         confirmbtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         confirmbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -113,9 +101,7 @@ public class UserAccountManagement extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(413, 413, 413)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addGap(59, 59, 59))
+                .addGap(59, 402, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(194, 194, 194)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
@@ -145,13 +131,8 @@ public class UserAccountManagement extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel5)))
+                .addGap(27, 27, 27)
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(name_th, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -207,6 +188,7 @@ public class UserAccountManagement extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void confirmbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmbtnActionPerformed
@@ -277,12 +259,11 @@ public class UserAccountManagement extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPasswordField change_pass_new_c;
     private javax.swing.JPasswordField change_pass_new;
+    private javax.swing.JPasswordField change_pass_new_c;
     private javax.swing.JPasswordField change_pass_old;
     private javax.swing.JButton confirmbtn;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
