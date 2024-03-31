@@ -144,8 +144,8 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel9" min="-2" pref="69" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="status" min="-2" pref="156" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="status" min="-2" pref="150" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jSeparator2" alignment="0" min="-2" pref="365" max="-2" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
@@ -263,13 +263,6 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="building_tf">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="FreesiaUPC" size="24" style="0"/>
-                </Property>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -299,6 +292,13 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="&#xe2d;&#xe32;&#xe04;&#xe32;&#xe23;"/>
                 <Property name="verticalAlignment" type="int" value="3"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="building_tf">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="FreesiaUPC" size="24" style="0"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
@@ -342,10 +342,10 @@
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="open_hourStateChanged"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JSpinner" name="close_hour">
+            <Component class="javax.swing.JSpinner" name="open_min">
               <Properties>
                 <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                  <SpinnerModel initial="0" maximum="23" minimum="0" numberType="java.lang.Long" stepSize="1" type="number"/>
+                  <SpinnerModel initial="0" maximum="59" minimum="0" numberType="java.lang.Long" stepSize="1" type="number"/>
                 </Property>
               </Properties>
             </Component>
@@ -361,10 +361,10 @@
                 <Property name="verticalAlignment" type="int" value="3"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JSpinner" name="open_min">
+            <Component class="javax.swing.JSpinner" name="close_hour">
               <Properties>
                 <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                  <SpinnerModel initial="0" maximum="59" minimum="0" numberType="java.lang.Long" stepSize="1" type="number"/>
+                  <SpinnerModel initial="0" maximum="23" minimum="0" numberType="java.lang.Long" stepSize="1" type="number"/>
                 </Property>
               </Properties>
             </Component>
