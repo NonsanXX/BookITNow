@@ -16,6 +16,7 @@ public abstract class Database {
     public static final String BUILDING_COLLECTION = "Building";
     public static final String ROOM_HISTORY_COLLECTION = "Room_History";
     public static final String ROOM_COMMENT_COLLECTION = "Room_Comment";
+    public static final String FEEDBACK_COLLECTION = "Feedback";
     
     public static Firestore db = null;
     
