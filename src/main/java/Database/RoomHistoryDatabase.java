@@ -4,26 +4,26 @@
  */
 package Database;
 
+import static Database.Database.getDb;
 import Database.Dataclass.HistoryData;
 import Database.Dataclass.TimeDate;
 import Database.Exception.DatabaseGetInterrupted;
-import javax.swing.table.DefaultTableModel;
-
-import java.util.concurrent.ExecutionException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author phump
  */
-public class ClientHistoryDatabase extends Database{
+public class RoomHistoryDatabase extends Database{
     private static final String HISTORY_FIELD_NAME = "table";
-    public static final Object[] columName = {"RID", "TimeStamp", "Reservation detail", "Room"};
+    public static final Object[] columName = {"RID", "TimeStamp", "Reservation detail", "Client"};
     
-    public static DefaultTableModel createDefaultTableModel(String clientStdID) throws DatabaseGetInterrupted{
-        return createDefaultTableModel(readHistory(clientStdID));
+    public static DefaultTableModel createDefaultTableModel(String roomName) throws DatabaseGetInterrupted{
+        return createDefaultTableModel(readHistory(roomName));
     }
     
     public static DefaultTableModel createDefaultTableModel(ArrayList<HistoryData> data){
@@ -41,10 +41,10 @@ public class ClientHistoryDatabase extends Database{
         return table;
     };
     
-    public static ArrayList<HistoryData> readHistory(String clientStdID) throws DatabaseGetInterrupted{
+    public static ArrayList<HistoryData> readHistory(String roomName) throws DatabaseGetInterrupted{
         try {
             ArrayList<HistoryData> returnVar = new ArrayList<>();
-            HashMap<String, Object> readData = (HashMap<String, Object>) getDb().collection(CLIENT_HISTORY_COLLECTION).document(clientStdID).get().get().getData();
+            HashMap<String, Object> readData = (HashMap<String, Object>) getDb().collection(ROOM_HISTORY_COLLECTION).document(roomName).get().get().getData();
             ArrayList<Object> reader = (readData == null) ? null : (ArrayList<Object>) readData.get(HISTORY_FIELD_NAME);
             if(reader == null){
                 reader = new ArrayList<>();
@@ -59,23 +59,23 @@ public class ClientHistoryDatabase extends Database{
         }
     }
     
-    public static void updateHistory(String clientStdID, ArrayList<HistoryData> data){
+    public static void updateHistory(String roomName, ArrayList<HistoryData> data){
         HashMap<String, Object> push = new HashMap<>();
         push.put(HISTORY_FIELD_NAME, data);
-        getDb().collection(CLIENT_HISTORY_COLLECTION).document(clientStdID).set(push);
+        getDb().collection(ROOM_HISTORY_COLLECTION).document(roomName).set(push);
     }
     
-    public static boolean addHistory(String clientStdID, HistoryData history) throws DatabaseGetInterrupted{
+    public static boolean addHistory(String roomName, HistoryData history) throws DatabaseGetInterrupted{
         if(history != null){
-            ArrayList<HistoryData> readData = readHistory(clientStdID);
+            ArrayList<HistoryData> readData = readHistory(roomName);
             readData.add(history);
-            updateHistory(clientStdID, readData);
+            updateHistory(roomName, readData);
             return true;
         }
         return false;
     }
     
-    public static void deleteHistory(String clientStdID){
-        getDb().collection(CLIENT_HISTORY_COLLECTION).document(clientStdID).delete();
+    public static void deleteHistory(String roomName){
+        getDb().collection(ROOM_HISTORY_COLLECTION).document(roomName).delete();
     }
 }

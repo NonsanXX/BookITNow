@@ -17,6 +17,7 @@ import java.net.URISyntaxException;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import Database.RoomCommentDatabase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,19 +29,25 @@ import Database.ClientHistoryDatabase;
 import Database.Dataclass.HistoryData;
 
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import javax.swing.*;
+import Database.Dataclass.CommentData;
 
 public class TestDB {
     public static void main(String[] args) throws DatabaseGetInterrupted {
         try {
             FirebaseServiceAccount.initFirebase();
             //ClientHistoryDatabase.updateHistory("66070162", ClientHistoryDatabase.createEmptyHistory());
-            UserLoginToken.loginUser(ClientDatabase.getClientObject("66070162")); //bypass login session
-            RoomData rm = RoomDatabase.getRoomObject("reservative");
-            rm.updateReservedTime("05/05/2567", 12.0);
-            RoomDatabase.updateRoom(rm);
-//            TimeDate reserveTime = new TimeDate(16.5, 20.0, TimeDate.getDateNow());
-//            RoomDatabase.reservingRoom(RoomDatabase.getRoomObject("reservative"), reserveTime);
+            UserLoginToken.loginUser(ClientDatabase.getClientObject("66070305")); //bypass login session
+            RoomData rm = RoomDatabase.getRoomObject("IT-IT-HIY");
+            RoomDatabase.reservingRoom(rm, new TimeDate(0.0, 1.0, TimeDate.getDateNow()));
+            JFrame frame = new JFrame();
+            JScrollPane scrollPane = new JScrollPane(RoomDatabase.getRoomObject("IT-IT-HIY").reservedTimeReport());
+            frame.add(scrollPane);
             
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.pack();
+            frame.setVisible(true);
         } catch (URISyntaxException | IOException    ex) {
             Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         } finally{

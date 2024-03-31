@@ -7,6 +7,8 @@ package Database.Dataclass;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+
+import java.util.Map;
 /**
  *
  * @author phump
@@ -26,6 +28,10 @@ public class TimeDate extends TimeRange{
     public TimeDate(Double time1, Double time2, String timeDate){
         super(time1, time2);
         this.timeDate = timeDate;
+    }
+    
+    public TimeDate(Map<String, Object> map){
+        this((Double) map.get("time1"), (Double) map.get("time2"), (String) map.get("timeDate"));
     }
     
     public String getTimeDate() {
@@ -60,6 +66,11 @@ public class TimeDate extends TimeRange{
         return result < 0;
     }
     
+    public static Double getTimeNow(){
+        LocalDateTime now = LocalDateTime.now();
+        return now.getHour() + now.getMinute()/60.0;
+    }
+    
     public static String getDateNow(){
         return FORMATTER.format(LocalDate.now());
     }
@@ -67,5 +78,14 @@ public class TimeDate extends TimeRange{
     public static String getTimeStamp(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return formatter.format(LocalDateTime.now());
+    }
+    
+    public static String toPoint60(Double time){
+        return (int) Math.floor(time)+":"+(int) (time%1*60);
+    }
+    
+    @Override
+    public String toString(){
+        return String.format("%s - %s, %s", toPoint60(time1), toPoint60(time2), timeDate);
     }
 }
