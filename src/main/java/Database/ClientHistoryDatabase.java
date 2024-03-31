@@ -62,4 +62,8 @@ public class ClientHistoryDatabase extends Database{
         }
         return false;
     }
+    
+    public static void deleteHistory(String clientStdID){
+        getDb().collection(CLIENT_HISTORY_COLLECTION).document(clientStdID).delete();
+    }
 }
