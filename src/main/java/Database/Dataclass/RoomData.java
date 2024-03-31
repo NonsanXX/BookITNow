@@ -18,7 +18,7 @@ import java.util.Map;
  *
  * @author phump
  */
-public class RoomData implements StatisticReport<JFrame>{
+public class RoomData implements StatisticReport<JTable>{
     private String roomName;
     private String building;
     private String floor;
@@ -212,20 +212,12 @@ public class RoomData implements StatisticReport<JFrame>{
     }
 
     @Override
-    public JFrame report() {
+    public JTable report() {
         try{
-            JFrame frame = new JFrame(roomName);
             JTable table = new JTable(createDefaultTableModel(roomName));
             table.getTableHeader().setReorderingAllowed(false);
             table.setCellSelectionEnabled(false);
-            
-            JScrollPane scrollPane = new JScrollPane(table);
-            frame.add(scrollPane);
-            
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.pack();
-            frame.setVisible(true);
-            return frame;
+            return table;
         } catch(DatabaseGetInterrupted ex){
             return null;
         }
