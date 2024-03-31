@@ -116,7 +116,7 @@ public class RoomDatabase extends Database{
     }
     
     public static void updateRoom(RoomData roomData) throws DatabaseGetInterrupted{
-        addRoom(roomData);
+        getDb().collection(ROOM_COLLECTION).document(roomData.getRoomName()).set(roomData);
     }
     
     public static void deleteRoom(String roomName) throws DatabaseGetInterrupted{
