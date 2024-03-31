@@ -7,6 +7,7 @@ package Database.Dataclass;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 /**
  *
  * @author phump
@@ -182,11 +183,19 @@ public class RoomData{
      */
     public void updateReservedTime(String timeDate, Double time){
         TimeDate tester = new TimeDate(0.0, time, timeDate);
-        Iterator<TimeDate> iterator = reservedTime.iterator();
-        while(iterator.hasNext()){
-            TimeDate tr = iterator.next();
+        Iterator<TimeDate> reservedTimeIterator = reservedTime.iterator();
+        while(reservedTimeIterator.hasNext()){
+            TimeDate tr = reservedTimeIterator.next();
             if(TimeDate.timeDateCompare(tr, tester)){
-                iterator.remove();
+                reservedTimeIterator.remove();
+            }
+        }
+        
+        Iterator<Map.Entry<String, TimeDate>> currentQueueIterator = currentQueue.entrySet().iterator();
+        while(currentQueueIterator.hasNext()){
+            Map.Entry<String, TimeDate> entry = currentQueueIterator.next();
+            if(TimeDate.timeDateCompare(entry.getValue(), tester)){
+                currentQueueIterator.remove();
             }
         }
     }
