@@ -49,7 +49,7 @@ public class RoomDatabase extends Database{
     
     /**
      * Filter:  roomName        - Get the room if it contain desirableRoom.roomName<br>
-     *          facilityList    - Get the room if it contain desirableRoom.facilityList<br>
+     *          facilityList    - Get the room if it containAll desirableRoom.facilityList<br>
      *          building        - Get the room if it contain desirableRoom.building<br>
      *          floor           - Get the room if it equal to desirableRoom.floor<br>
      *          openTime        - Get the room if it isSuperRange of desirableRoom.openTime<br>
