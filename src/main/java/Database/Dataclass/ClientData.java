@@ -16,7 +16,7 @@ import java.util.HashMap;
  *
  * @author phump
  */
-public class ClientData implements StatisticReport<Object>{
+public class ClientData implements StatisticReport<JTable>{
 
     /**
      *
@@ -158,20 +158,12 @@ public class ClientData implements StatisticReport<Object>{
     }
     
     @Override
-    public JFrame report() {
+    public JTable report() {
         try{
-            JFrame frame = new JFrame(studentID);
             JTable table = new JTable(createDefaultTableModel(studentID));
             table.getTableHeader().setReorderingAllowed(false);
             table.setCellSelectionEnabled(false);
-            
-            JScrollPane scrollPane = new JScrollPane(table);
-            frame.add(scrollPane);
-            
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.pack();
-            frame.setVisible(true);
-            return frame;
+            return table;
         } catch(DatabaseGetInterrupted ex){
             return null;
         }

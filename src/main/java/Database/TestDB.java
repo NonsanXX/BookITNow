@@ -46,11 +46,16 @@ public class TestDB {
 //            ClientDatabase.getClientObject("66070305").report();
             //RoomCommentDatabase.addComment("IT-IT-HIY", new CommentData("@null", "this room ....", 3l));
             
-            for(CommentData comment : RoomCommentDatabase.readComment("IT-IT-HIY")){
-                System.out.println(comment.getAuthor());
-                System.out.println(comment.getComment());
-                System.out.println(comment.getRating());
-            }
+            //System.out.println(ClientDatabase.getClientObject("66070162").getEnglishName());
+            
+            JScrollPane scrollPane = new JScrollPane(new ClientDatabase().report());
+            
+            JFrame frame = new JFrame();
+            frame.add(scrollPane);
+            
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.pack();
+            frame.setVisible(true);
         } catch (URISyntaxException | IOException    ex) {
             Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         } finally{
