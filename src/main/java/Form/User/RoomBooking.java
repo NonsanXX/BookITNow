@@ -28,10 +28,14 @@ public class RoomBooking extends javax.swing.JFrame {
     /**
      * Creates new form RoomBooking
      */
-    public RoomBooking(RoomData roomdata) {
-        this.roomData = roomdata;
+    public RoomBooking(RoomData roomData) {
+        this.roomData = roomData;
         initComponents();
         datePicker1.setDateToToday();
+        room_name_label.setText("ห้อง : "+roomData.getRoomName());
+        building_label.setText("ตึก : "+roomData.getBuilding());
+        floor_label.setText("ชั้น : "+roomData.getFloor());
+        openclose_time_label.setText("เวลาเปิด-ปิด : "+formatTime(roomData.getOpenTime().get(0).getTime1())+" - "+ formatTime(roomData.getOpenTime().get(0).getTime2()));
     }
 
     /**
@@ -45,7 +49,10 @@ public class RoomBooking extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        room_name_label = new javax.swing.JLabel();
+        building_label = new javax.swing.JLabel();
+        floor_label = new javax.swing.JLabel();
+        openclose_time_label = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel7 = new javax.swing.JLabel();
@@ -84,9 +91,21 @@ public class RoomBooking extends javax.swing.JFrame {
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jLabel1.setFont(new java.awt.Font("FreesiaUPC", 1, 48)); // NOI18N
 
-        jLabel2.setText("ชื่อห้อง :");
-        jLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jLabel2.setFont(new java.awt.Font("FreesiaUPC", 1, 24)); // NOI18N
+        room_name_label.setText("ชื่อห้อง :");
+        room_name_label.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        room_name_label.setFont(new java.awt.Font("FreesiaUPC", 1, 24)); // NOI18N
+
+        building_label.setText("ตึก :");
+        building_label.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        building_label.setFont(new java.awt.Font("FreesiaUPC", 1, 24)); // NOI18N
+
+        floor_label.setText("ชั้น :");
+        floor_label.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        floor_label.setFont(new java.awt.Font("FreesiaUPC", 1, 24)); // NOI18N
+
+        openclose_time_label.setText("เวลาเปิด-ปิด :");
+        openclose_time_label.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        openclose_time_label.setFont(new java.awt.Font("FreesiaUPC", 1, 24)); // NOI18N
 
         jLabel7.setText("เวลาเข้า");
         jLabel7.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
@@ -130,7 +149,7 @@ public class RoomBooking extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(room_name_label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator2)
                     .addComponent(jSeparator3)
                     .addComponent(book_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -154,7 +173,10 @@ public class RoomBooking extends javax.swing.JFrame {
                                 .addComponent(jLabel9)
                                 .addGap(18, 18, 18)
                                 .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 108, Short.MAX_VALUE)))
+                        .addGap(0, 108, Short.MAX_VALUE))
+                    .addComponent(building_label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(floor_label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(openclose_time_label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -165,7 +187,13 @@ public class RoomBooking extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(room_name_label, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(building_label, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(floor_label, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(openclose_time_label, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -184,7 +212,7 @@ public class RoomBooking extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 244, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
                 .addComponent(book_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -246,9 +274,14 @@ public class RoomBooking extends javax.swing.JFrame {
             }
         } catch (DatabaseGetInterrupted e) {
             JOptionPane.showMessageDialog(RoomBooking.this, "Error, please try again later.");
+            this.dispose();
         }
     }//GEN-LAST:event_book_btnActionPerformed
-
+    public static String formatTime(double decimalHours) {
+        int hours = (int) decimalHours;
+        int minutes = (int) ((decimalHours - hours) * 60);
+        return String.format("%02d:%02d", hours, minutes);
+    }
     /**
      * @param args the command line arguments
      */
@@ -286,13 +319,14 @@ public class RoomBooking extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton book_btn;
+    private javax.swing.JLabel building_label;
     private com.github.lgooddatepicker.components.DatePicker datePicker1;
     private javax.swing.JSpinner enter_hour;
     private javax.swing.JSpinner enter_min;
     private javax.swing.JSpinner exit_hour;
     private javax.swing.JSpinner exit_min;
+    private javax.swing.JLabel floor_label;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -300,5 +334,7 @@ public class RoomBooking extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JLabel openclose_time_label;
+    private javax.swing.JLabel room_name_label;
     // End of variables declaration//GEN-END:variables
 }
