@@ -13,6 +13,7 @@ import Database.RoomDatabase;
 import javax.swing.*;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -357,6 +358,7 @@ public class RoomRegister extends javax.swing.JFrame {
 
     private void add_roomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_roomActionPerformed
         String roomName = room_name_tf.getText();
+        String roomNamePlusBuilding = building_tf.getText()+"-"+room_name_tf.getText();
         int capacity = (int)capacity_spin.getValue();
         String building = building_tf.getText();
         String floor = floor_tf.getText();
@@ -364,7 +366,8 @@ public class RoomRegister extends javax.swing.JFrame {
         long openMin = (long)open_min.getValue();
         long closeHour = (long)close_hour.getValue();
         long closeMin = (long)close_min.getValue();
-        //TimeRange timeRange = new TimeRange();
+        ArrayList<TimeRange> timeRange = new ArrayList<>();
+        timeRange.add(new TimeRange((openHour + openMin/60.0), (closeHour + closeMin/60.0)));
         ArrayList<String> facilityList;
         boolean available = status.getSelectedItem() == "เปิด";
         if (facility_JList.getSelectedValuesList().isEmpty()){
@@ -373,15 +376,23 @@ public class RoomRegister extends javax.swing.JFrame {
             facilityList = (ArrayList<String>) facility_JList.getSelectedValuesList();
         }
         if (!roomName.isEmpty() && capacity != 0 && !building.isEmpty() && !floor.isEmpty()){
-            if (openHour == closeHour && openMin <= closeMin || closeHour > openHour){
-                RoomData roomData = new RoomData(roomName, building, floor, facilityList, null, null, null, capacity, available);
+            if (openHour == closeHour && openMin < closeMin || closeHour > openHour){
                 try {
-                    RoomDatabase.addRoom(roomData);
+                    if (RoomDatabase.getRoomObject(roomName) == null){
+                        RoomData roomData = new RoomData(roomNamePlusBuilding, building, floor, facilityList, timeRange, new ArrayList<>(), new HashMap<>(), capacity, available);
+                        try {
+                            RoomDatabase.addRoom(roomData);
+                        } catch (DatabaseGetInterrupted e) {
+                            JOptionPane.showMessageDialog(RoomRegister.this, "Add room error. Please try again later.");
+                        }
+                        JOptionPane.showMessageDialog(RoomRegister.this, "Add Room Successful!");
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(RoomRegister.this, "This room is already exist. Please Change the name/building of this room.");
+                    }
                 } catch (DatabaseGetInterrupted e) {
                     e.printStackTrace();
                 }
-                JOptionPane.showMessageDialog(RoomRegister.this, "Add Room Successful!");
-                this.dispose();
             }else {
                 JOptionPane.showMessageDialog(RoomRegister.this, "Please enter valid time.");
             }

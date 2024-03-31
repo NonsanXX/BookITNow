@@ -45,16 +45,16 @@ public class RoomPanel extends javax.swing.JPanel {
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setPreferredSize(new java.awt.Dimension(300, 250));
 
-        room_name.setFont(new java.awt.Font("FreesiaUPC", 0, 36)); // NOI18N
+        room_name.setFont(new java.awt.Font("FreesiaUPC", 0, 24)); // NOI18N
         room_name.setText("ห้อง : ");
 
-        building.setFont(new java.awt.Font("FreesiaUPC", 0, 36)); // NOI18N
+        building.setFont(new java.awt.Font("FreesiaUPC", 0, 24)); // NOI18N
         building.setText("อาคาร : ");
 
-        floor.setFont(new java.awt.Font("FreesiaUPC", 0, 36)); // NOI18N
+        floor.setFont(new java.awt.Font("FreesiaUPC", 0, 24)); // NOI18N
         floor.setText("ชั้น : ");
 
-        jLabel1.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/room_icon.png")).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH)));
+        jLabel1.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/room_icon.png")).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -69,8 +69,8 @@ public class RoomPanel extends javax.swing.JPanel {
                             .addComponent(floor, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(room_name, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(100, 100, 100)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
