@@ -17,6 +17,7 @@ import java.net.URISyntaxException;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import Database.RoomCommentDatabase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,6 +31,7 @@ import Database.Dataclass.HistoryData;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import javax.swing.*;
+import Database.Dataclass.CommentData;
 
 public class TestDB {
     public static void main(String[] args) throws DatabaseGetInterrupted {
@@ -40,9 +42,15 @@ public class TestDB {
             
             //RoomDatabase.reservingRoom(RoomDatabase.getRoomObject("IT-IT-Tutor"), new TimeDate(0.0, 1.0, TimeDate.getDateNow()));
             
-            RoomDatabase.getRoomObject("IT-IT-Tutor").report();
-            ClientDatabase.getClientObject("66070305").report();
+//            RoomDatabase.getRoomObject("IT-IT-Tutor").report();
+//            ClientDatabase.getClientObject("66070305").report();
+            //RoomCommentDatabase.addComment("IT-IT-HIY", new CommentData("@null", "this room ....", 3l));
             
+            for(CommentData comment : RoomCommentDatabase.readComment("IT-IT-HIY")){
+                System.out.println(comment.getAuthor());
+                System.out.println(comment.getComment());
+                System.out.println(comment.getRating());
+            }
         } catch (URISyntaxException | IOException    ex) {
             Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         } finally{
