@@ -4,11 +4,10 @@
  */
 package Database.Interface;
 
-import javax.swing.table.DefaultTableModel;
 /**
- *
+ * @param <Infographic> Ex. DefaultTableModel, JTable, Graph, ..., etc.
  * @author phump
  */
-public interface StatisticReport {
-    public abstract DefaultTableModel report();;
+public interface StatisticReport<Infographic> {
+    public abstract Infographic report();;
 }

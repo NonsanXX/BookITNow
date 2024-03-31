@@ -36,18 +36,11 @@ public class TestDB {
         try {
             FirebaseServiceAccount.initFirebase();
             //ClientHistoryDatabase.updateHistory("66070162", ClientHistoryDatabase.createEmptyHistory());
-            UserLoginToken.loginUser(ClientDatabase.getClientObject("66070162")); //bypass login session
-            ArrayList<HistoryData> readData = ClientHistoryDatabase.readHistory("66070162");
+            UserLoginToken.loginUser(ClientDatabase.getClientObject("66070305")); //bypass login session
             
-            JFrame frame = new JFrame();
-            JTable table = new JTable(ClientHistoryDatabase.createDefaultTableModel(readData));
-            JScrollPane scrollPane = new JScrollPane(table);
-            frame.add(scrollPane);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.pack();
-            frame.setVisible(true);
-//            TimeDate reserveTime = new TimeDate(0.5, 1.5, TimeDate.getDateNow());
-//            RoomDatabase.reservingRoom(RoomDatabase.getRoomObject("IT-Peer"), reserveTime);
+            RoomDatabase.reservingRoom(RoomDatabase.getRoomObject("IT-IT-Kuy"), new TimeDate(0.0, 1.0, TimeDate.getDateNow()));
+            
+            ClientDatabase.getClientObject("66070305").report();
             
         } catch (URISyntaxException | IOException    ex) {
             Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
