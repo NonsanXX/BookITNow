@@ -26,7 +26,16 @@ import javax.swing.text.Document;
  */
 
 public class AdminLanding extends javax.swing.JFrame implements MouseListener, DocumentListener{
-    ArrayList<String> roomdata = RoomDatabase.getRoomList();
+    ArrayList<RoomData> roomdata;
+
+    {
+        try {
+            roomdata = RoomDatabase.getRoomListObject();
+        } catch (DatabaseGetInterrupted e) {
+            e.printStackTrace();
+        }
+    }
+
     int showroom_rows = Math.max(3, (int) Math.ceil((double)roomdata.size() / 4));
     /**
      * Creates new form landing
@@ -274,18 +283,18 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener, D
     private void refreshShowroom() {
         ref_btn.setEnabled(false);
         jScrollPane2.getVerticalScrollBar().setValue(jScrollPane2.getVerticalScrollBar().getMinimum());
-        roomdata = RoomDatabase.getRoomList(); // get new room data from database
+        try {
+            roomdata = RoomDatabase.getRoomListObject(); // get new room data from database
+        } catch (DatabaseGetInterrupted e) {
+            e.printStackTrace();
+        }
         showroom_rows = Math.max(3, (int) Math.ceil((double)roomdata.size() / 4));
         showroomPanel.removeAll();
-        for (String room : roomdata) {
-            try {
-                RoomPanel rp = new RoomPanel(RoomDatabase.getRoomObject(room));
-                rp.addMouseListener(this);
-                showroomPanel.add(rp);
-                System.out.println(room);
-            } catch (DatabaseGetInterrupted e) {
-                e.printStackTrace();
-            }
+        for (RoomData room : roomdata) {
+            RoomPanel rp = new RoomPanel(room);
+            rp.addMouseListener(this);
+            showroomPanel.add(rp);
+            System.out.println("Room : "+room.getRoomName());
         }
         while (showroomPanel.getComponentCount() < 12){
             showroomPanel.add(new JLabel());
