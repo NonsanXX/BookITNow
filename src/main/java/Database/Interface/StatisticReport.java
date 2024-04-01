@@ -9,5 +9,5 @@ package Database.Interface;
  * @author phump
  */
 public interface StatisticReport<Infographic> {
-    public abstract Infographic report();;
+    public abstract Infographic report();
 }

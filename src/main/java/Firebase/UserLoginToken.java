@@ -18,6 +18,7 @@ public final class UserLoginToken{
         return client.getStudentID();
     }
     public static ClientData getClient() {return  client;}
+    
     public static void refreshClient(){
         try {
             loginUser(ClientDatabase.getClientObject(getClientID()));
