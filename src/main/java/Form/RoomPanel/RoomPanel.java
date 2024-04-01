@@ -24,6 +24,7 @@ public class RoomPanel extends javax.swing.JPanel {
         room_name.setText("ห้อง : "+roomdata.getRoomName());
         building.setText("อาคาร : "+roomdata.getBuilding());
         floor.setText("ชั้น : "+roomdata.getFloor());
+        capa.setText(roomdata.getCapacity()+"");
     }
 
     public String getRoomName() {
@@ -43,20 +44,25 @@ public class RoomPanel extends javax.swing.JPanel {
         building = new javax.swing.JLabel();
         floor = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        capa = new javax.swing.JLabel();
 
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setPreferredSize(new java.awt.Dimension(300, 250));
 
-        room_name.setFont(new java.awt.Font("FreesiaUPC", 0, 24)); // NOI18N
         room_name.setText("ห้อง : ");
+        room_name.setFont(new java.awt.Font("FreesiaUPC", 0, 24)); // NOI18N
 
-        building.setFont(new java.awt.Font("FreesiaUPC", 0, 24)); // NOI18N
         building.setText("อาคาร : ");
+        building.setFont(new java.awt.Font("FreesiaUPC", 0, 24)); // NOI18N
 
-        floor.setFont(new java.awt.Font("FreesiaUPC", 0, 24)); // NOI18N
         floor.setText("ชั้น : ");
+        floor.setFont(new java.awt.Font("FreesiaUPC", 0, 24)); // NOI18N
 
-        jLabel1.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/room_icon.png")).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
+        jLabel1.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/room_icon.png")).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH)));
+
+        capa.setFont(new java.awt.Font("FreesiaUPC", 0, 24)); // NOI18N
+        capa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user_capacity.png"))); // NOI18N
+        capa.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -67,24 +73,33 @@ public class RoomPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(building, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(floor, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(room_name, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(floor, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(121, 121, 121)
+                                .addComponent(capa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(building, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(room_name, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(100, 100, 100)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(room_name, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(building, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(floor, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(floor, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(capa))
                 .addGap(18, 18, 18))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -92,6 +107,7 @@ public class RoomPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel building;
+    private javax.swing.JLabel capa;
     private javax.swing.JLabel floor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel room_name;

@@ -3,6 +3,9 @@
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[1080, 644]"/>
+    </Property>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
@@ -48,7 +51,9 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="686" max="32767" attributes="0"/>
+                  <Component id="ref_btn" min="-2" pref="50" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -56,7 +61,10 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" pref="53" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel1" min="-2" pref="53" max="-2" attributes="0"/>
+                      <Component id="ref_btn" min="-2" pref="50" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="579" max="-2" attributes="0"/>
               </Group>
@@ -77,14 +85,18 @@
             <Container class="javax.swing.JPanel" name="queuePanel">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="66" red="0" type="rgb"/>
+                  <Color blue="66" green="66" red="66" type="rgb"/>
+                </Property>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new Dimension(1080, Math.max(150*historyRow, 750))" type="code"/>
                 </Property>
               </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_LayoutCodePre" type="java.lang.String" value="BoxLayout boxLayout = new BoxLayout(panel, BoxLayout.Y_AXIS);&#xa;queuePanel.setLayout(boxLayout);"/>
-              </AuxValues>
 
-              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
+                <Property name="alignment" type="int" value="3"/>
+                <Property name="horizontalGap" type="int" value="0"/>
+                <Property name="verticalGap" type="int" value="0"/>
+              </Layout>
             </Container>
           </SubComponents>
         </Container>
@@ -96,6 +108,19 @@
             <Property name="text" type="java.lang.String" value="&#xe41;&#xe2a;&#xe14;&#xe07;&#xe04;&#xe34;&#xe27;&#xe17;&#xe35;&#xe48;&#xe01;&#xe33;&#xe25;&#xe31;&#xe07;&#xe08;&#xe30;&#xe21;&#xe32;&#xe16;&#xe36;&#xe07;"/>
             <Property name="verticalAlignment" type="int" value="3"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="ref_btn">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icons/refresh-page-option (Custom).png"/>
+            </Property>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ref_btnMousePressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
