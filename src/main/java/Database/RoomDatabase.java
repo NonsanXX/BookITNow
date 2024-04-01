@@ -67,12 +67,24 @@ public class RoomDatabase extends Database{
             boolean roomNameCheck, buildingCheck, floorCheck, facilityListCheck, openTimeCheck, capacityCheck;
             roomNameCheck = rm.getRoomName().contains(desirableRoom.getRoomName());
             buildingCheck = rm.getBuilding().contains(desirableRoom.getBuilding());
-            floorCheck = rm.getFloor().equals(desirableRoom.getFloor());
+            floorCheck = rm.getFloor().contains(desirableRoom.getFloor());
             capacityCheck = rm.getCapacity() >= desirableRoom.getCapacity();
             facilityListCheck = (desirableRoom.getFacilityList() == null) ? true : rm.getFacilityList().containsAll(desirableRoom.getFacilityList());
             openTimeCheck = (desirableRoom.getOpenTime() == null) ? true : rm.checkOpenTimeList(desirableRoom.getOpenTime());
 
             if(roomNameCheck && buildingCheck && floorCheck && facilityListCheck && openTimeCheck && capacityCheck){
+                qualified.add(rm);
+            }
+        }
+        return qualified;
+    }
+    public static ArrayList<RoomData> searchRoomName(RoomData desirableRoom) throws DatabaseGetInterrupted{
+        ArrayList<RoomData> qualified = new ArrayList<>();
+        for(RoomData rm : getRoomListObject()){
+            boolean roomNameCheck;
+            roomNameCheck = rm.getRoomName().contains(desirableRoom.getRoomName());
+
+            if(roomNameCheck){
                 qualified.add(rm);
             }
         }

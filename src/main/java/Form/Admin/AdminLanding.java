@@ -9,19 +9,23 @@ import Database.RoomDatabase;
 import Firebase.UserLoginToken;
 import Form.LoginGUI;
 import Form.RoomPanel.RoomPanel;
+import Form.User.UserLanding;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.Document;
 
 /**
  *
  * @author acer
  */
 
-public class AdminLanding extends javax.swing.JFrame implements MouseListener{
+public class AdminLanding extends javax.swing.JFrame implements MouseListener, DocumentListener{
     ArrayList<String> roomdata = RoomDatabase.getRoomList();
     int showroom_rows = Math.max(3, (int) Math.ceil((double)roomdata.size() / 4));
     /**
@@ -30,7 +34,8 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
     public AdminLanding() {
 
         initComponents();
-        refreshShowroom();
+        Document doc = search_textfield.getDocument();
+        doc.addDocumentListener(this);
     }
 
     /**
@@ -49,6 +54,9 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
         loading = new javax.swing.JLabel();
         add_btn = new javax.swing.JButton();
         ref_btn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        clear_button = new javax.swing.JLabel();
+        search_textfield = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         user_menu = new javax.swing.JMenu();
         logout_item = new javax.swing.JMenuItem();
@@ -87,7 +95,7 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
             .addGroup(showroomPanelLayout.createSequentialGroup()
                 .addGap(192, 192, 192)
                 .addComponent(loading, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(184, Short.MAX_VALUE))
+                .addContainerGap(177, Short.MAX_VALUE))
         );
 
         jScrollPane2.setViewportView(showroomPanel);
@@ -112,12 +120,34 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
             }
         });
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/search.png"))); // NOI18N
+
+        clear_button.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/xbutton.png")).getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH)));
+        clear_button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        clear_button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clear_buttonMouseClicked(evt);
+            }
+        });
+
+        search_textfield.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                search_textfieldPropertyChange(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(1022, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(search_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(clear_button, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 418, Short.MAX_VALUE)
                 .addComponent(add_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ref_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -128,11 +158,16 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
-                    .addComponent(ref_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(add_btn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                        .addComponent(ref_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(add_btn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel1)
+                        .addComponent(search_textfield)
+                        .addComponent(clear_button, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE))
         );
 
         jScrollPane2.getVerticalScrollBar().setUnitIncrement(16);
@@ -225,6 +260,17 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
             new LoginGUI().setVisible(true);
         }
     }//GEN-LAST:event_logout_itemActionPerformed
+
+    private void search_textfieldPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_search_textfieldPropertyChange
+        System.out.println(search_textfield.getText());
+    }//GEN-LAST:event_search_textfieldPropertyChange
+
+    private void clear_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clear_buttonMouseClicked
+        search_textfield.setText("");
+        search_textfield.setFocusable(false);
+        search_textfield.setFocusable(true);
+        refreshShowroom();
+    }//GEN-LAST:event_clear_buttonMouseClicked
     private void refreshShowroom() {
         ref_btn.setEnabled(false);
         jScrollPane2.getVerticalScrollBar().setValue(jScrollPane2.getVerticalScrollBar().getMinimum());
@@ -250,7 +296,27 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
         showroomPanel.repaint();
         ref_btn.setEnabled(true);
     }
-    
+    private void searchRefreshShowroom(ArrayList<RoomData> roomdata) {
+        ref_btn.setEnabled(false);
+        jScrollPane2.getVerticalScrollBar().setValue(jScrollPane2.getVerticalScrollBar().getMinimum());
+        showroom_rows = Math.max(3, (int) Math.ceil((double)roomdata.size() / 4));
+        showroomPanel.removeAll();
+        System.out.println("Loading...");
+        for (RoomData room : roomdata) {
+            RoomPanel rp = new RoomPanel(room);
+            rp.addMouseListener(this);
+            showroomPanel.add(rp);
+            System.out.println("Room : "+room.getRoomName());
+        }
+        while (showroomPanel.getComponentCount() < 12){
+            showroomPanel.add(new JLabel());
+        }
+        showroomPanel.setLayout(new GridLayout(showroom_rows, 4, 5, 5));
+        showroomPanel.setPreferredSize( new Dimension(800, Math.max(250*showroom_rows, 600)));
+        showroomPanel.revalidate();
+        showroomPanel.repaint();
+        ref_btn.setEnabled(true);
+    }
     /**
      * @param args the command line arguments
      */
@@ -292,6 +358,8 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu about_menu;
     private javax.swing.JButton add_btn;
+    private javax.swing.JLabel clear_button;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
@@ -299,6 +367,7 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
     private javax.swing.JLabel loading;
     private javax.swing.JMenuItem logout_item;
     private javax.swing.JButton ref_btn;
+    private javax.swing.JTextField search_textfield;
     private javax.swing.JPanel showroomPanel;
     private javax.swing.JMenu user_menu;
     // End of variables declaration//GEN-END:variables
@@ -340,4 +409,34 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener{
     }
 
 
+    @Override
+    public void insertUpdate(DocumentEvent e) {
+        String searchText = search_textfield.getText();
+        RoomData searchRD = new RoomData();
+        searchRD.setRoomName(searchText);
+        try {
+            ArrayList<RoomData> searchRD_list = RoomDatabase.searchRoomName(searchRD);
+            searchRefreshShowroom(searchRD_list);
+        } catch (DatabaseGetInterrupted ex) {
+            JOptionPane.showMessageDialog(AdminLanding.this, ex.getMessage());
+        }
+    }
+
+    @Override
+    public void removeUpdate(DocumentEvent e) {
+        String searchText = search_textfield.getText();
+        RoomData searchRD = new RoomData();
+        searchRD.setRoomName(searchText);
+        try {
+            ArrayList<RoomData> searchRD_list = RoomDatabase.searchRoomName(searchRD);
+            searchRefreshShowroom(searchRD_list);
+        } catch (DatabaseGetInterrupted ex) {
+            JOptionPane.showMessageDialog(AdminLanding.this, ex.getMessage());
+        }
+    }
+
+    @Override
+    public void changedUpdate(DocumentEvent e) {
+
+    }
 }
