@@ -59,6 +59,7 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener, Do
         jMenuBar1 = new javax.swing.JMenuBar();
         user_menu = new javax.swing.JMenu();
         change_pass_item = new javax.swing.JMenuItem();
+        book_history = new javax.swing.JMenuItem();
         logout_item = new javax.swing.JMenuItem();
         about_menu = new javax.swing.JMenu();
 
@@ -179,6 +180,14 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener, Do
         });
         user_menu.add(change_pass_item);
 
+        book_history.setText("Booking History");
+        book_history.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                book_historyActionPerformed(evt);
+            }
+        });
+        user_menu.add(book_history);
+
         logout_item.setText("Logout");
         logout_item.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -262,6 +271,10 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener, Do
         search_textfield.setFocusable(true);
         refreshShowroom();
     }//GEN-LAST:event_clear_buttonMouseClicked
+
+    private void book_historyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_book_historyActionPerformed
+        new HistoryFrame().setVisible(true);
+    }//GEN-LAST:event_book_historyActionPerformed
     private void refreshShowroom() {
         ref_btn.setEnabled(false);
         jScrollPane2.getVerticalScrollBar().setValue(jScrollPane2.getVerticalScrollBar().getMinimum());
@@ -353,6 +366,7 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener, Do
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu about_menu;
+    private javax.swing.JMenuItem book_history;
     private javax.swing.JMenuItem change_pass_item;
     private javax.swing.JLabel clear_button;
     private javax.swing.JLabel jLabel1;
