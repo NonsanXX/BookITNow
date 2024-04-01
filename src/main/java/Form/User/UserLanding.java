@@ -130,11 +130,6 @@ public class UserLanding extends JFrame implements MouseListener, DocumentListen
         });
 
         search_textfield.setFont(new java.awt.Font("FreesiaUPC", 0, 24)); // NOI18N
-        search_textfield.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                search_textfieldPropertyChange(evt);
-            }
-        });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/search.png"))); // NOI18N
 
@@ -313,10 +308,6 @@ public class UserLanding extends JFrame implements MouseListener, DocumentListen
        new UserAccountManagement().setVisible(true);
     }//GEN-LAST:event_change_pass_itemActionPerformed
 
-    private void search_textfieldPropertyChange(PropertyChangeEvent evt) {//GEN-FIRST:event_search_textfieldPropertyChange
-        System.out.println(search_textfield.getText());
-    }//GEN-LAST:event_search_textfieldPropertyChange
-
     private void clear_buttonMouseClicked(MouseEvent evt) {//GEN-FIRST:event_clear_buttonMouseClicked
         search_textfield.setText("");
         search_textfield.setFocusable(false);
@@ -368,7 +359,6 @@ public class UserLanding extends JFrame implements MouseListener, DocumentListen
         } catch (DatabaseGetInterrupted e) {
             JOptionPane.showMessageDialog(UserLanding.this, e.getMessage());
         }
-        System.out.println(historyDataArrayList);
         if (!historyDataArrayList.isEmpty()){
             HistoryData upcoming = historyDataArrayList.get(0);
             RoomData upcomingRoom = new RoomData();
@@ -377,8 +367,12 @@ public class UserLanding extends JFrame implements MouseListener, DocumentListen
             } catch (DatabaseGetInterrupted e) {
                 JOptionPane.showMessageDialog(UserLanding.this, e.getMessage());
             }
-            upcoming_text.setText("<html>Upcoming reservation for "+upcoming.getRecorded()+"<html><br> Floor <html>"+
-                    upcomingRoom.getFloor()+", "+upcomingRoom.getBuilding()+" at "+upcoming.getTimeDate().toString());
+            if (upcomingRoom != null){
+                upcoming_text.setText("<html>Upcoming reservation for " + upcoming.getRecorded() + "<html><br> Floor <html>" +
+                        upcomingRoom.getFloor() + ", " + upcomingRoom.getBuilding() + " at " + upcoming.getTimeDate().toString());
+            } else {
+                upcoming_text.setText("<html>Hello!<br>You currently have no upcoming reservations scheduled.<html>");
+            }
         } else {
             upcoming_text.setText("<html>Hello!<br>You currently have no upcoming reservations scheduled.<html>");
         }
