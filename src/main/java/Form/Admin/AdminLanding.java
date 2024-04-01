@@ -70,7 +70,6 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener, D
         user_menu = new javax.swing.JMenu();
         switch_to_user = new javax.swing.JMenuItem();
         logout_item = new javax.swing.JMenuItem();
-        about_menu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("BookITNow");
@@ -195,7 +194,7 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener, D
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        user_menu.setText("Hello, Administator");
+        user_menu.setText("Administator Access");
 
         switch_to_user.setText("Switch To User Access");
         switch_to_user.addActionListener(new java.awt.event.ActionListener() {
@@ -214,9 +213,6 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener, D
         user_menu.add(logout_item);
 
         jMenuBar1.add(user_menu);
-
-        about_menu.setText("About");
-        jMenuBar1.add(about_menu);
 
         setJMenuBar(jMenuBar1);
 
@@ -381,7 +377,6 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener, D
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu about_menu;
     private javax.swing.JButton add_btn;
     private javax.swing.JLabel clear_button;
     private javax.swing.JLabel jLabel1;
