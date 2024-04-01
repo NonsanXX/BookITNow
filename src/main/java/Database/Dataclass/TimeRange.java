@@ -57,7 +57,7 @@ public class TimeRange {
     /**
      *
      * @param tr
-     * @return true if tr is overlap with the object
+     * @return true if tr is overlap with the object.
      * <img src="https://i.stack.imgur.com/6iULg.png" width="600" height="300">
      */
     public boolean isOverlap(TimeRange tr){

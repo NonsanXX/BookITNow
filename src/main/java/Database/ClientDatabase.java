@@ -6,6 +6,7 @@ package Database;
 
 import Database.Interface.StatisticReport;
 import Database.Dataclass.ClientData;
+import Database.Dataclass.ClientModel;
 import Database.Exception.DatabaseGetInterrupted;
 
 import com.google.cloud.firestore.DocumentReference;
@@ -99,8 +100,8 @@ public class ClientDatabase extends Database implements StatisticReport<JTable>{
         }
         return false;
     }
-    public static void addClient(ClientData clientData){
-        getDb().collection(CLIENT_COLLECTION).document(clientData.getStudentID()).set(clientData.toHashMap());
+    public static void addClient(ClientModel clientData){
+        getDb().collection(CLIENT_COLLECTION).document((String) clientData.getKey()).set(clientData.toHashMap());
     }
     
     public static void addClient(HashMap<String, Object> clientData){
