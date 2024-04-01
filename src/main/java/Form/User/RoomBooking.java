@@ -86,6 +86,7 @@ public class RoomBooking extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("RoomBooking");
+        setResizable(false);
 
         jLabel1.setText("ระบบจองห้อง");
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
@@ -266,14 +267,18 @@ public class RoomBooking extends javax.swing.JFrame {
 
         TimeDate timeDate = new TimeDate((enterHour + enterMin/60.0), (exitHour + exitMin/60.0), formattedDate);
         try {
-            if (RoomDatabase.reservingRoom(roomData, timeDate)){
-                JOptionPane.showMessageDialog(RoomBooking.this, "Book successful.");
-                this.dispose();
+            System.out.println("Time date compare : "+(timeDate.getTime2() - timeDate.getTime1()));
+            if (timeDate.getTime2() - timeDate.getTime1() != 0){
+                if (RoomDatabase.reservingRoom(roomData, timeDate)) {
+                    JOptionPane.showMessageDialog(RoomBooking.this, "Book successful.");
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(RoomBooking.this, "The selected time period is not available." +
+                            "\nEither the room has already been booked during that time," +
+                            "\nPlease choose a different time period for your booking.");
+                }
             } else {
-                JOptionPane.showMessageDialog(RoomBooking.this, "The selected time period is not available." +
-                        "\nEither the room has already been booked during that time," +
-                        "\nor the requested time falls outside the room's operating hours." +
-                        "\nPlease choose a different time period for your booking.");
+                JOptionPane.showMessageDialog(RoomBooking.this, "Invalid time.");
             }
         } catch (DatabaseGetInterrupted e) {
             JOptionPane.showMessageDialog(RoomBooking.this, "Error, please try again later.");
