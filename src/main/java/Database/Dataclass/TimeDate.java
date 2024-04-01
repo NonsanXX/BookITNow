@@ -44,9 +44,9 @@ public class TimeDate extends TimeRange{
     public boolean isOverlap(TimeDate tr){
         boolean timeOverlap = new TimeRange(time1, time2).isOverlap(new TimeRange(tr.time1, tr.time2));
         if(!tr.timeDate.equals(timeDate)){ // not same day
-            return true;
+            return false;
         }
-        return !timeOverlap; // if same day consider timeOverlap
+        return timeOverlap; // if same day consider timeOverlap
     }
     
     /**
