@@ -219,7 +219,7 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener, Do
     }// </editor-fold>//GEN-END:initComponents
 
     private void ref_btnActionPerformed(java.awt.event.ActionEvent evt) {
-
+        search_textfield.setText("");
         showLoadingIndicator();
         new SwingWorker<Void, Void>() {
             @Override
@@ -228,9 +228,6 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener, Do
                 return null;
             }
         }.execute();
-        search_textfield.setFocusable(false);
-        search_textfield.setFocusable(true);
-        search_textfield.setText("");
     }                                       
     private void showLoadingIndicator() {
         showroomPanel.removeAll();
@@ -300,6 +297,7 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener, Do
         showroomPanel.revalidate();
         showroomPanel.repaint();
         ref_btn.setEnabled(true);
+        ref_btn.requestFocus();
     }
     private void searchRefreshShowroom(ArrayList<RoomData> roomdata) {
         ref_btn.setEnabled(false);
