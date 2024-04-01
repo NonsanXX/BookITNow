@@ -223,7 +223,7 @@ public class UserLanding extends JFrame implements MouseListener, DocumentListen
         });
         user_menu.add(book_history);
 
-        switch_to_admin.setText("Initiating Admin Privileges");
+        switch_to_admin.setText("Switch to Admin Mode");
         switch_to_admin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 switch_to_adminActionPerformed(evt);
