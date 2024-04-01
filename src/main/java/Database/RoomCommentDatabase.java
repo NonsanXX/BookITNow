@@ -53,4 +53,8 @@ public class RoomCommentDatabase extends Database{
         currentComment.remove(comment);
         updateComment(roomName, currentComment);
     }
+    
+    public static void deleteAllComment(String roomName){
+        getDb().collection(ROOM_COMMENT_COLLECTION).document(roomName).delete();
+    }
 }

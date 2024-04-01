@@ -135,6 +135,7 @@ public class RoomDatabase extends Database{
         getDb().collection(ROOM_COLLECTION).document(roomName).delete();
         BuildingDatabase.deleteReference(getRoomObject(roomName));
         RoomHistoryDatabase.deleteAllHistory(roomName);
+        RoomCommentDatabase.deleteAllComment(roomName);
     }
     
     public static RoomData loadRoom(DocumentReference docRef) throws DatabaseGetInterrupted{

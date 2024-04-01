@@ -57,5 +57,9 @@ public class BuildingDatabase extends Database{
         push.put(BUILDING_FIELD_NAME, array);
         
         getDb().collection(BUILDING_COLLECTION).document(roomData.getBuilding()).set(push);
+        
+        if(array.isEmpty()){
+            getDb().collection(BUILDING_COLLECTION).document(roomData.getBuilding()).delete();
+        }
     }
 }
