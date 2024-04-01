@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  *
  * @author phump
  */
-public class ClientData implements StatisticReport<JTable>, Cancellation{
+public class ClientData extends ClientModel<String> implements StatisticReport<JTable>, Cancellation{
 
     /**
      *
@@ -42,27 +42,33 @@ public class ClientData implements StatisticReport<JTable>, Cancellation{
     private String englishName;
     private String englishSurname;
     private String email;
-    private String studentID;
+    private final String studentID;
     private String passcode;
     private long accessLevel;
     private boolean isSecure;
     
     public ClientData(){
-        this("", "", "", "", "", "", "", 0);
+        this("");
+    }
+    
+    public ClientData(String studentID){
+        this("", "", "", "", "", studentID, "", 0);
     }
 
-    public ClientData(String thaiName, String thaiSurname, String englishName, String englishSurname, String email, String StudentID, String passcode, int accessLevel) {
+    public ClientData(String thaiName, String thaiSurname, String englishName, String englishSurname, String email, String studentID, String passcode, int accessLevel) {
+        super(studentID);
         this.thaiName = thaiName;
         this.thaiSurname = thaiSurname;
         this.englishName = englishName;
         this.englishSurname = englishSurname;
         this.email = email;
-        this.studentID = StudentID;
+        this.studentID = studentID;
         this.passcode = hashing(passcode);
         this.accessLevel = accessLevel;
     }
     
     public ClientData(HashMap<String, Object> fieldMap){
+        super((String) fieldMap.get(FIELD_STUDENT_ID));
         this.thaiName = (String) fieldMap.get(FIELD_THAI_NAME);
         this.thaiSurname = (String) fieldMap.get(FIELD_THAI_SURNAME);
         this.englishName = (String) fieldMap.get(FIELD_ENGLISH_NAME);
@@ -117,10 +123,6 @@ public class ClientData implements StatisticReport<JTable>, Cancellation{
         return studentID;
     }
 
-    public void setStudentID(String StudentID) {
-        this.studentID = StudentID;
-    }
-    
     public long getAccessLevel(){
         return accessLevel;
     }
@@ -145,6 +147,7 @@ public class ClientData implements StatisticReport<JTable>, Cancellation{
         return passcode.length() < 64 ? org.apache.commons.codec.digest.DigestUtils.sha256Hex(passcode) : passcode;
     }
 
+    @Override
     public HashMap<String, Object> toHashMap(){
         /**
          * @return HashMap between Field and it's value
