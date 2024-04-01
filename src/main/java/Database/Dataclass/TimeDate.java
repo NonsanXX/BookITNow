@@ -81,7 +81,7 @@ public class TimeDate extends TimeRange{
     }
     
     public static String toPoint60(Double time){
-        return (int) Math.floor(time)+":"+(int) (time%1*60);
+        return String.format("%02d:%02d", (int) Math.floor(time), (int) (time%1*60));
     }
     
     @Override
