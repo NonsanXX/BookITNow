@@ -69,6 +69,7 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener, D
         jMenuBar1 = new javax.swing.JMenuBar();
         user_menu = new javax.swing.JMenu();
         switch_to_user = new javax.swing.JMenuItem();
+        manange_item = new javax.swing.JMenuItem();
         logout_item = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -198,6 +199,14 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener, D
         });
         user_menu.add(switch_to_user);
 
+        manange_item.setText("Management");
+        manange_item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manange_itemActionPerformed(evt);
+            }
+        });
+        user_menu.add(manange_item);
+
         logout_item.setText("Logout");
         logout_item.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -282,6 +291,10 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener, D
         userLanding.setVisible(true);
         userLanding.setLocationRelativeTo(null);
     }//GEN-LAST:event_switch_to_userActionPerformed
+
+    private void manange_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manange_itemActionPerformed
+        new AdminManagement().setVisible(true);
+    }//GEN-LAST:event_manange_itemActionPerformed
     private void refreshShowroom() {
         ref_btn.setEnabled(false);
         jScrollPane2.getVerticalScrollBar().setValue(jScrollPane2.getVerticalScrollBar().getMinimum());
@@ -376,6 +389,7 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener, D
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel loading;
     private javax.swing.JMenuItem logout_item;
+    private javax.swing.JMenuItem manange_item;
     private javax.swing.JButton ref_btn;
     private javax.swing.JTextField search_textfield;
     private javax.swing.JPanel showroomPanel;

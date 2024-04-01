@@ -29,7 +29,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="switch_to_admin">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Initiating Admin Privileges"/>
+                <Property name="text" type="java.lang.String" value="Switch to Admin Mode"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="switch_to_adminActionPerformed"/>
