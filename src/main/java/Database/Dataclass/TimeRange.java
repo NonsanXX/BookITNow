@@ -61,6 +61,6 @@ public class TimeRange {
      * <img src="https://i.stack.imgur.com/6iULg.png" width="600" height="300">
      */
     public boolean isOverlap(TimeRange tr){
-        return length() + tr.length() > Double.max(time2, tr.time2) + Double.min(time1, tr.time1);
+        return length() + tr.length() > Double.max(time2, tr.time2) - Double.min(time1, tr.time1);
     }
 }
