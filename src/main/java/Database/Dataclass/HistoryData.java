@@ -7,7 +7,7 @@ package Database.Dataclass;
  *
  * @author phump
  */
-public class HistoryData {
+public class HistoryData implements Comparable<HistoryData>{
     public static final String TIMESTAMP_FIELD_NAME = "timeStamp";
     public static final String TIMEDATE_FIELD_NAME = "timeDate";
     public static final String RECORDED_FIELD_NAME = "recorded";
@@ -52,5 +52,10 @@ public class HistoryData {
     
     public Object[] toRowData(long rid){
         return new Object[]{rid, timeStamp, timeDate, recorded};
+    }
+
+    @Override
+    public int compareTo(HistoryData o) {
+        return timeDate.compareTo(o.timeDate);
     }
 }

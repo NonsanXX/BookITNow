@@ -5,6 +5,7 @@
 package Database.Dataclass;
 
 import static Database.RoomHistoryDatabase.createDefaultTableModel;
+import Database.RoomHistoryDatabase;
 import Database.Exception.DatabaseGetInterrupted;
 import Database.Interface.RoomReservedTime;
 import Database.RoomDatabase;
@@ -16,11 +17,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import Database.Interface.Cancellation;
 /**
  *
  * @author phump
  */
-public class RoomData implements RoomReservedTime<JTable>{
+public class RoomData implements RoomReservedTime<JTable>, Cancellation{
     private String roomName;
     private String building;
     private String floor;
@@ -188,6 +192,17 @@ public class RoomData implements RoomReservedTime<JTable>{
         reservedTime.remove(tr);
         return true;
     }
+    
+    public boolean deCurrentQueue(TimeDate tr){
+        for(String key : currentQueue.keySet()){
+            if(currentQueue.get(key).equals(tr)){
+                currentQueue.remove(key);
+                return true;
+            }
+        }
+        return false;
+    }
+    
     /**
      * 
      * @param timeDate - Date in dateTimeFormatter in format dd/MM/YYYY
@@ -249,5 +264,17 @@ public class RoomData implements RoomReservedTime<JTable>{
         } catch (DatabaseGetInterrupted ex) {
             return null;
         }
+    }
+
+    @Override
+    public boolean cancel(TimeDate reservation) {
+        boolean result = false;
+        try {
+            RoomHistoryDatabase.deleteHistory(roomName, reservation);
+            result = unReservedTime(reservation) & deCurrentQueue(reservation);
+        } catch (DatabaseGetInterrupted ex) {
+            ex.printStackTrace();
+        }
+        return result;
     }
 }

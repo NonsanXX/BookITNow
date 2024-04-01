@@ -13,7 +13,7 @@ import java.util.Map;
  *
  * @author phump
  */
-public class TimeDate extends TimeRange{
+public class TimeDate extends TimeRange implements Comparable<TimeDate>{
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private String timeDate;
     
@@ -88,4 +88,21 @@ public class TimeDate extends TimeRange{
     public String toString(){
         return String.format("%s - %s, %s", toPoint60(time1), toPoint60(time2), timeDate);
     }
+    
+    @Override
+    public int compareTo(TimeDate time){
+        if(this.equals(time)){
+            return 0;
+        }
+        if (timeDateCompare(this, time)){
+            return -1;
+        }
+        return 1;
+    }
+    
+    public boolean equals(TimeDate timeDate){
+        return Double.compare(time1, timeDate.getTime1()) <= 0.01 && Double.compare(time2, timeDate.getTime2()) <= 0.01 && this.timeDate.equals(timeDate.getTimeDate());
+    }
+    
+    
 }
