@@ -103,6 +103,4 @@ public class TimeDate extends TimeRange implements Comparable<TimeDate>{
     public boolean equals(TimeDate timeDate){
         return Double.compare(time1, timeDate.getTime1()) <= 0.01 && Double.compare(time2, timeDate.getTime2()) <= 0.01 && this.timeDate.equals(timeDate.getTimeDate());
     }
-    
-    
 }
