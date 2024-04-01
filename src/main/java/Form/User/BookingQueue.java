@@ -25,6 +25,7 @@ import java.util.ArrayList;
  */
 public class BookingQueue extends javax.swing.JFrame{
     ArrayList<HistoryData> historyData;
+    public static int historyRow;
     /**
      * Creates new form BookingQueue
      */
@@ -34,6 +35,7 @@ public class BookingQueue extends javax.swing.JFrame{
         } catch (DatabaseGetInterrupted e) {
             e.printStackTrace();
         }
+        historyRow = historyData.size();
         initComponents();
     }
 
@@ -50,8 +52,10 @@ public class BookingQueue extends javax.swing.JFrame{
         jScrollPane1 = new javax.swing.JScrollPane();
         queuePanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        ref_btn = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1080, 644));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
@@ -61,15 +65,22 @@ public class BookingQueue extends javax.swing.JFrame{
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        queuePanel.setBackground(new java.awt.Color(0, 102, 255));
-        queuePanel.setLayout(new javax.swing.BoxLayout(queuePanel, javax.swing.BoxLayout.LINE_AXIS));
-        BoxLayout boxLayout = new BoxLayout(queuePanel, BoxLayout.Y_AXIS);
-        queuePanel.setLayout(boxLayout);
+        queuePanel.setBackground(new java.awt.Color(102, 102, 102));
+        queuePanel.setPreferredSize(new Dimension(1080, Math.max(150*historyRow, 750)));
+        queuePanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 0, 0));
         jScrollPane1.setViewportView(queuePanel);
 
         jLabel1.setFont(new java.awt.Font("FreesiaUPC", 1, 48)); // NOI18N
         jLabel1.setText("แสดงคิวที่กำลังจะมาถึง");
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
+        ref_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/refresh-page-option (Custom).png"))); // NOI18N
+        ref_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ref_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                ref_btnMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -79,13 +90,17 @@ public class BookingQueue extends javax.swing.JFrame{
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 686, Short.MAX_VALUE)
+                .addComponent(ref_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ref_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -110,8 +125,12 @@ public class BookingQueue extends javax.swing.JFrame{
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         refreshBookingView();
     }//GEN-LAST:event_formWindowOpened
+
+    private void ref_btnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ref_btnMousePressed
+        refreshBookingView();
+    }//GEN-LAST:event_ref_btnMousePressed
     private void refreshBookingView() {
-        //ref_btn.setEnabled(false);
+        ref_btn.setEnabled(false);
         jScrollPane1.getVerticalScrollBar().setValue(jScrollPane1.getVerticalScrollBar().getMinimum());
         try {
             historyData = ClientHistoryDatabase.getIncomingReservation(UserLoginToken.getClientID());
@@ -123,14 +142,14 @@ public class BookingQueue extends javax.swing.JFrame{
         for (HistoryData history : historyData) {
             ViewBookingPanel rp = new ViewBookingPanel(history);
             queuePanel.add(rp);
+            queuePanel.revalidate();
+            queuePanel.repaint();
         }
         //while (showroomPanel.getComponentCount() < 12){
             //showroomPanel.add(new JLabel());
         //}
-        queuePanel.revalidate();
-        queuePanel.repaint();
-        //ref_btn.setEnabled(true);
-        //ref_btn.requestFocus();
+        queuePanel.setPreferredSize( new Dimension(1080, Math.max(150*historyRow, 750)));
+        ref_btn.setEnabled(true);
     }
     /**
      * @param args the command line arguments
@@ -172,6 +191,6 @@ public class BookingQueue extends javax.swing.JFrame{
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel queuePanel;
-
+    private javax.swing.JLabel ref_btn;
     // End of variables declaration//GEN-END:variables
 }
