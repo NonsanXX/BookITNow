@@ -68,6 +68,7 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener, D
         search_textfield = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         user_menu = new javax.swing.JMenu();
+        switch_to_user = new javax.swing.JMenuItem();
         logout_item = new javax.swing.JMenuItem();
         about_menu = new javax.swing.JMenu();
 
@@ -196,6 +197,14 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener, D
 
         user_menu.setText("Hello, Administator");
 
+        switch_to_user.setText("Switch To User Access");
+        switch_to_user.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                switch_to_userActionPerformed(evt);
+            }
+        });
+        user_menu.add(switch_to_user);
+
         logout_item.setText("Logout");
         logout_item.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -280,6 +289,13 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener, D
         search_textfield.setFocusable(true);
         refreshShowroom();
     }//GEN-LAST:event_clear_buttonMouseClicked
+
+    private void switch_to_userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_switch_to_userActionPerformed
+        this.dispose();
+        UserLanding userLanding = new UserLanding();
+        userLanding.setVisible(true);
+        userLanding.setLocationRelativeTo(null);
+    }//GEN-LAST:event_switch_to_userActionPerformed
     private void refreshShowroom() {
         ref_btn.setEnabled(false);
         jScrollPane2.getVerticalScrollBar().setValue(jScrollPane2.getVerticalScrollBar().getMinimum());
@@ -378,6 +394,7 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener, D
     private javax.swing.JButton ref_btn;
     private javax.swing.JTextField search_textfield;
     private javax.swing.JPanel showroomPanel;
+    private javax.swing.JMenuItem switch_to_user;
     private javax.swing.JMenu user_menu;
     // End of variables declaration//GEN-END:variables
 

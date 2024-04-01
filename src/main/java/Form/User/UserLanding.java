@@ -3,31 +3,35 @@ package Form.User;/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
-import Database.Database;
-import Firebase.UserLoginToken;
-import Form.Admin.*;
+import Database.ClientHistoryDatabase;
+import Database.Dataclass.HistoryData;
 import Database.Dataclass.RoomData;
 import Database.Exception.DatabaseGetInterrupted;
 import Database.RoomDatabase;
+import Firebase.UserLoginToken;
+import Form.Admin.AdminLanding;
 import Form.LoginGUI;
 import Form.RoomPanel.RoomPanel;
+import org.checkerframework.checker.units.qual.A;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author acer
  */
 
-public class UserLanding extends javax.swing.JFrame implements MouseListener, DocumentListener {
+public class UserLanding extends JFrame implements MouseListener, DocumentListener {
     ArrayList<RoomData> roomdata;
 
     {
@@ -43,7 +47,6 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener, Do
      * Creates new form landing
      */
     public UserLanding() {
-
         initComponents();
         Document doc = search_textfield.getDocument();
         doc.addDocumentListener(this);
@@ -68,11 +71,12 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener, Do
         jLabel1 = new javax.swing.JLabel();
         clear_button = new javax.swing.JLabel();
         view_queue = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        upcoming_text = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         user_menu = new javax.swing.JMenu();
         change_pass_item = new javax.swing.JMenuItem();
         book_history = new javax.swing.JMenuItem();
+        switch_to_admin = new javax.swing.JMenuItem();
         logout_item = new javax.swing.JMenuItem();
         about_menu = new javax.swing.JMenu();
 
@@ -153,9 +157,9 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener, Do
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("FreesiaUPC", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("You have upcoming queue at IT-Peer, 16.00-18.00");
+        upcoming_text.setFont(new java.awt.Font("FreesiaUPC", 0, 18)); // NOI18N
+        upcoming_text.setForeground(new java.awt.Color(255, 255, 255));
+        upcoming_text.setText("You have upcoming queue at IT-Peer, 16.00-18.00");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -169,7 +173,7 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener, Do
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(clear_button, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(upcoming_text, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(view_queue, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -184,10 +188,10 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener, Do
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1)
                     .addComponent(search_textfield, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(upcoming_text, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(ref_btn, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                        .addComponent(view_queue, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(view_queue, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
                     .addComponent(clear_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -224,6 +228,16 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener, Do
         });
         user_menu.add(book_history);
 
+        switch_to_admin.setText("Initiating Admin Privileges");
+        switch_to_admin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                switch_to_adminActionPerformed(evt);
+            }
+        });
+        if (UserLoginToken.getClient().getAccessLevel() == 1){
+            user_menu.add(switch_to_admin);
+        }
+
         logout_item.setText("Logout");
         logout_item.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -254,7 +268,7 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener, Do
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ref_btnActionPerformed(java.awt.event.ActionEvent evt) {
+    private void ref_btnActionPerformed(ActionEvent evt) {
         search_textfield.setText("");
         showLoadingIndicator();
         new SwingWorker<Void, Void>() {
@@ -273,11 +287,11 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener, Do
         showroomPanel.revalidate();
         showroomPanel.repaint();
     }
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+    private void formWindowOpened(WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         refreshShowroom();
     }//GEN-LAST:event_formWindowOpened
 
-    private void logout_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logout_itemActionPerformed
+    private void logout_itemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_logout_itemActionPerformed
         int choice = JOptionPane.showConfirmDialog(UserLanding.this,
                 "Do you want to logout?", "Logout",
                 JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
@@ -290,28 +304,33 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener, Do
 
     }//GEN-LAST:event_logout_itemActionPerformed
 
-    private void change_pass_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_change_pass_itemActionPerformed
+    private void change_pass_itemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_change_pass_itemActionPerformed
        new UserAccountManagement().setVisible(true);
     }//GEN-LAST:event_change_pass_itemActionPerformed
 
-    private void search_textfieldPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_search_textfieldPropertyChange
+    private void search_textfieldPropertyChange(PropertyChangeEvent evt) {//GEN-FIRST:event_search_textfieldPropertyChange
         System.out.println(search_textfield.getText());
     }//GEN-LAST:event_search_textfieldPropertyChange
 
-    private void clear_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clear_buttonMouseClicked
+    private void clear_buttonMouseClicked(MouseEvent evt) {//GEN-FIRST:event_clear_buttonMouseClicked
         search_textfield.setText("");
         search_textfield.setFocusable(false);
         search_textfield.setFocusable(true);
         refreshShowroom();
     }//GEN-LAST:event_clear_buttonMouseClicked
 
-    private void book_historyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_book_historyActionPerformed
+    private void book_historyActionPerformed(ActionEvent evt) {//GEN-FIRST:event_book_historyActionPerformed
         new HistoryFrame().setVisible(true);
     }//GEN-LAST:event_book_historyActionPerformed
 
-    private void view_queueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_view_queueActionPerformed
+    private void view_queueActionPerformed(ActionEvent evt) {//GEN-FIRST:event_view_queueActionPerformed
         new BookingQueue().setVisible(true);
     }//GEN-LAST:event_view_queueActionPerformed
+
+    private void switch_to_adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_switch_to_adminActionPerformed
+        new AdminLanding().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_switch_to_adminActionPerformed
     private void refreshShowroom() {
         ref_btn.setEnabled(false);
         jScrollPane2.getVerticalScrollBar().setValue(jScrollPane2.getVerticalScrollBar().getMinimum());
@@ -334,6 +353,25 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener, Do
         }
         showroomPanel.setLayout(new GridLayout(showroom_rows, 4, 5, 5));
         showroomPanel.setPreferredSize( new Dimension(800, Math.max(250*showroom_rows, 600)));
+        ArrayList<HistoryData> historyDataArrayList = new ArrayList<>();
+        try {
+            historyDataArrayList = ClientHistoryDatabase.getIncomingReservation(UserLoginToken.getClientID());
+        } catch (DatabaseGetInterrupted e) {
+            JOptionPane.showMessageDialog(UserLanding.this, e.getMessage());
+        }
+        if (!historyDataArrayList.isEmpty()){
+            HistoryData upcoming = historyDataArrayList.get(0);
+            RoomData upcomingRoom = new RoomData();
+            try {
+                upcomingRoom = RoomDatabase.getRoomObject(upcoming.getRecorded());
+            } catch (DatabaseGetInterrupted e) {
+                JOptionPane.showMessageDialog(UserLanding.this, e.getMessage());
+            }
+            upcoming_text.setText("Upcoming reservation for "+upcoming.getRecorded()+" Floor "+
+                    upcomingRoom.getFloor()+", "+upcomingRoom.getBuilding()+" at "+upcoming.getTimeDate().toString());
+        } else {
+            upcoming_text.setText("You currently have no upcoming reservations scheduled.");
+        }
         showroomPanel.revalidate();
         showroomPanel.repaint();
         ref_btn.setEnabled(true);
@@ -370,20 +408,20 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener, Do
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UserLanding.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            Logger.getLogger(UserLanding.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UserLanding.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            Logger.getLogger(UserLanding.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UserLanding.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UserLanding.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            Logger.getLogger(UserLanding.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(UserLanding.class.getName()).log(Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -395,7 +433,7 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener, Do
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new UserLanding().setVisible(true);
             }
@@ -408,7 +446,6 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener, Do
     private javax.swing.JMenuItem change_pass_item;
     private javax.swing.JLabel clear_button;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
@@ -418,6 +455,8 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener, Do
     private javax.swing.JButton ref_btn;
     private javax.swing.JTextField search_textfield;
     private javax.swing.JPanel showroomPanel;
+    private javax.swing.JMenuItem switch_to_admin;
+    private javax.swing.JLabel upcoming_text;
     private javax.swing.JMenu user_menu;
     private javax.swing.JButton view_queue;
     // End of variables declaration//GEN-END:variables
