@@ -42,17 +42,11 @@ public class TestDB{
         try {
             FirebaseServiceAccount.initFirebase();
             //ClientHistoryDatabase.updateHistory("66070162", ClientHistoryDatabase.createEmptyHistory());
-            UserLoginToken.loginUser(ClientDatabase.getClientObject("66070305")); //bypass login session
+            UserLoginToken.loginUser(ClientDatabase.getClientObject("66070306")); //bypass login session
             
-//            RoomData rm = RoomDatabase.getRoomObject("IT-IT-HIY");
-//            RoomDatabase.reservingRoom(rm, new TimeDate(0.0, 1.0, TimeDate.getDateNow()));
-            TimeDate t1 = new TimeDate(0.0, 1.0, "01/04/2024");
-            TimeDate t2 = new TimeDate(0.0, 1.0, "01/05/2024");
-            
-            System.out.println(t1.isOverlap(t2));
-//            for(String feedback : FeedbackDatabase.getFeedback()){
-//                System.out.println(feedback);
-//            }
+            for(HistoryData o : ClientHistoryDatabase.getIncomingReservation(UserLoginToken.getClientID())){
+                System.out.println(o.getTimeDate());
+            }
         } catch (URISyntaxException | IOException    ex) {
             Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         } finally{

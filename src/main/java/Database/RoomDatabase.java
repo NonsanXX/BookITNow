@@ -9,7 +9,7 @@ import Database.Dataclass.HistoryData;
 import Database.Dataclass.TimeDate;
 import Database.Exception.DatabaseGetInterrupted;
 import Firebase.UserLoginToken;
-
+import Database.Interface.Cancellation;
 
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.WriteResult;
@@ -134,6 +134,7 @@ public class RoomDatabase extends Database{
     public static void deleteRoom(String roomName) throws DatabaseGetInterrupted{
         getDb().collection(ROOM_COLLECTION).document(roomName).delete();
         BuildingDatabase.deleteReference(getRoomObject(roomName));
+        RoomHistoryDatabase.deleteAllHistory(roomName);
     }
     
     public static RoomData loadRoom(DocumentReference docRef) throws DatabaseGetInterrupted{
@@ -160,5 +161,13 @@ public class RoomDatabase extends Database{
     
     public static DocumentReference getReference(RoomData roomData){
         return getDb().collection(ROOM_COLLECTION).document(roomData.getRoomName());
+    }
+    
+    public static boolean cancelReservation(TimeDate time, Cancellation... cancel){
+        boolean result = true;
+        for(Cancellation c : cancel){
+            result = c.cancel(time) && result;
+        }
+        return result;
     }
 }

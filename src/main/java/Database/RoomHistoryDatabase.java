@@ -75,7 +75,18 @@ public class RoomHistoryDatabase extends Database{
         return false;
     }
     
-    public static void deleteHistory(String roomName){
+    public static void deleteAllHistory(String roomName){
         getDb().collection(ROOM_HISTORY_COLLECTION).document(roomName).delete();
+    }
+    
+    public static void deleteHistory(String roomName, TimeDate reservationDetail) throws DatabaseGetInterrupted{
+        ArrayList<HistoryData> readData = readHistory(roomName);
+        for(HistoryData history : readData){
+            if(history.getTimeDate().equals(reservationDetail)){
+                readData.remove(history);
+                break;
+            }
+        }
+        updateHistory(roomName, readData);
     }
 }

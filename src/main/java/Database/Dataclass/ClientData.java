@@ -6,17 +6,21 @@ package Database.Dataclass;
 
 import static Database.ClientHistoryDatabase.createDefaultTableModel;
 import Database.Exception.DatabaseGetInterrupted;
+import Database.ClientHistoryDatabase;
+import Database.Interface.Cancellation;
 import Database.Interface.StatisticReport;
 
 import javax.swing.*;
 
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author phump
  */
-public class ClientData implements StatisticReport<JTable>{
+public class ClientData implements StatisticReport<JTable>, Cancellation{
 
     /**
      *
@@ -167,5 +171,15 @@ public class ClientData implements StatisticReport<JTable>{
         } catch(DatabaseGetInterrupted ex){
             return null;
         }
+    }
+
+    @Override
+    public boolean cancel(TimeDate reservation) {
+        try {
+            ClientHistoryDatabase.deleteHistory(studentID, reservation);
+        } catch (DatabaseGetInterrupted ex) {
+            ex.printStackTrace();
+        }
+        return true;
     }
 }

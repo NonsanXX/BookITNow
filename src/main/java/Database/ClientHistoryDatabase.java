@@ -9,6 +9,9 @@ import Database.Dataclass.TimeDate;
 import Database.Exception.DatabaseGetInterrupted;
 import javax.swing.table.DefaultTableModel;
 
+import java.util.Collections;
+import java.util.Comparator;
+
 import java.util.concurrent.ExecutionException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -75,7 +78,31 @@ public class ClientHistoryDatabase extends Database{
         return false;
     }
     
-    public static void deleteHistory(String clientStdID){
+    public static void deleteAllHistory(String clientStdID){
         getDb().collection(CLIENT_HISTORY_COLLECTION).document(clientStdID).delete();
+    }
+    
+    public static void deleteHistory(String clientStdID, TimeDate reservationDetail) throws DatabaseGetInterrupted{
+        ArrayList<HistoryData> readData = readHistory(clientStdID);
+        for(HistoryData history : readData){
+            if(history.getTimeDate().equals(reservationDetail)){
+                readData.remove(history);
+                break;
+            }
+        }
+        updateHistory(clientStdID, readData);
+    }
+    
+    public static ArrayList<HistoryData> getIncomingReservation(String clientStdID) throws DatabaseGetInterrupted{
+        ArrayList<HistoryData> coming = readHistory(clientStdID);
+        Collections.sort(coming);
+        ArrayList<HistoryData> notPassed = new ArrayList<>();
+        TimeDate thisDate = new TimeDate(0.0, TimeDate.getTimeNow(), TimeDate.getDateNow());
+        for(HistoryData history : coming){
+            if(!TimeDate.timeDateCompare(history.getTimeDate(), thisDate)){
+                notPassed.add(history);
+            }
+        }
+        return notPassed;
     }
 }
