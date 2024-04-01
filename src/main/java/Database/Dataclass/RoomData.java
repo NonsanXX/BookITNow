@@ -159,6 +159,11 @@ public class RoomData implements RoomReservedTime<JTable>, Cancellation{
         }
         return false;
     }
+    
+    public boolean isTimePassed(TimeDate tr){
+        TimeDate thisTime = new TimeDate(0.0, TimeDate.getTimeNow(), TimeDate.getDateNow());
+        return TimeDate.timeDateCompare(tr, thisTime);
+    }
     /**
     * To reserve time, it must satisfy three conditions
     1: Given TimeDate MUST be a subRange of openTime
@@ -169,7 +174,7 @@ public class RoomData implements RoomReservedTime<JTable>, Cancellation{
     * @return true if reserving is complete
     */
     public boolean reservingTime(TimeDate tr){
-        if(isSuperRangeOfOpenTime(tr) && !isOverlapWithReservedTime(tr)){
+        if(checkReservingTime(tr)){
             reservedTime.add(tr);
             return true;
         }
@@ -177,7 +182,7 @@ public class RoomData implements RoomReservedTime<JTable>, Cancellation{
     }
     
     public boolean checkReservingTime(TimeDate tr){
-        return isSuperRangeOfOpenTime(tr) && !isOverlapWithReservedTime(tr);
+        return isSuperRangeOfOpenTime(tr) && !isOverlapWithReservedTime(tr) && !isTimePassed(tr);
     }
     
     /**
