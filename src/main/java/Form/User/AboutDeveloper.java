@@ -17,11 +17,7 @@ public class AboutDeveloper extends javax.swing.JFrame {
         
         initComponents();
         
-        AboutDeveloper.setText("");
-        
         this.setTitle("About");
-        this.setResizable(false);
-        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -37,19 +33,22 @@ public class AboutDeveloper extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         DeveloperL = new javax.swing.JList<>();
         CloseB = new javax.swing.JButton();
-        AboutDeveloper = new javax.swing.JLabel();
+        about = new javax.swing.JLabel();
+        about_text = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(354, 306));
+        setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        DeveloperL.setBackground(new java.awt.Color(153, 153, 153));
         DeveloperL.setFont(new java.awt.Font("FreesiaUPC", 0, 20)); // NOI18N
         DeveloperL.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "66070153 Phakin Pansook", "66070162 Phumphuridon Wongchan", "66070166 Manonthakorn Khunsuwan", "66070257 Natthajak Dilorattanaphijahit", "66070295 Pochara Sappasate", "66070305 Phuriphat Arunphaisan", "66070310 Siwat Chantarak", "66070311 Supakorn Vachirapoosit" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        DeveloperL.setVerifyInputWhenFocusTarget(false);
         DeveloperL.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 DeveloperLValueChanged(evt);
@@ -57,9 +56,7 @@ public class AboutDeveloper extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(DeveloperL);
 
-        CloseB.setBackground(new java.awt.Color(0, 0, 0));
         CloseB.setFont(new java.awt.Font("FreesiaUPC", 1, 24)); // NOI18N
-        CloseB.setForeground(new java.awt.Color(255, 255, 255));
         CloseB.setText("Close");
         CloseB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,36 +64,43 @@ public class AboutDeveloper extends javax.swing.JFrame {
             }
         });
 
-        AboutDeveloper.setFont(new java.awt.Font("Cordia New", 1, 22)); // NOI18N
-        AboutDeveloper.setForeground(new java.awt.Color(255, 255, 255));
-        AboutDeveloper.setText("Developer");
+        about.setFont(new java.awt.Font("FreesiaUPC", 1, 36)); // NOI18N
+        about.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        about.setText("About Developer");
+
+        about_text.setFont(new java.awt.Font("FreesiaUPC", 0, 24)); // NOI18N
+        about_text.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(AboutDeveloper)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(144, 144, 144)
-                        .addComponent(CloseB, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(CloseB, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(about_text, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(about, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(6, 6, 6))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
-                .addComponent(AboutDeveloper)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(about)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(about_text, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CloseB, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -107,38 +111,33 @@ public class AboutDeveloper extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(354, 327));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void CloseBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseBActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_CloseBActionPerformed
 
     private void DeveloperLValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_DeveloperLValueChanged
         // TODO add your handling code here:
         if (!evt.getValueIsAdjusting()) {
             String select = DeveloperL.getSelectedValue();
-            if (select.equals("66070153 Phakin Pansook")) {
-                AboutDeveloper.setText("<html>" + select + "<br>66070153@kmitl.ac.th<br>หน้าที่: Art Director </html>");
-            } else if (select.equals("66070162 Phumphuridon Wongchan")) {
-                AboutDeveloper.setText("<html>" + select + "<br>66070162@kmitl.ac.th<br>หน้าที่: Back-End Developer </html>");
-            } else if (select.equals("66070166 Manonthakorn Khunsuwan")) {
-                AboutDeveloper.setText("<html>" + select + "<br>66070166@kmitl.ac.th<br>หน้าที่: Front-End Developer </html>");
-            } else if (select.equals("66070257 Natthajak Dilorattanaphijahit")) {
-                AboutDeveloper.setText("<html>" + select + "<br>66070257@kmitl.ac.th<br>หน้าที่: Front-End Developer </html>");
-            } else if (select.equals("66070295 Pochara Sappasate")) {
-                AboutDeveloper.setText("<html>" + select + "<br>66070295@kmitl.ac.th<br>หน้าที่: Front-End Developer </html>");
-            } else if (select.equals("66070305 Phuriphat Arunphaisan")) {
-                AboutDeveloper.setText("<html>" + select + "<br>66070305@kmitl.ac.th<br>หน้าที่: Back-End Developer </html>");
-            } else if (select.equals("66070310 Siwat Chantarak")) {
-                AboutDeveloper.setText("<html>" + select + "<br>66070310@kmitl.ac.th<br>หน้าที่: Front-End Developer </html>");
-            } else if (select.equals("66070311 Supakorn Vachirapoosit")) {
-                AboutDeveloper.setText("<html>" + select + "<br>66070311@kmitl.ac.th<br>หน้าที่: Front-End Developer </html>");
-            } else {
-                AboutDeveloper.setText("");
+            switch (select) {
+                case "66070153 Phakin Pansook" -> about_text.setText("<html>" + select + "<br>Email : 66070153@kmitl.ac.th<br>Role : Art Director </html>");
+                case "66070162 Phumphuridon Wongchan" -> about_text.setText("<html>" + select + "<br>Email : 66070162@kmitl.ac.th<br>Role : Back-End Developer </html>");
+                case "66070166 Manonthakorn Khunsuwan" -> about_text.setText("<html>" + select + "<br>Email : 66070166@kmitl.ac.th<br>Role : Front-End Developer </html>");
+                case "66070257 Natthajak Dilorattanaphijahit" -> about_text.setText("<html>" + select + "<br>Email : 66070257@kmitl.ac.th<br>Role : Front-End Developer </html>");
+                case "66070295 Pochara Sappasate" -> about_text.setText("<html>" + select + "<br>Email : 66070295@kmitl.ac.th<br>Role : Front-End Developer </html>");
+                case "66070305 Phuriphat Arunphaisan" -> about_text.setText("<html>" + select + "<br>Email : 66070305@kmitl.ac.th<br>Role : Back-End Developer </html>");
+                case "66070310 Siwat Chantarak" -> about_text.setText("<html>" + select + "<br>Email : 66070310@kmitl.ac.th<br>Role : Front-End Developer </html>");
+                case "66070311 Supakorn Vachirapoosit" -> about_text.setText("<html>" + select + "<br>Email : 66070311@kmitl.ac.th<br>Role : Front-End Developer </html>");
+                default -> about_text.setText("");
             }
         }
     }//GEN-LAST:event_DeveloperLValueChanged
@@ -179,9 +178,10 @@ public class AboutDeveloper extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel AboutDeveloper;
     private javax.swing.JButton CloseB;
     private javax.swing.JList<String> DeveloperL;
+    private javax.swing.JLabel about;
+    private javax.swing.JLabel about_text;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

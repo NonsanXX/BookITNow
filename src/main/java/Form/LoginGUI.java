@@ -10,6 +10,7 @@ import Database.Dataclass.ClientData;
 import Database.Exception.DatabaseGetInterrupted;
 import EmailService.EmailSender;
 import Form.Admin.AdminLanding;
+import Form.User.AboutDeveloper;
 import Form.User.UserLanding;
 import Utility.PasswordGenerator;
 import jakarta.mail.MessagingException;
@@ -198,6 +199,9 @@ public class LoginGUI extends javax.swing.JFrame {
         contact_btn.setText(" ติดต่อผู้พัฒนา");
         contact_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         contact_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                contact_btnMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 contact_btnMouseEntered(evt);
             }
@@ -962,6 +966,12 @@ public class LoginGUI extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_forgetpass_btnActionPerformed
+
+    private void contact_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contact_btnMouseClicked
+        AboutDeveloper aboutDeveloper = new AboutDeveloper();
+        aboutDeveloper.setVisible(true);
+        aboutDeveloper.setAlwaysOnTop(true);
+    }//GEN-LAST:event_contact_btnMouseClicked
 
     private void signin_btnActionPerformed(java.awt.event.ActionEvent evt) {                                           
         String stud_id = stud_id_tf.getText();

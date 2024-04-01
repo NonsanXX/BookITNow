@@ -157,9 +157,9 @@ public class UserLanding extends JFrame implements MouseListener, DocumentListen
             }
         });
 
-        upcoming_text.setFont(new java.awt.Font("FreesiaUPC", 0, 18)); // NOI18N
+        upcoming_text.setFont(new java.awt.Font("FreesiaUPC", 0, 24)); // NOI18N
         upcoming_text.setForeground(new java.awt.Color(255, 255, 255));
-        upcoming_text.setText("You have upcoming queue at IT-Peer, 16.00-18.00");
+        upcoming_text.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -173,8 +173,8 @@ public class UserLanding extends JFrame implements MouseListener, DocumentListen
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(clear_button, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(upcoming_text, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(upcoming_text, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(view_queue, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ref_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -210,7 +210,7 @@ public class UserLanding extends JFrame implements MouseListener, DocumentListen
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        user_menu.setText("Hi, "+ UserLoginToken.getClient().getEnglishName() +" "+ UserLoginToken.getClient().getEnglishSurname());
+        user_menu.setText("Hello, "+ UserLoginToken.getClient().getEnglishName() +" "+ UserLoginToken.getClient().getEnglishSurname());
 
         change_pass_item.setText("Change Password");
         change_pass_item.addActionListener(new java.awt.event.ActionListener() {
@@ -249,6 +249,11 @@ public class UserLanding extends JFrame implements MouseListener, DocumentListen
         jMenuBar1.add(user_menu);
 
         about_menu.setText("About");
+        about_menu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                about_menuActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(about_menu);
 
         setJMenuBar(jMenuBar1);
@@ -331,6 +336,10 @@ public class UserLanding extends JFrame implements MouseListener, DocumentListen
         new AdminLanding().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_switch_to_adminActionPerformed
+
+    private void about_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_about_menuActionPerformed
+        new AboutDeveloper().setVisible(true);
+    }//GEN-LAST:event_about_menuActionPerformed
     private void refreshShowroom() {
         ref_btn.setEnabled(false);
         jScrollPane2.getVerticalScrollBar().setValue(jScrollPane2.getVerticalScrollBar().getMinimum());
@@ -367,10 +376,10 @@ public class UserLanding extends JFrame implements MouseListener, DocumentListen
             } catch (DatabaseGetInterrupted e) {
                 JOptionPane.showMessageDialog(UserLanding.this, e.getMessage());
             }
-            upcoming_text.setText("Upcoming reservation for "+upcoming.getRecorded()+" Floor "+
+            upcoming_text.setText("<html>Upcoming reservation for "+upcoming.getRecorded()+"<html><br> Floor <html>"+
                     upcomingRoom.getFloor()+", "+upcomingRoom.getBuilding()+" at "+upcoming.getTimeDate().toString());
         } else {
-            upcoming_text.setText("You currently have no upcoming reservations scheduled.");
+            upcoming_text.setText("<html>Hello!<br>You currently have no upcoming reservations scheduled.<html>");
         }
         showroomPanel.revalidate();
         showroomPanel.repaint();
