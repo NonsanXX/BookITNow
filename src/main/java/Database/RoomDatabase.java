@@ -169,6 +169,7 @@ public class RoomDatabase extends Database{
         for(Cancellation c : cancel){
             result = c.cancel(time) && result;
         }
+        System.out.println(result);
         return result;
     }
 }
