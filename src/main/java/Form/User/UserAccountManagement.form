@@ -63,44 +63,37 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="413" max="-2" attributes="0"/>
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="194" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="2" attributes="0">
-                                  <Component id="name_th" alignment="2" min="-2" pref="251" max="-2" attributes="0"/>
-                                  <Component id="name_en" alignment="2" min="-2" pref="313" max="-2" attributes="0"/>
-                                  <Component id="student_id" alignment="2" min="-2" pref="333" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="2" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="1" attributes="0">
-                                                  <Component id="jLabel9" min="-2" pref="175" max="-2" attributes="0"/>
-                                                  <Component id="jLabel7" min="-2" pref="121" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                                          </Group>
+                      <EmptySpace min="-2" pref="194" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="2" attributes="0">
+                          <Component id="name_th" alignment="2" min="-2" pref="251" max="-2" attributes="0"/>
+                          <Component id="name_en" alignment="2" min="-2" pref="313" max="-2" attributes="0"/>
+                          <Component id="student_id" alignment="2" min="-2" pref="333" max="-2" attributes="0"/>
+                          <Group type="102" alignment="2" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="jLabel9" min="-2" pref="175" max="-2" attributes="0"/>
+                                          <Component id="jLabel7" min="-2" pref="121" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel6" min="-2" pref="333" max="-2" attributes="0"/>
-                                          <Component id="change_pass_old" min="-2" pref="350" max="-2" attributes="0"/>
-                                          <Component id="change_pass_new" alignment="0" min="-2" pref="350" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="change_pass_new_c" min="-2" pref="350" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                                              <Component id="confirmbtn" min="-2" pref="111" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
+                                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel6" min="-2" pref="333" max="-2" attributes="0"/>
+                                  <Component id="change_pass_old" min="-2" pref="350" max="-2" attributes="0"/>
+                                  <Component id="change_pass_new" alignment="0" min="-2" pref="350" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="change_pass_new_c" min="-2" pref="350" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                                      <Component id="confirmbtn" min="-2" pref="111" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
+                          <Component id="jLabel1" alignment="2" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="186" max="32767" attributes="0"/>
                   </Group>
@@ -109,9 +102,9 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Component id="name_th" min="-2" pref="38" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="name_en" min="-2" pref="27" max="-2" attributes="0"/>
@@ -158,7 +151,7 @@
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="UserLoginToken.getClient().getThaiName()+&quot; &quot;+UserLoginToken.getClient().getThaiSurname()" type="code"/>
+                  <Connection code="&quot;&#xe0a;&#xe37;&#xe48;&#xe2d; : &quot; +UserLoginToken.getClient().getThaiName()+&quot; &quot;+UserLoginToken.getClient().getThaiSurname()" type="code"/>
                 </Property>
               </Properties>
             </Component>
@@ -169,7 +162,7 @@
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="UserLoginToken.getClient().getEnglishName()+&quot; &quot;+UserLoginToken.getClient().getEnglishSurname()" type="code"/>
+                  <Connection code="&quot;Name : &quot;+UserLoginToken.getClient().getEnglishName()+&quot; &quot;+UserLoginToken.getClient().getEnglishSurname()" type="code"/>
                 </Property>
               </Properties>
             </Component>
