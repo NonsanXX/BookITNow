@@ -12,6 +12,9 @@ import Form.LoginGUI;
 import Form.RoomPanel.RoomPanel;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.Document;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -22,7 +25,7 @@ import java.util.ArrayList;
  * @author acer
  */
 
-public class UserLanding extends javax.swing.JFrame implements MouseListener{
+public class UserLanding extends javax.swing.JFrame implements MouseListener, DocumentListener {
     ArrayList<String> roomdata = RoomDatabase.getRoomList();
     int showroom_rows = Math.max(3, (int) Math.ceil((double)roomdata.size() / 4));
     /**
@@ -31,7 +34,8 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener{
     public UserLanding() {
 
         initComponents();
-        refreshShowroom();
+        Document doc = search_textfield.getDocument();
+        doc.addDocumentListener(this);
     }
 
     /**
@@ -49,6 +53,9 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener{
         showroomPanel = new javax.swing.JPanel();
         loading = new javax.swing.JLabel();
         ref_btn = new javax.swing.JButton();
+        search_textfield = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        clear_button = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         user_menu = new javax.swing.JMenu();
         change_pass_item = new javax.swing.JMenuItem();
@@ -79,16 +86,16 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener{
         showroomPanelLayout.setHorizontalGroup(
             showroomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(showroomPanelLayout.createSequentialGroup()
-                .addGap(337, 337, 337)
+                .addGap(340, 340, 340)
                 .addComponent(loading)
-                .addContainerGap(370, Short.MAX_VALUE))
+                .addContainerGap(367, Short.MAX_VALUE))
         );
         showroomPanelLayout.setVerticalGroup(
             showroomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(showroomPanelLayout.createSequentialGroup()
-                .addGap(245, 245, 245)
+                .addGap(168, 168, 168)
                 .addComponent(loading, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addContainerGap(204, Short.MAX_VALUE))
         );
 
         jScrollPane2.setViewportView(showroomPanel);
@@ -104,12 +111,34 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener{
             }
         });
 
+        search_textfield.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                search_textfieldPropertyChange(evt);
+            }
+        });
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/search.png"))); // NOI18N
+
+        clear_button.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/xbutton.png")).getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH)));
+        clear_button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        clear_button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clear_buttonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(1118, Short.MAX_VALUE)
+                .addGap(9, 9, 9)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(search_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(clear_button, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 511, Short.MAX_VALUE)
                 .addComponent(ref_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addComponent(jScrollPane2)
@@ -118,8 +147,12 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener{
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(ref_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1)
+                    .addComponent(search_textfield, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(ref_btn, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(clear_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -186,7 +219,9 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener{
                 return null;
             }
         }.execute();
-
+        search_textfield.setFocusable(false);
+        search_textfield.setFocusable(true);
+        search_textfield.setText("");
     }                                       
     private void showLoadingIndicator() {
         showroomPanel.removeAll();
@@ -216,18 +251,30 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener{
     private void change_pass_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_change_pass_itemActionPerformed
        new UserAccountManagement().setVisible(true);
     }//GEN-LAST:event_change_pass_itemActionPerformed
+
+    private void search_textfieldPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_search_textfieldPropertyChange
+        System.out.println(search_textfield.getText());
+    }//GEN-LAST:event_search_textfieldPropertyChange
+
+    private void clear_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clear_buttonMouseClicked
+        search_textfield.setText("");
+        search_textfield.setFocusable(false);
+        search_textfield.setFocusable(true);
+        refreshShowroom();
+    }//GEN-LAST:event_clear_buttonMouseClicked
     private void refreshShowroom() {
         ref_btn.setEnabled(false);
         jScrollPane2.getVerticalScrollBar().setValue(jScrollPane2.getVerticalScrollBar().getMinimum());
         roomdata = RoomDatabase.getRoomList(); // get new room data from database
         showroom_rows = Math.max(3, (int) Math.ceil((double)roomdata.size() / 4));
         showroomPanel.removeAll();
+        System.out.println("Loading...");
         for (String room : roomdata) {
             try {
                 RoomPanel rp = new RoomPanel(RoomDatabase.getRoomObject(room));
                 rp.addMouseListener(this);
                 showroomPanel.add(rp);
-                System.out.println(room);
+                System.out.println("Room : "+room);
             } catch (DatabaseGetInterrupted e) {
                 e.printStackTrace();
             }
@@ -241,7 +288,27 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener{
         showroomPanel.repaint();
         ref_btn.setEnabled(true);
     }
-    
+    private void searchRefreshShowroom(ArrayList<RoomData> roomdata) {
+        ref_btn.setEnabled(false);
+        jScrollPane2.getVerticalScrollBar().setValue(jScrollPane2.getVerticalScrollBar().getMinimum());
+        showroom_rows = Math.max(3, (int) Math.ceil((double)roomdata.size() / 4));
+        showroomPanel.removeAll();
+        System.out.println("Loading...");
+        for (RoomData room : roomdata) {
+            RoomPanel rp = new RoomPanel(room);
+            rp.addMouseListener(this);
+            showroomPanel.add(rp);
+            System.out.println("Room : "+room.getRoomName());
+        }
+        while (showroomPanel.getComponentCount() < 12){
+            showroomPanel.add(new JLabel());
+        }
+        showroomPanel.setLayout(new GridLayout(showroom_rows, 4, 5, 5));
+        showroomPanel.setPreferredSize( new Dimension(800, Math.max(250*showroom_rows, 600)));
+        showroomPanel.revalidate();
+        showroomPanel.repaint();
+        ref_btn.setEnabled(true);
+    }
     /**
      * @param args the command line arguments
      */
@@ -287,6 +354,8 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu about_menu;
     private javax.swing.JMenuItem change_pass_item;
+    private javax.swing.JLabel clear_button;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
@@ -294,6 +363,7 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener{
     private javax.swing.JLabel loading;
     private javax.swing.JMenuItem logout_item;
     private javax.swing.JButton ref_btn;
+    private javax.swing.JTextField search_textfield;
     private javax.swing.JPanel showroomPanel;
     private javax.swing.JMenu user_menu;
     // End of variables declaration//GEN-END:variables
@@ -335,4 +405,34 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener{
     }
 
 
+    @Override
+    public void insertUpdate(DocumentEvent e) {
+        String searchText = search_textfield.getText();
+        RoomData searchRD = new RoomData();
+        searchRD.setRoomName(searchText);
+        try {
+            ArrayList<RoomData> searchRD_list = RoomDatabase.searchRoomName(searchRD);
+            searchRefreshShowroom(searchRD_list);
+        } catch (DatabaseGetInterrupted ex) {
+            JOptionPane.showMessageDialog(UserLanding.this, ex.getMessage());
+        }
+    }
+
+    @Override
+    public void removeUpdate(DocumentEvent e) {
+        String searchText = search_textfield.getText();
+        RoomData searchRD = new RoomData();
+        searchRD.setRoomName(searchText);
+        try {
+            ArrayList<RoomData> searchRD_list = RoomDatabase.searchRoomName(searchRD);
+            searchRefreshShowroom(searchRD_list);
+        } catch (DatabaseGetInterrupted ex) {
+            JOptionPane.showMessageDialog(UserLanding.this, ex.getMessage());
+        }
+    }
+
+    @Override
+    public void changedUpdate(DocumentEvent e) {
+
+    }
 }
