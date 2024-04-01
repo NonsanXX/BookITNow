@@ -368,19 +368,22 @@ public class RoomEdit extends javax.swing.JFrame {
         close_min.setValue(closeMin);
         boolean hasSelected = false;
         System.out.println(facilityList);
-        int[] selectedIndices = new int[facility_JList.getModel().getSize()];
+        ArrayList<Integer> selectedArrayList = new ArrayList<Integer>();
         for (int i = 0; i < facility_JList.getModel().getSize(); i++) {
             for (String item : facilityList){
-
                 if (Objects.equals(facility_JList.getModel().getElementAt(i), item)){
-                    selectedIndices[i] = i;
+                    selectedArrayList.add(i);
                     hasSelected = true;
                 }
             }
         }
-        System.out.println(Arrays.toString(selectedIndices));
+        System.out.println(selectedArrayList);
         if (hasSelected){
-            facility_JList.setSelectedIndices(selectedIndices);
+            int[] selectList = new int[selectedArrayList.size()];
+            for (int i = 0; i < selectedArrayList.size(); i++) {
+                selectList[i] = selectedArrayList.get(i);
+            }
+            facility_JList.setSelectedIndices(selectList);
         }
 
         status.setSelectedItem((available) ? "เปิด" :  "ปิด");

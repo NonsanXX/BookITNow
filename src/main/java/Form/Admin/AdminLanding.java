@@ -139,12 +139,6 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener, D
             }
         });
 
-        search_textfield.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                search_textfieldPropertyChange(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -274,10 +268,6 @@ public class AdminLanding extends javax.swing.JFrame implements MouseListener, D
             new LoginGUI().setVisible(true);
         }
     }//GEN-LAST:event_logout_itemActionPerformed
-
-    private void search_textfieldPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_search_textfieldPropertyChange
-        System.out.println(search_textfield.getText());
-    }//GEN-LAST:event_search_textfieldPropertyChange
 
     private void clear_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clear_buttonMouseClicked
         search_textfield.setText("");

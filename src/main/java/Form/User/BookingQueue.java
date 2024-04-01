@@ -67,7 +67,7 @@ public class BookingQueue extends javax.swing.JFrame{
 
         queuePanel.setBackground(new java.awt.Color(102, 102, 102));
         queuePanel.setPreferredSize(new Dimension(1080, Math.max(150*historyRow, 750)));
-        queuePanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 5, 0));
+        queuePanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 0, 5));
         jScrollPane1.setViewportView(queuePanel);
 
         jLabel1.setFont(new java.awt.Font("FreesiaUPC", 1, 48)); // NOI18N
@@ -140,10 +140,16 @@ public class BookingQueue extends javax.swing.JFrame{
         queuePanel.removeAll();
         System.out.println("Loading...");
         for (HistoryData history : historyData) {
-            ViewBookingPanel rp = new ViewBookingPanel(history);
-            queuePanel.add(rp);
-            queuePanel.revalidate();
-            queuePanel.repaint();
+            try {
+                if(RoomDatabase.getRoomObject(history.getRecorded()) != null){
+                    ViewBookingPanel rp = new ViewBookingPanel(history);
+                    queuePanel.add(rp);
+                    queuePanel.revalidate();
+                    queuePanel.repaint();
+                }
+            } catch (DatabaseGetInterrupted e) {
+                JOptionPane.showMessageDialog(BookingQueue.this, e.getMessage());
+            }
         }
         //while (showroomPanel.getComponentCount() < 12){
             //showroomPanel.add(new JLabel());
