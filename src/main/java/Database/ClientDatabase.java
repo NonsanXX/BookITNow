@@ -109,7 +109,7 @@ public class ClientDatabase extends Database implements StatisticReport<JTable>{
     
     public static void deleteClient(String clientstdID){
         getDb().collection(CLIENT_COLLECTION).document(clientstdID).delete();
-        ClientHistoryDatabase.deleteHistory(clientstdID);
+        ClientHistoryDatabase.deleteAllHistory(clientstdID);
     }
     
     public static DefaultTableModel createDefaultTableModel() throws DatabaseGetInterrupted{
