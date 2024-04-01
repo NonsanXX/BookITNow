@@ -9,6 +9,14 @@
             <Property name="text" type="java.lang.String" value="Hello, Administator"/>
           </Properties>
           <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="switch_to_user">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Switch To User Access"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="switch_to_userActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="logout_item">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Logout"/>
