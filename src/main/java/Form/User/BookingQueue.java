@@ -67,7 +67,7 @@ public class BookingQueue extends javax.swing.JFrame{
 
         queuePanel.setBackground(new java.awt.Color(102, 102, 102));
         queuePanel.setPreferredSize(new Dimension(1080, Math.max(150*historyRow, 750)));
-        queuePanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 0, 0));
+        queuePanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 5, 0));
         jScrollPane1.setViewportView(queuePanel);
 
         jLabel1.setFont(new java.awt.Font("FreesiaUPC", 1, 48)); // NOI18N

@@ -368,6 +368,7 @@ public class UserLanding extends JFrame implements MouseListener, DocumentListen
         } catch (DatabaseGetInterrupted e) {
             JOptionPane.showMessageDialog(UserLanding.this, e.getMessage());
         }
+        System.out.println(historyDataArrayList);
         if (!historyDataArrayList.isEmpty()){
             HistoryData upcoming = historyDataArrayList.get(0);
             RoomData upcomingRoom = new RoomData();
