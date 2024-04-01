@@ -67,6 +67,8 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener, Do
         search_textfield = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         clear_button = new javax.swing.JLabel();
+        view_queue = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         user_menu = new javax.swing.JMenu();
         change_pass_item = new javax.swing.JMenuItem();
@@ -123,6 +125,7 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener, Do
             }
         });
 
+        search_textfield.setFont(new java.awt.Font("FreesiaUPC", 0, 24)); // NOI18N
         search_textfield.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 search_textfieldPropertyChange(evt);
@@ -139,6 +142,21 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener, Do
             }
         });
 
+        view_queue.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        view_queue.setText("What's Next?");
+        view_queue.setMaximumSize(new java.awt.Dimension(33, 28));
+        view_queue.setMinimumSize(new java.awt.Dimension(33, 28));
+        view_queue.setPreferredSize(new java.awt.Dimension(33, 28));
+        view_queue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                view_queueActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("FreesiaUPC", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("You have upcoming queue at IT-Peer, 16.00-18.00");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -147,10 +165,14 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener, Do
                 .addGap(9, 9, 9)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(search_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(search_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(clear_button, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 511, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(view_queue, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ref_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addComponent(jScrollPane2)
@@ -162,7 +184,10 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener, Do
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1)
                     .addComponent(search_textfield, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                    .addComponent(ref_btn, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(ref_btn, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                        .addComponent(view_queue, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(clear_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -283,6 +308,10 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener, Do
     private void book_historyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_book_historyActionPerformed
         new HistoryFrame().setVisible(true);
     }//GEN-LAST:event_book_historyActionPerformed
+
+    private void view_queueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_view_queueActionPerformed
+        new BookingQueue().setVisible(true);
+    }//GEN-LAST:event_view_queueActionPerformed
     private void refreshShowroom() {
         ref_btn.setEnabled(false);
         jScrollPane2.getVerticalScrollBar().setValue(jScrollPane2.getVerticalScrollBar().getMinimum());
@@ -379,6 +408,7 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener, Do
     private javax.swing.JMenuItem change_pass_item;
     private javax.swing.JLabel clear_button;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
@@ -389,6 +419,7 @@ public class UserLanding extends javax.swing.JFrame implements MouseListener, Do
     private javax.swing.JTextField search_textfield;
     private javax.swing.JPanel showroomPanel;
     private javax.swing.JMenu user_menu;
+    private javax.swing.JButton view_queue;
     // End of variables declaration//GEN-END:variables
 
     @Override
