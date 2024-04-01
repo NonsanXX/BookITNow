@@ -42,9 +42,10 @@ public class TestDB{
         try {
             FirebaseServiceAccount.initFirebase();
             //ClientHistoryDatabase.updateHistory("66070162", ClientHistoryDatabase.createEmptyHistory());
-            TimeDate t = new TimeDate(9.0, 11.0, "04/04/2024");
+            TimeDate t = new TimeDate(9.0, 13.0, "02/08/2024");
             RoomData r = RoomDatabase.getRoomObject("IT-Tutor");
-            System.out.println(r.checkReservingTime(t));
+            TimeDate re = r.getReservedTime().get(0);
+            System.out.println(r.getReservedTime().contains(t));
         } catch (URISyntaxException | IOException    ex) {
             Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         } finally{

@@ -191,11 +191,13 @@ public class RoomData implements RoomReservedTime<JTable>, Cancellation{
      * @return true if there exist TimeRange in reservedTime
      */
     public boolean unReservedTime(TimeDate tr){
-        if(!reservedTime.contains(tr)){
-            return false;
+        for(TimeDate time : reservedTime){
+            if(time.equals(tr)){
+                reservedTime.remove(time);
+                return true;
+            }
         }
-        reservedTime.remove(tr);
-        return true;
+        return false;
     }
     
     public boolean deCurrentQueue(TimeDate tr){
@@ -277,6 +279,7 @@ public class RoomData implements RoomReservedTime<JTable>, Cancellation{
         try {
             RoomHistoryDatabase.deleteHistory(roomName, reservation);
             result = unReservedTime(reservation) & deCurrentQueue(reservation);
+            RoomDatabase.updateRoom(this);
         } catch (DatabaseGetInterrupted ex) {
             ex.printStackTrace();
         }
