@@ -8,6 +8,8 @@ import javax.swing.text.DateFormatter;
 import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
@@ -82,6 +84,7 @@ public class RoomBooking extends javax.swing.JFrame {
         settings.setAllowKeyboardEditing(false);
         datePicker1 = new com.github.lgooddatepicker.components.DatePicker(settings);
         book_btn = new javax.swing.JButton();
+        watch_queue_btn = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -139,6 +142,14 @@ public class RoomBooking extends javax.swing.JFrame {
             }
         });
 
+        watch_queue_btn.setText("ดูคิว");
+        watch_queue_btn.setFont(new java.awt.Font("FreesiaUPC", 1, 24)); // NOI18N
+        watch_queue_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                watch_queue_btnActionPerformed(evt);
+            }
+        });
+
         jLabel9.setText("วันที่");
         jLabel9.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jLabel9.setFont(new java.awt.Font("FreesiaUPC", 1, 24)); // NOI18N
@@ -177,7 +188,8 @@ public class RoomBooking extends javax.swing.JFrame {
                         .addGap(0, 108, Short.MAX_VALUE))
                     .addComponent(building_label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(floor_label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(openclose_time_label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(openclose_time_label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(watch_queue_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -213,7 +225,9 @@ public class RoomBooking extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addComponent(watch_queue_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(book_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -267,8 +281,10 @@ public class RoomBooking extends javax.swing.JFrame {
 
         TimeDate timeDate = new TimeDate((enterHour + enterMin/60.0), (exitHour + exitMin/60.0), formattedDate);
         try {
-            System.out.println("Time date compare : "+(timeDate.getTime2() - timeDate.getTime1()));
-            if (timeDate.getTime2() - timeDate.getTime1() != 0){
+            System.out.println(timeDate.getTime1() >= LocalTime.now().getHour() + (LocalTime.now().getMinute()/60.0));
+            if (timeDate.getTime2() - timeDate.getTime1() != 0 &&
+                    (timeDate.getTime1() >= LocalTime.now().getHour() + (LocalTime.now().getMinute()/60.0)) ||
+                    (timeDate.getTime1() < LocalTime.now().getHour() + (LocalTime.now().getMinute()/60.0) && Period.between(today, selectedDate).getDays() > 0)){
                 if (RoomDatabase.reservingRoom(roomData, timeDate)) {
                     JOptionPane.showMessageDialog(RoomBooking.this, "Book successful.");
                     this.dispose();
@@ -285,6 +301,19 @@ public class RoomBooking extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_book_btnActionPerformed
+
+    private void watch_queue_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_watch_queue_btnActionPerformed
+       CheckRoomReserveTime crrt = new CheckRoomReserveTime(roomData);
+       Point panelLocation = this.getLocationOnScreen();
+       Dimension panelSize = this.getSize();
+
+        int newFrameX = panelLocation.x + panelSize.width;
+        int newFrameY = panelLocation.y;
+
+        crrt.setLocation(newFrameX, newFrameY);
+        crrt.setVisible(true);
+        
+    }//GEN-LAST:event_watch_queue_btnActionPerformed
     public static String formatTime(double decimalHours) {
         int hours = (int) decimalHours;
         int minutes = (int) ((decimalHours - hours) * 60);
@@ -344,5 +373,6 @@ public class RoomBooking extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JLabel openclose_time_label;
     private javax.swing.JLabel room_name_label;
+    private javax.swing.JButton watch_queue_btn;
     // End of variables declaration//GEN-END:variables
 }

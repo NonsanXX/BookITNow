@@ -988,7 +988,7 @@ public class LoginGUI extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(LoginGUI.this, dgi.getMessage());
                 }
             } else {
-                JOptionPane.showMessageDialog(LoginGUI.this, "Login Failed!");
+                JOptionPane.showMessageDialog(LoginGUI.this, "Incorrect Student ID/ Password.");
             }
         } else {
             JOptionPane.showMessageDialog(LoginGUI.this, "Please fill out every field / Incorrect Student ID.");

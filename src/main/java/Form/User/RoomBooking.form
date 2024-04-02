@@ -82,6 +82,7 @@
                       <Component id="building_label" max="32767" attributes="0"/>
                       <Component id="floor_label" max="32767" attributes="0"/>
                       <Component id="openclose_time_label" max="32767" attributes="0"/>
+                      <Component id="watch_queue_btn" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -123,7 +124,9 @@
                       <Component id="jLabel9" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="datePicker1" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="148" max="32767" attributes="0"/>
+                  <EmptySpace pref="99" max="32767" attributes="0"/>
+                  <Component id="watch_queue_btn" min="-2" pref="43" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="book_btn" min="-2" pref="43" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -252,6 +255,17 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="book_btnActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="watch_queue_btn">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#xe14;&#xe39;&#xe04;&#xe34;&#xe27;"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="FreesiaUPC" size="24" style="1"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="watch_queue_btnActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">

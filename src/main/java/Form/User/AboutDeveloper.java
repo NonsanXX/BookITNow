@@ -37,6 +37,7 @@ public class AboutDeveloper extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("About");
+        setAlwaysOnTop(true);
         setPreferredSize(new java.awt.Dimension(354, 306));
         setResizable(false);
 
