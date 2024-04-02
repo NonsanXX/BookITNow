@@ -10,9 +10,11 @@ import Database.Dataclass.RoomData;
 import Database.Exception.DatabaseGetInterrupted;
 import Database.RoomDatabase;
 import Firebase.UserLoginToken;
+import Form.User.CheckRoomReserveTime;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.beans.PropertyVetoException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -239,7 +241,9 @@ public class AdminManagement extends javax.swing.JFrame {
                 }
             }
             if (selection == 1) {
-
+                AdminEdit adminEdit = new AdminEdit(user);
+                adminEdit.setLocationRelativeTo(user_table_frame);
+                adminEdit.setVisible(true);
             }
     }//GEN-LAST:event_userTableMouseClicked
 

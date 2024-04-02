@@ -96,7 +96,7 @@ public class LoginGUI extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(21, 31, 44));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/test_logo.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bookitnow_logo (633x262).png"))); // NOI18N
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("FreesiaUPC", 0, 24)); // NOI18N
@@ -215,7 +215,7 @@ public class LoginGUI extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(158, 158, 158)
+                .addGap(180, 180, 180)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(fgt_pass, javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(signin_btn, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -223,7 +223,7 @@ public class LoginGUI extends javax.swing.JFrame {
                         .addComponent(fgt_pass1)
                         .addGap(8, 8, 8)
                         .addComponent(signup_btn))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(stud_id_tf, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
