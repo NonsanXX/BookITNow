@@ -33,6 +33,8 @@ import java.awt.*;
 import javax.swing.*;
 import Database.Dataclass.CommentData;
 
+import java.util.Collections;
+
 import java.awt.event.*;
 
 public class TestDB{
@@ -42,10 +44,17 @@ public class TestDB{
         try {
             FirebaseServiceAccount.initFirebase();
             //ClientHistoryDatabase.updateHistory("66070162", ClientHistoryDatabase.createEmptyHistory());
-            TimeDate t = new TimeDate(9.0, 13.0, "02/08/2024");
-            RoomData r = RoomDatabase.getRoomObject("IT-Tutor");
-            TimeDate re = r.getReservedTime().get(0);
-            System.out.println(r.getReservedTime().contains(t));
+            TimeDate t1 = new TimeDate(9.0, 11.0, "02/04/2024");
+            TimeDate t2 = new TimeDate(19.0, 21.0, "02/04/2024");
+            TimeDate t3 = new TimeDate(12.0, 13.0, "02/04/2024");
+            ArrayList<TimeDate> f = new ArrayList<>();
+            f.add(t1);
+            f.add(t2);
+            f.add(t3);
+            Collections.sort(f);
+            System.out.println(f);
+//            System.out.println(t1.compareTo(t3));
+//            System.out.println(t2.compareTo(t3));
         } catch (URISyntaxException | IOException    ex) {
             Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
         } finally{
