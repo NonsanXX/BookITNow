@@ -14,7 +14,7 @@ import java.util.Map;
  * @author phump
  */
 public class TimeDate extends TimeRange implements Comparable<TimeDate>{
-    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private String timeDate;
     
     public TimeDate(){
