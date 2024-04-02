@@ -13,10 +13,7 @@ import Database.RoomDatabase;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Database.Interface.Cancellation;
@@ -257,8 +254,9 @@ public class RoomData implements RoomReservedTime<JTable>, Cancellation{
             Boolean wait = updateReservedTime(TimeDate.getDateNow(), TimeDate.getTimeNow());
             while(!wait){}
             DefaultTableModel model = new DefaultTableModel(columName, 0);
-            
-            for(TimeDate time : reservedTime){
+            ArrayList<TimeDate> sortedTimedate = (ArrayList<TimeDate>) reservedTime.clone();
+            Collections.sort(sortedTimedate);
+            for(TimeDate time : sortedTimedate){
                 Object[] rowData = {time.getTimeDate(), TimeDate.toPoint60(time.getTime1())+" - "+TimeDate.toPoint60(time.getTime2())};
                 model.addRow(rowData);
             }

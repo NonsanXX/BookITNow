@@ -54,7 +54,7 @@ public class AdminEdit extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         accesslevel_spinner = new javax.swing.JSpinner();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("FreesiaUPC", 1, 48)); // NOI18N
         jLabel1.setText("USER EDIT");
