@@ -54,7 +54,7 @@
             <Property name="text" type="java.lang.String" value="About"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="about_menuActionPerformed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="about_menuMouseClicked"/>
           </Events>
         </Menu>
       </SubComponents>
@@ -129,13 +129,13 @@
                       <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" pref="37" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="search_textfield" min="-2" pref="400" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="search_textfield" min="-2" pref="360" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="clear_button" min="-2" pref="37" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="upcoming_text" pref="471" max="32767" attributes="0"/>
+                      <Component id="upcoming_text" pref="415" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="view_queue" min="-2" pref="110" max="-2" attributes="0"/>
+                      <Component id="view_queue" min="-2" pref="200" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="ref_btn" min="-2" pref="82" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -269,7 +269,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="12" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="What&apos;s Next?"/>
+                <Property name="text" type="java.lang.String" value="Reserve Check"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[33, 28]"/>
                 </Property>

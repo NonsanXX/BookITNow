@@ -142,7 +142,7 @@ public class UserLanding extends JFrame implements MouseListener, DocumentListen
         });
 
         view_queue.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        view_queue.setText("What's Next?");
+        view_queue.setText("Reserve Check");
         view_queue.setMaximumSize(new java.awt.Dimension(33, 28));
         view_queue.setMinimumSize(new java.awt.Dimension(33, 28));
         view_queue.setPreferredSize(new java.awt.Dimension(33, 28));
@@ -164,13 +164,13 @@ public class UserLanding extends JFrame implements MouseListener, DocumentListen
                 .addGap(9, 9, 9)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(search_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(search_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(clear_button, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(upcoming_text, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
+                .addComponent(upcoming_text, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(view_queue, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(view_queue, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ref_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -244,9 +244,9 @@ public class UserLanding extends JFrame implements MouseListener, DocumentListen
         jMenuBar1.add(user_menu);
 
         about_menu.setText("About");
-        about_menu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                about_menuActionPerformed(evt);
+        about_menu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                about_menuMouseClicked(evt);
             }
         });
         jMenuBar1.add(about_menu);
@@ -328,9 +328,11 @@ public class UserLanding extends JFrame implements MouseListener, DocumentListen
         this.dispose();
     }//GEN-LAST:event_switch_to_adminActionPerformed
 
-    private void about_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_about_menuActionPerformed
-        new AboutDeveloper().setVisible(true);
-    }//GEN-LAST:event_about_menuActionPerformed
+    private void about_menuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_about_menuMouseClicked
+        AboutDeveloper aboutDeveloper = new AboutDeveloper();
+        aboutDeveloper.setVisible(true);
+        aboutDeveloper.setAlwaysOnTop(true);
+    }//GEN-LAST:event_about_menuMouseClicked
     private void refreshShowroom() {
         ref_btn.setEnabled(false);
         jScrollPane2.getVerticalScrollBar().setValue(jScrollPane2.getVerticalScrollBar().getMinimum());

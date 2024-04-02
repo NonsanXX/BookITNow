@@ -144,16 +144,14 @@ public class BookingQueue extends javax.swing.JFrame{
                 if(RoomDatabase.getRoomObject(history.getRecorded()) != null){
                     ViewBookingPanel rp = new ViewBookingPanel(history);
                     queuePanel.add(rp);
-                    queuePanel.revalidate();
-                    queuePanel.repaint();
+
                 }
             } catch (DatabaseGetInterrupted e) {
                 JOptionPane.showMessageDialog(BookingQueue.this, e.getMessage());
             }
         }
-        //while (showroomPanel.getComponentCount() < 12){
-            //showroomPanel.add(new JLabel());
-        //}
+        queuePanel.revalidate();
+        queuePanel.repaint();
         queuePanel.setPreferredSize( new Dimension(1080, Math.max(150*historyRow, 750)));
         ref_btn.setEnabled(true);
     }
